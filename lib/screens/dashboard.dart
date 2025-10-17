@@ -5,6 +5,7 @@ import '../user_profile_model.dart';
 import 'pregnancy_nutrition_screen.dart';
 import 'pregnancy_exercise_screen.dart';
 import 'edit_profile_screen.dart';
+import 'hospital_list_screen.dart';
 
 class DashboardPage extends StatefulWidget {
   const DashboardPage({Key? key}) : super(key: key);
@@ -165,59 +166,7 @@ class _DashboardPageState extends State<DashboardPage> {
 
   // Hospital Page Content
   Widget _buildHospitalPage() {
-    return Container(
-      decoration: BoxDecoration(
-        gradient: LinearGradient(
-          begin: Alignment.topLeft,
-          end: Alignment.bottomRight,
-          colors: [
-            Color(0xFFF5F7FA),
-            Color(0xFFC3CFE2),
-          ],
-        ),
-      ),
-      child: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Container(
-              padding: EdgeInsets.all(30),
-              decoration: BoxDecoration(
-                gradient: LinearGradient(
-                  colors: [Color(0xFF667EEA), Color(0xFF764BA2)],
-                ),
-                shape: BoxShape.circle,
-                boxShadow: [
-                  BoxShadow(
-                    color: Color(0xFF667EEA).withOpacity(0.3),
-                    blurRadius: 20,
-                    offset: Offset(0, 10),
-                  ),
-                ],
-              ),
-              child: Icon(Icons.local_hospital, size: 80, color: Colors.white),
-            ),
-            SizedBox(height: 30),
-            Text(
-              'Hospital',
-              style: TextStyle(
-                fontSize: 28,
-                fontWeight: FontWeight.bold,
-                color: Color(0xFF2D3748),
-              ),
-            ),
-            SizedBox(height: 10),
-            Text(
-              'Find nearby hospitals and clinics',
-              style: TextStyle(
-                fontSize: 16,
-                color: Color(0xFF4A5568),
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
+    return HospitalListScreen();
   }
 
   // Exercise Page Content

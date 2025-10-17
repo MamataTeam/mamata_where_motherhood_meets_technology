@@ -2,12 +2,12 @@ plugins {
     id "com.android.application"
     id "kotlin-android"
     id "dev.flutter.flutter-gradle-plugin"
-    id "com.google.gms.google-services"
+    // id "com.google.gms.google-services"
 }
 
 android {
     namespace = "com.example.mamata_app"
-    compileSdk = 34
+    compileSdk = 35
     ndkVersion = flutter.ndkVersion
 
     compileOptions {
@@ -22,7 +22,7 @@ android {
     defaultConfig {
         applicationId = "com.example.mamata_app"
         minSdk = 21
-        targetSdk = 34
+        targetSdk = 35
         versionCode = 1
         versionName = "1.0"
     }
@@ -39,6 +39,6 @@ flutter {
 }
 
 dependencies {
-    implementation platform('com.google.firebase:firebase-bom:32.7.0')
-    implementation 'com.google.firebase:firebase-auth'
+    // implementation platform('com.google.firebase:firebase-bom:32.7.0')
+    // implementation 'com.google.firebase:firebase-auth'
 }
