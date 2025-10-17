@@ -3,10 +3,13 @@ import 'package:get/get.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'firebase_options.dart';
+
+// Screens
 import 'screens/login_page.dart';
 import 'screens/registration_page.dart';
 import 'screens/dashboard.dart';
 import 'screens/health_page.dart';
+import 'screens/hospital_list_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -28,6 +31,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
+      title: 'Mamata App',
       localizationsDelegates: const [
         GlobalMaterialLocalizations.delegate,
         GlobalWidgetsLocalizations.delegate,
@@ -39,6 +43,7 @@ class MyApp extends StatelessWidget {
       ],
       locale: const Locale('ne', 'NP'),
       theme: ThemeData(
+        primarySwatch: Colors.pink,
         splashColor: Colors.transparent,
         highlightColor: Colors.transparent,
         hoverColor: Colors.transparent,
@@ -46,7 +51,7 @@ class MyApp extends StatelessWidget {
         inputDecorationTheme: InputDecorationTheme(
           filled: true,
           fillColor: Colors.white,
-          isDense: true, //Makes TextFields compact
+          isDense: true,
           contentPadding:
               const EdgeInsets.symmetric(horizontal: 20, vertical: 14),
           border: OutlineInputBorder(
@@ -89,10 +94,8 @@ class MyApp extends StatelessWidget {
         GetPage(name: '/login', page: () => const LoginPage()),
         GetPage(name: '/register', page: () => const RegistrationPage()),
         GetPage(name: '/dashboard', page: () => const DashboardPage()),
-        GetPage(
-          name: '/health',
-          page: () => HealthPage(),
-        ),
+        GetPage(name: '/health', page: () => HealthPage()),
+        GetPage(name: '/hospital_list', page: () => HospitalListScreen()),
       ],
     );
   }
