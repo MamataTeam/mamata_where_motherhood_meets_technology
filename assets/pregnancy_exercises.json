@@ -1,0 +1,872 @@
+{
+  "first_trimester": [
+    {
+      "id": "cardio_swim",
+      "name": "Swimming ",
+      "duration": "30 mins daily or 150 mins/week",
+      "description": "Considered a safe, low-impact form of cardio ",
+      "benefits": [
+        "Water provides support to joints.",
+        "Strengthens back, arm, and leg muscles.",
+        "Excellent cardiovascular exercise."
+      ],
+      "steps": [
+        "Use comfortable swimming strokes (if you can swim) or stick to water aerobics (walking/marching in the shallow end).",
+        "If you cannot swim, use a pool noodle or flotation belt for stability, especially when exercising in the deep end.",
+        "Maintain a steady, non-strenuous pace for your 30-minute session.",
+        "Focus on gentle, rhythmic movements and ensure easy, regular breathing-never hold your breath.",
+        "Be mindful of the pool deck; enter and exit the water slowly to prevent slips and falls."
+      ],
+      "precautions": [
+        "Ensure the pool is clean and well-maintained. Do not use pools that are cloudy, have an overwhelming chemical smell (which can indicate high chloramine levels), or that you suspect are not regularly cleaned.",
+        "Avoid hot tubs, spas, and water over 90°F (32°C) to prevent overheating, especially in the first trimester.",
+        "Avoid diving, jumping, or vigorous movements that require fast changes in direction or body position.",
+        "Stay well-hydrated throughout the session, as the cooling effect of water can mask dehydration."
+      ],
+      "tips": [
+        "Consider wearing a maternity swimsuit for comfort as your belly grows."
+      ],
+      "youtubeUrl": "https://www.youtube.com/watch?v=VyF5J5yXTxI",
+      "videoTitle": "Safe Swimming for First Trimester",
+      "videoDuration": "00:02:50",
+      "trimesterModifications": {
+        "First Trimester (1-12 weeks)": "Safe to continue at a moderate intensity.",
+        "Second Trimester (13-27 weeks)": "Great for joint support.",
+        "Third Trimester (28-40 weeks)": "Ideal for relieving joint stress and swelling."
+      }
+    },
+    {
+      "id": "cardio_stationary",
+      "name": "Stationary Cycling",
+      "duration": "30 mins daily or 150 mins/week",
+      "description": "Safe, low-impact alternatives to running & outdoor cycling.",
+      "benefits": [
+        "Zero risk of falling.",
+        "Excellent low-impact cardio.",
+        "Fights fatigue, boosts mood.",
+        "Helps manage healthy weight."
+      ],
+      "steps": [
+        "Use a stationary bike (upright or recumbent), elliptical, or Arc Trainer.",
+        "Adjust the seat and handlebars for an upright posture, which relieves pressure on the abdomen and lower back. Ensure your knee has a slight bend when the pedal is at its lowest point.",
+        "Start with 5 minutes of low-resistance, slow-paced pedaling to gradually prepare your muscles.",
+        "Cycle at a moderate intensity, ensuring you can still hold a conversation comfortably. Avoid all-out sprints or high-intensity intervals.",
+        "Maintain proper posture (back straight, shoulders relaxed).",
+        "Cool-down:Finish with 5 minutes of very slow pedaling and light stretching off the machine."
+      ],
+      "precautions": [
+        "Start Slow (If new to exercise):Begin with a short duration, such as 10 to 15 minutes, and slowly build up to the goal of 30 minutes over several weeks.",
+        "Avoid standing up on the pedals to keep your balance and reduce stress on joints affected by the relaxin hormone.",
+        "Ensure the exercise area is cool and well-ventilated, and wear light clothing. Overheating is a key precaution, especially in the first trimester."
+      ],
+      "tips": [
+        "Keep a water bottle handy and sip water frequently throughout the session.",
+        "If cycling causes pain or you have reservations, switch to walking, swimming/water aerobics, or using the elliptical, all of which are safe and highly recommended low-impact options."
+      ],
+      "youtubeUrl": "https://www.youtube.com/shorts/8UXRYnoFWJc",
+      "videoTitle": "Using Cardio Machines Safely While Pregnant",
+      "videoDuration": "00:00:42",
+      "trimesterModifications": {
+        "First Trimester (1-12 weeks)": "Safe to continue.",
+        "Second Trimester (13-27 weeks)": "Adjust machine positioning for belly clearance.",
+        "Third Trimester (28-40 weeks)": "Adjust machine positioning for belly clearance."
+      }
+    },
+    {
+      "id": "flex_prenatal_yoga_start",
+      "name": "Prenatal Yoga ",
+      "duration": "As comfortable",
+      "description": "An excellent way to keep moving and reduce stress.",
+      "benefits": [
+        "Reduces stress, anxiety, nausea.",
+        "Improves mood and sleep.",
+        "Builds strength, flexibility, endurance.",
+        "Enhances mind-body connection."
+      ],
+      "steps": [
+        "Begin by standing still for a few minutes, focusing on calm, deep breaths. Gently raise and lower your arms to start moving your body.",
+        "Slowly move through standing poses (like Warrior or Triangle) to strengthen your legs and improve your balance. Hold each pose for a few breaths to focus on form.",
+        "Practice deep, supported squat positions (like Yogi Squat) to gently open your hips. If your heels lift, place a cushion or rolled towel under them for support.",
+        "Get down on your hands and knees. Gently arch and round your back (Cat-Cow) and do slow Hip Circles to relieve pressure and stiffness in your lower back.",
+        "Perform safe core work like Reverse Tabletop (a gentle backbend that strengthens the back of the body) and safe hip stretches like Figure Four while lying on your back (in the first trimester).",
+        " End the session by lying comfortably on your side (especially in later pregnancy). Take a few minutes to be still, focus on your breath, and connect with your baby."
+      ],
+      "precautions": [
+        "AVOID Hot Yoga, inversions, and big bends.",
+        "When it is time to rest or stretch while lying down, always avoid lying flat on your back after the first trimester. Instead, roll onto your left side and use pillows for support."
+      ],
+      "tips": [
+        "Focus on poses that feel grounding and comfortable."
+      ],
+      "youtubeUrl": "https://www.youtube.com/watch?v=3VHnnpBJVsk",
+      "videoTitle": "Safe Prenatal Yoga Poses and Modifications",
+      "videoDuration": "00:28:00",
+      "trimesterModifications": {
+        "First Trimester (1-12 weeks)": "Focus on building a routine; most poses are safe.",
+        "Second Trimester (13-27 weeks)": "Crucially, avoid lying flat on the back; modify all back-lying poses with props.",
+        "Third Trimester (28-40 weeks)": "Prioritize restorative and gentle Hatha; continue to avoid back-lying poses."
+      }
+    },
+    {
+      "id": "cardio_aerobics",
+      "name": "Prenatal Aerobics",
+      "duration": "30 mins daily or 150 mins/week",
+      "description": "Low-impact aerobics programs available digitally or in-person to incorporate cardio into your routine.",
+      "benefits": [
+        "Low-impact, joint friendly.",
+        "Increases energy, lifts mood.",
+        "Builds strength for labor.",
+        "Eases backache, constipation."
+      ],
+      "steps": [
+        "Select programs specifically labeled as 'prenatal,' 'low-impact,' or 'pregnancy-safe'.",
+        "Dedicate the first 5-10 minutes to a light warm-up to gradually raise your heart rate and prepare your muscles (e.g., marching in place, gentle arm circles).",
+        "Focus on keeping one foot on the ground at all times to minimize joint stress. ",
+        " Maintain a moderate intensity. Use the 'Talk Test'you should be able to carry on a normal conversation without being breathless. ",
+        "Keep movements controlled and stable. As the hormone relaxin softens your ligaments, focus on stability over speed or range of motion to protect your joints.",
+        "Conclude with 5-10 minutes of gentle static stretching and deep breathing to slowly bring your heart rate down."
+      ],
+      "precautions": [
+        "Ensure you are in a cool, well-ventilated space (especially in the first trimester).",
+        "Avoid high-impact moves like jumping, hopping, or quick changes in direction.",
+        "In the first trimester, be especially mindful of any discomfort or nausea; it is always safe to slow down or stop the movement."
+      ],
+      "tips": [
+        "Look for classes specifically labeled 'prenatal'.",
+        "Reduce the intensity or take a break if you feel dizzy, overheated, or experience any pain.",
+        "Drink water frequently throughout the session to stay hydrated."
+      ],
+      "youtubeUrl": "https://www.youtube.com/watch?v=G9NVRZN_gp4",
+      "videoTitle": "Low-Impact Prenatal Aerobics",
+      "videoDuration": "00:35:33",
+      "trimesterModifications": {
+        "First Trimester (1-12 weeks)": "Safe to follow low-impact class routines.",
+        "Second Trimester (13-27 weeks)": "Continue, modifying movements that involve lying on the back or excessive jumping.",
+        "Third Trimester (28-40 weeks)": "Continue, focusing on movements that feel comfortable and stable."
+      }
+    },
+    {
+      "id": "strength_squat_weighted",
+      "name": "Squats",
+      "duration": "3 sets of 10-15 reps",
+      "description": "Strengthens legs, glutes, core, and pelvic floor. ",
+      "benefits": [
+        "Strengthens legs, core.",
+        "Improves posture, alignment.",
+        "Boosts energy, reduces fatigue.",
+        "Prepares hips for labor."
+      ],
+      "steps": [
+        "* If you consistently performed weighted squats (barbell, dumbbells, kettlebell) before pregnancy, it is generally safe to continue in the first trimester. However, you must reduce the weight—never attempt a personal best or lift heavy to the point of straining your form.",
+        "If you did not perform weighted squats before pregnancy, only perform unweighted (bodyweight) squats.",
+        "Start with feet shoulder-width or slightly wider than shoulder-width apart. A wider stance (sumo squat) can be more comfortable.",
+        "*Lower slowly as if sitting in a chair, keeping your chest lifted and your back neutral (avoid rounding or over-arching).Imagine allowing your baby to relax as you maintain a stable spine.",
+        "Ensure your knees track out over your toes; do not let them cave inward.",
+        "Push through your heels to return to a standing position, squeezing your glutes at the top.",
+        "Throughout the movement, keep your core gently engaged. Focus on a controlled pelvic floor engagement as you push up."
+      ],
+      "precautions": [
+        "*Lower only to a comfortable depth where you can maintain good form and feel no joint pain, particularly in the knees or lower back.",
+        "Listen for any joint pain (especially knees or lower back)."
+      ],
+      "tips": [
+        "Can use a chair/bench to gauge depth initially."
+      ],
+      "youtubeUrl": "https://www.youtube.com/watch?v=B0KImLBgqxo",
+      "videoTitle": "Safe Squatting Techniques for Pregnancy",
+      "videoDuration": "00:00:31",
+      "trimesterModifications": {
+        "First Trimester (1-12 weeks)": "Can continue weighted/unweighted squats if done pre-pregnancy.",
+        "Second Trimester (13-27 weeks)": "Reduce weight, widen stance, use support (chair/bench).",
+        "Third Trimester (28-40 weeks)": "Focus on bodyweight squats with support/bench."
+      }
+    },
+    {
+      "id": "core_plank_standard",
+      "name": "Planking ",
+      "duration": "Hold for 10-30 seconds",
+      "description": "Standard planking is considered safe in the first trimester for core strength.",
+      "benefits": [
+        "Strengthens deep core.",
+        "Reduces back strain.",
+        "Improves body stability.",
+        "Maintains abdominal tone."
+      ],
+      "steps": [
+        "Begin on your hands (like the top of a push-up) or on your forearms, ensuring your elbows are directly beneath your shoulders.",
+        "Extend your legs and maintain a straight line from the crown of your head down to your heels. Avoid letting your hips sag or hike up too high.",
+        " Actively engage your deep core muscles (transverse abdominis) by drawing your belly button gently toward your spine—think about bracing your core, not sucking in.",
+        "Squeeze your glutes and the fronts of your thighs to maintain the straight alignment and support your pelvis.",
+        " Breathe steadily and rhythmically throughout the entire hold.",
+        "Hold the position for a short duration, starting at 10 seconds and building up to 30 seconds as you maintain perfect form."
+      ],
+      "precautions": [
+        " **Never hold your breath** while performing the plank.",
+        "Stop the exercise immediately if you notice any doming, bulging, or coning down the center of your abdomen (a sign of excessive intra-abdominal pressure or potential diastasis recti). If this occurs, switch to a modified plank (on hands and knees or hands elevated on a bench)."
+      ],
+      "tips": [
+        "Prioritize holding excellent form for a shorter time over struggling with poor form for a longer time."
+      ],
+      "youtubeUrl": "https://www.youtube.com/watch?v=xDVGyHg-3HM",
+      "videoTitle": "Standard Planking for First Trimester",
+      "videoDuration": "00:01:48",
+      "trimesterModifications": {
+        "First Trimester (1-12 weeks)": "Standard plank is safe.",
+        "Second Trimester (13-27 weeks)": "Modify to **Elevated Planking** (hands on a bench) for short 5-10 second intervals.",
+        "Third Trimester (28-40 weeks)": "Continue **Elevated Planking** only."
+      }
+    },
+    {
+      "id": "cardio_walk_brisk",
+      "name": "Walking",
+      "duration": "30 mins daily or 150 mins/week",
+      "description": "An excellent exercise for every trimester. ",
+      "benefits": [
+        "Boosts energy, improves mood.",
+        "Reduces health risks (like gestational diabetes).",
+        "Eases common discomforts (like constipation).",
+        "Aids healthy weight gain."
+      ],
+      "steps": [
+        "Walk with correct posture (keep your back straight).",
+        "Maintain a brisk pace, but only if you feel comfortable.",
+        "Stay well-hydrated before, during, and after your walk.",
+        "Avoid exercising in hot or humid environments.",
+        "Stop immediately if you feel any discomfort or dizziness."
+      ],
+      "precautions": [
+        "Avoid exercising in hot or humid environments.",
+        "Stop if you feel any discomfort or dizziness."
+      ],
+      "tips": [
+        "Can continue your pre-pregnancy pace if medically cleared."
+      ],
+      "youtubeUrl": "https://www.youtube.com/watch?v=Ull8oGTilAk",
+      "videoTitle": "First Trimester Cardio: Brisk Walking",
+      "videoDuration": "00:04:19",
+      "trimesterModifications": {
+        "First Trimester (1-12 weeks)": "Brisk power walk is generally safe if comfortable.",
+        "Second Trimester (13-27 weeks)": "Adjust pace to moderate stroll.",
+        "Third Trimester (28-40 weeks)": "Regress to a slightly slower stroll."
+      }
+    }
+  ],
+  "second_trimester": [
+    {
+      "id": "flex_prenatal_yoga_cont",
+      "name": "Prenatal Yoga ",
+      "duration": "As comfortable",
+      "description": "An excellent way to keep moving and reduce stress. ",
+      "benefits": [
+        "Reduces stress, anxiety, nausea.",
+        "Improves mood and sleep.",
+        "Builds strength, flexibility, endurance.",
+        "Enhances mind-body connection."
+      ],
+      "steps": [
+        "Begin by standing still for a few minutes, focusing on calm, deep breaths. Gently raise and lower your arms to start moving your body.",
+        "Slowly move through standing poses (like Warrior or Triangle) to strengthen your legs and improve your balance. Hold each pose for a few breaths to focus on form.",
+        "Practice deep, supported squat positions (like Yogi Squat) to gently open your hips. If your heels lift, place a cushion or rolled towel under them for support.",
+        "Get down on your hands and knees. Gently arch and round your back (Cat-Cow) and do slow Hip Circles to relieve pressure and stiffness in your lower back.",
+        "Perform safe core work like Reverse Tabletop (a gentle backbend that strengthens the back of the body) and safe hip stretches like Figure Four while lying on your back (in the first trimester).",
+        " End the session by lying comfortably on your side (especially in later pregnancy). Take a few minutes to be still, focus on your breath, and connect with your baby."
+      ],
+      "precautions": [
+        "AVOID Hot Yoga, inversions, and big bends.",
+        "When it is time to rest or stretch while lying down, always avoid lying flat on your back after the first trimester. Instead, roll onto your left side and use pillows for support."
+      ],
+      "tips": [
+        "Focus on poses that feel grounding and comfortable."
+      ],
+      "youtubeUrl": "https://www.youtube.com/watch?v=3VHnnpBJVsk",
+      "videoTitle": "Safe Prenatal Yoga Poses and Modifications",
+      "videoDuration": "00:28:00",
+      "trimesterModifications": {
+        "First Trimester (1-12 weeks)": "Focus on building a routine; most poses are safe.",
+        "Second Trimester (13-27 weeks)": "Crucially, avoid lying flat on the back; modify all back-lying poses with props.",
+        "Third Trimester (28-40 weeks)": "Prioritize restorative and gentle Hatha; continue to avoid back-lying poses."
+      }
+    },
+    {
+      "id": "cardio_walk_brisk",
+      "name": "Walking",
+      "duration": "30 mins daily or 150 mins/week",
+      "description": "An excellent exercise for every trimester. ",
+      "benefits": [
+        "Boosts energy, improves mood.",
+        "Reduces health risks (like gestational diabetes).",
+        "Eases common discomforts (like constipation).",
+        "Aids healthy weight gain."
+      ],
+      "steps": [
+        "Walk with correct posture (keep your back straight).",
+        "Maintain a brisk pace, but only if you feel comfortable.",
+        "Stay well-hydrated before, during, and after your walk.",
+        "Avoid exercising in hot or humid environments.",
+        "Stop immediately if you feel any discomfort or dizziness."
+      ],
+      "precautions": [
+        "Avoid exercising in hot or humid environments.",
+        "Stop if you feel any discomfort or dizziness."
+      ],
+      "tips": [
+        "Can continue your pre-pregnancy pace if medically cleared."
+      ],
+      "youtubeUrl": "https://www.youtube.com/watch?v=Ull8oGTilAk",
+      "videoTitle": "First Trimester Cardio: Brisk Walking",
+      "videoDuration": "00:04:20",
+      "trimesterModifications": {
+        "First Trimester (1-12 weeks)": "Brisk power walk is generally safe if comfortable.",
+        "Second Trimester (13-27 weeks)": "Adjust pace to moderate stroll.",
+        "Third Trimester (28-40 weeks)": "Regress to a slightly slower stroll."
+      }
+    },
+    {
+      "id": "cardio_swim",
+      "name": "Swimming ",
+      "duration": "30 mins daily or 150 mins/week",
+      "description": "Considered a safe, low-impact form of cardio ",
+      "benefits": [
+        "Water provides support to joints.",
+        "Strengthens back, arm, and leg muscles.",
+        "Excellent cardiovascular exercise."
+      ],
+      "steps": [
+        "Use comfortable swimming strokes (if you can swim) or stick to water aerobics (walking/marching in the shallow end).",
+        "If you cannot swim, use a pool noodle or flotation belt for stability, especially when exercising in the deep end.",
+        "Maintain a steady, non-strenuous pace for your 30-minute session.",
+        "Focus on gentle, rhythmic movements and ensure easy, regular breathing-never hold your breath.",
+        "Be mindful of the pool deck; enter and exit the water slowly to prevent slips and falls."
+      ],
+      "precautions": [
+        "Ensure the pool is clean and well-maintained. Do not use pools that are cloudy, have an overwhelming chemical smell (which can indicate high chloramine levels), or that you suspect are not regularly cleaned.",
+        "Avoid hot tubs, spas, and water over 90°F (32°C) to prevent overheating, especially in the first trimester.",
+        "Avoid diving, jumping, or vigorous movements that require fast changes in direction or body position.",
+        "Stay well-hydrated throughout the session, as the cooling effect of water can mask dehydration."
+      ],
+      "tips": [
+        "Consider wearing a maternity swimsuit for comfort as your belly grows."
+      ],
+      "youtubeUrl": "https://www.youtube.com/watch?v=VyF5J5yXTxI",
+      "videoTitle": "Safe Swimming for First Trimester",
+      "videoDuration": "00:02:50",
+      "trimesterModifications": {
+        "First Trimester (1-12 weeks)": "Safe to continue at a moderate intensity.",
+        "Second Trimester (13-27 weeks)": "Great for joint support.",
+        "Third Trimester (28-40 weeks)": "Ideal for relieving joint stress and swelling."
+      }
+    },
+    {
+      "id": "cardio_stationary",
+      "name": "Stationary Cycling",
+      "duration": "30 mins daily or 150 mins/week",
+      "description": "Safe, low-impact alternatives to running & outdoor cycling.",
+      "benefits": [
+        "Zero risk of falling.",
+        "Excellent low-impact cardio.",
+        "Fights fatigue, boosts mood.",
+        "Helps manage healthy weight."
+      ],
+      "steps": [
+        "Use a stationary bike (upright or recumbent), elliptical, or Arc Trainer.",
+        "Adjust the seat and handlebars for an upright posture, which relieves pressure on the abdomen and lower back. Ensure your knee has a slight bend when the pedal is at its lowest point.",
+        "Start with 5 minutes of low-resistance, slow-paced pedaling to gradually prepare your muscles.",
+        "Cycle at a moderate intensity, ensuring you can still hold a conversation comfortably. Avoid all-out sprints or high-intensity intervals.",
+        "Maintain proper posture (back straight, shoulders relaxed).",
+        "Cool-down:Finish with 5 minutes of very slow pedaling and light stretching off the machine."
+      ],
+      "precautions": [
+        "Start Slow (If new to exercise):Begin with a short duration, such as 10 to 15 minutes, and slowly build up to the goal of 30 minutes over several weeks.",
+        "Avoid standing up on the pedals to keep your balance and reduce stress on joints affected by the relaxin hormone.",
+        "Ensure the exercise area is cool and well-ventilated, and wear light clothing. Overheating is a key precaution, especially in the first trimester."
+      ],
+      "tips": [
+        "Keep a water bottle handy and sip water frequently throughout the session.",
+        "If cycling causes pain or you have reservations, switch to walking, swimming/water aerobics, or using the elliptical, all of which are safe and highly recommended low-impact options."
+      ],
+      "youtubeUrl": "https://www.youtube.com/shorts/8UXRYnoFWJc",
+      "videoTitle": "Using Cardio Machines Safely While Pregnant",
+      "videoDuration": "00:00:42",
+      "trimesterModifications": {
+        "First Trimester (1-12 weeks)": "Safe to continue.",
+        "Second Trimester (13-27 weeks)": "Adjust machine positioning for belly clearance.",
+        "Third Trimester (28-40 weeks)": "Adjust machine positioning for belly clearance."
+      }
+    },
+    {
+      "id": "cardio_aerobics",
+      "name": "Prenatal Aerobics",
+      "duration": "30 mins daily or 150 mins/week",
+      "description": "Low-impact aerobics programs available digitally or in-person to incorporate cardio ",
+      "benefits": [
+        "Low-impact, joint friendly.",
+        "Increases energy, lifts mood.",
+        "Builds strength for labor.",
+        "Eases backache, constipation."
+      ],
+      "steps": [
+        "Select programs specifically labeled as 'prenatal,' 'low-impact,' or 'pregnancy-safe'.",
+        "Dedicate the first 5-10 minutes to a light warm-up to gradually raise your heart rate and prepare your muscles (e.g., marching in place, gentle arm circles).",
+        "Focus on keeping one foot on the ground at all times to minimize joint stress. ",
+        " Maintain a moderate intensity. Use the 'Talk Test'you should be able to carry on a normal conversation without being breathless. ",
+        "Keep movements controlled and stable. As the hormone relaxin softens your ligaments, focus on stability over speed or range of motion to protect your joints.",
+        "Conclude with 5-10 minutes of gentle static stretching and deep breathing to slowly bring your heart rate down."
+      ],
+      "precautions": [
+        "Ensure you are in a cool, well-ventilated space (especially in the first trimester).",
+        "Avoid high-impact moves like jumping, hopping, or quick changes in direction.",
+        "In the first trimester, be especially mindful of any discomfort or nausea; it is always safe to slow down or stop the movement."
+      ],
+      "tips": [
+        "Look for classes specifically labeled 'prenatal'.",
+        "Reduce the intensity or take a break if you feel dizzy, overheated, or experience any pain.",
+        "Drink water frequently throughout the session to stay hydrated."
+      ],
+      "youtubeUrl": "https://www.youtube.com/watch?v=G9NVRZN_gp4",
+      "videoTitle": "Low-Impact Prenatal Aerobics",
+      "videoDuration": "00:35:33",
+      "trimesterModifications": {
+        "First Trimester (1-12 weeks)": "Safe to follow low-impact class routines.",
+        "Second Trimester (13-27 weeks)": "Continue, modifying movements that involve lying on the back or excessive jumping.",
+        "Third Trimester (28-40 weeks)": "Continue, focusing on movements that feel comfortable and stable."
+      }
+    },
+    {
+      "id": "strength_squat_weighted",
+      "name": "Squats",
+      "duration": "3 sets of 10-15 reps",
+      "description": "Strengthens legs, glutes, core, and pelvic floor.",
+      "benefits": [
+        "Strengthens legs, core.",
+        "Improves posture, alignment.",
+        "Boosts energy, reduces fatigue.",
+        "Prepares hips for labor."
+      ],
+      "steps": [
+        "If you consistently performed weighted squats before pregnancy, it is generally safe to continue in the first trimester. However, you must reduce the weight—never attempt a personal best or lift heavy to the point of straining your form.",
+        "If you did not perform weighted squats before pregnancy, only perform unweightedsquats.",
+        "Start with feet shoulder-width or slightly wider than shoulder-width apart. A wider stance (sumo squat) can be more comfortable.",
+        "*Lower slowly as if sitting in a chair, keeping your chest lifted and your back neutral (avoid rounding or over-arching).Imagine allowing your baby to relax as you maintain a stable spine.",
+        "Ensure your knees track out over your toes; do not let them cave inward.",
+        "Push through your heels to return to a standing position, squeezing your glutes at the top."
+      ],
+      "precautions": [
+        "Lower only to a comfortable depth where you can maintain good form and feel no joint pain, particularly in the knees or lower back.",
+        "Listen for any joint pain (especially knees or lower back)."
+      ],
+      "tips": [
+        "Can use a chair/bench to gauge depth initially."
+      ],
+      "youtubeUrl": "https://www.youtube.com/watch?v=B0KImLBgqxo",
+      "videoTitle": "Safe Squatting Techniques for Pregnancy",
+      "videoDuration": "00:00:31",
+      "trimesterModifications": {
+        "First Trimester (1-12 weeks)": "Can continue weighted/unweighted squats if done pre-pregnancy.",
+        "Second Trimester (13-27 weeks)": "Reduce weight, widen stance, use support (chair/bench).",
+        "Third Trimester (28-40 weeks)": "Focus on bodyweight squats with support/bench."
+      }
+    },
+    {
+      "id": "core_stability_pelvic_tilt",
+      "name": "Stability Ball Pelvic Tilts",
+      "duration": "3 sets of 10-15 reps",
+      "description": "A safe exercise to develop deep core muscles and relieve lower back pain.",
+      "benefits": [
+        "Eases lower back pain.",
+        "Strengthens core muscles.",
+        "Improves pelvic mobility.",
+        "Prepares for labor.",
+        "Relieves pelvic pressure."
+      ],
+      "steps": [
+        "Sit upright on the stability ball with feet firmly planted on the floor, about hip-width apart.",
+        "Find a neutral spine position (not too arched, not too rounded).",
+        "Exhale and slowly curl your hips backward (posterior tilt), tucking your tailbone under and gently rounding your lower back, by tightening your lower abdominals.",
+        "Inhale and slowly tilt your hips forward (anterior tilt), gently arching your lower back, to return to or go past the neutral position.",
+        "Keep your shoulders and upper body still; the movement should only be at the hips/pelvis."
+      ],
+      "precautions": [
+        "Ensure the stability ball is stable and correctly inflated to support your weight.",
+        "Initiate and control the movement from your core muscles, not your legs or momentum.",
+        "Keep the movement small and controlled; do not exaggerate the rocking motion.",
+        "Avoid if you have a slipped disc problem or any acute injury to the spine, wrist, or knee (consult a doctor/physiotherapist first).",
+        "Stop immediately if you feel any pain, cramping, or contractions."
+      ],
+      "tips": [
+        "Coordinate the movement with your breath: Exhale to tuck/round (posterior tilt), Inhale to tilt forward/return to neutral.",
+        "Focus on moving the pelvis, keeping the upper body vertical and still.",
+        "If experiencing back pain, you can follow the tilts with 30 seconds of gentle bouncing on the ball for relief."
+      ],
+      "youtubeUrl": "https://www.youtube.com/watch?v=CMGsBQcK5Xk",
+      "videoTitle": "Pelvic Tilts on a Stability Ball",
+      "videoDuration": "00:01:31",
+      "trimesterModifications": {
+        "First Trimester (1-12 weeks)": "Can be performed if comfortable.",
+        "Second Trimester (13-27 weeks)": "Excellent exercise as other core work is omitted.",
+        "Third Trimester (28-40 weeks)": "Highly recommended for back pain relief."
+      }
+    },
+    {
+      "id": "flexibility_cat_cow",
+      "name": "Cat-Cow Pose",
+      "duration": "1-2 minutes, 8-10 slow breaths",
+      "description": "A gentle, rhythmic movement that  relieves back pain, and helps encourage optimal fetal positioning.",
+      "benefits": [
+        "Alleviates lower back pain and tension.",
+        "Improves spinal mobility and flexibility.",
+        "Encourages a balanced pelvis for labor.",
+        "Helps to shift the baby's weight off the spine (especially helpful for posterior/back labor).",
+        "Soothes the nervous system and improves breath awareness."
+      ],
+      "steps": [
+        "Start on all fours (Tabletop position) with wrists directly under shoulders and knees directly under hips. Use a folded blanket under your knees or wrists if needed for padding.",
+        "Keep your neck in line with your spine (neutral gaze down).",
+        "Cow Pose (Inhale): Gently tilt your pelvis by lifting your tailbone slightly and allowing a *soft* curve in your lower back. Lift your chest slightly, avoiding dropping your belly completely or over-arching your back.",
+        "Cat Pose (Exhale):Initiate movement from the pelvis, gently drawing the tailbone down and under. Allow your spine to round from the base upward, gently doming your back. Keep your neck neutral.",
+        "Flow between Cat and Cow poses slowly, coordinating the movement with your breath. The movement should be gentle and mindful, not forced."
+      ],
+      "precautions": [
+        "Avoid the traditional, deep 'Cow' arch, which can overstretch the abdominal midline (diastasis recti risk). Focus on a *soft* curve or a neutral spine during the 'Cow' phase.",
+        "Do not drop or crank your head up or down; keep the neck relaxed and in line with the spine.",
+        "If you experience any sharp pain in your back or wrists, stop or modify immediately."
+      ],
+      "tips": [
+        "To make this a Rocking Cat-Cow for added labor preparation, widen your knees slightly and, on the exhale/Cat Pose, gently rock your hips back toward your heels.",
+        "Place a yoga block or a rolled mat under your forearms for wrist support if needed."
+      ],
+      "youtubeUrl": "https://www.youtube.com/watch?v=j73L4UeNcZI",
+      "videoTitle": "Pregnancy Fitness - Cat Cow Pose and its variation - YouTube",
+      "videoDuration": "00:03:38",
+      "trimesterModifications": {
+        "First Trimester (1-12 weeks)": "Standard gentle pose, focusing on breath-to-movement coordination.",
+        "Second Trimester (13-27 weeks)": "Focus on pelvis-first movement (The New Cat-Cow) to protect the core. Use a wide knee stance if your belly needs more space.",
+        "Third Trimester (28-40 weeks)": "Focus on the rocking variation and use this pose often to help alleviate pressure and encourage optimal fetal positioning (especially if the baby is posterior/breech)."
+      }
+    },
+    {
+      "id": "core_stability_march",
+      "name": "Stability Ball Exercises",
+      "duration": "3 sets of 10-15 reps per leg",
+      "description": "Improves core stability and balance while strengthening muscles.",
+      "benefits": [
+        "Builds core stability.",
+        "Enhances balance, posture.",
+        "Strengthens deep abdominal muscles.",
+        "Activates hip flexors."
+      ],
+      "steps": [
+        "Sit tall on the stability ball with your feet flat on the floor, hip-width apart, and your knees bent at 90 degrees.",
+        "Engage your core muscles to maintain an upright, neutral, and stable posture.",
+        "Slowly exhale and lift one foot off the ground. Aim to lift the knee only high enough to bring the shin parallel to the floor, similar to a slow marching motion.",
+        "Maintain a perfectly still torso and ball; avoid letting your hips or the ball shift to the side.",
+        "Lower the foot slowly and with control.",
+        "Repeat the same lifting and lowering motion with the other foot. This completes one rep per leg."
+      ],
+      "precautions": [
+        "Keep movements slow and controlled to challenge your core and safely maintain balance.",
+        "Ensure your hips remain level and your upper body stays vertical throughout the exercise.",
+        "Ensure the ball is properly sized so that your hips are slightly higher than your knees when sitting.",
+        "Avoid holding your breath; maintain a steady breathing pattern."
+      ],
+      "tips": [
+        "Start by touching only your heel to the floor to reduce the challenge, then progress to fully lifting the foot.",
+        "If you need a stability aid, you can start by holding onto a nearby wall or chair for balance until your core strength improves."
+      ],
+      "youtubeUrl": "https://www.youtube.com/watch?v=OUEpTBFcIJQ",
+      "videoTitle": "Stability Ball  Exercise",
+      "videoDuration": "00:00:30",
+      "trimesterModifications": {
+        "First Trimester (1-12 weeks)": "Can be performed to build core awareness.",
+        "Second Trimester (13-27 weeks)": "Excellent, safe core exercise.",
+        "Third Trimester (28-40 weeks)": "Highly recommended for stability and back relief."
+      }
+    },
+    {
+      "id": "strength_tricep_dips_pregnancy_mod",
+      "name": "Tricep Dips",
+      "duration": "3 sets of 8-15 repetitions",
+      "description": "A bodyweight dip performed on the floor.",
+      "benefits": [
+        "Strengthens the triceps, shoulders, and chest.",
+        "Builds pushing strength vital for daily tasks.",
+        "Safe for various stages of pregnancy as it utilizes a stable, low-impact position.",
+        "Allows for gentle core engagement without excessive abdominal pressure."
+      ],
+      "steps": [
+        "Start by sitting on the floor with your knees bent, feet flat on the ground, hip-width apart.",
+        "Place your hands behind you, about shoulder-width apart, with your fingers pointing forward toward your hips (or slightly out to the sides if more comfortable).",
+        "Inhale and press through your hands and feet to lift your hips and buttocks slightly off the floor.",
+        "Exhale and slowly lower your body by bending your elbows straight backward, keeping your hips hovering just above the floor.",
+        "Only lower as far as comfortable for your shoulders, aiming for a small dip. Keep your elbows tucked in and pointed back.",
+        "Press back up to the starting position, straightening your arms (but do not lock the elbows). Repeat for the desired number of repetitions."
+      ],
+      "precautions": [
+        "If you feel any sharp pain in your wrists or shoulders, stop immediately. You can try elevating your hands slightly on small blocks or books.",
+        "Keep your hips lifted (don't allow them to drag) and focus the movement on bending the arms.",
+        "Avoid the traditional **Bench Dip** once the belly starts growing, as the greater range of motion and potential instability can increase risk.",
+        "Maintain a neutral spine and avoid rounding your shoulders forward."
+      ],
+      "tips": [
+        "For wrist support, ensure your entire palm, including your fingers, is flat on the floor or surface.",
+        "To increase the difficulty, lift one foot slightly off the floor while performing the dips.",
+        "Coordinate your breath: Inhale down, exhale up (or vice versa), matching the movement to a steady pace.",
+        "This exercise is excellent to use in conjunction with **Cat-Cow** (as requested earlier) to balance pushing and core work."
+      ],
+      "youtubeUrl": "http://www.youtube.com/watch?v=0kjbblPAxzs",
+      "videoTitle": "Tricep Dips (Pregnancy)",
+      "videoDuration": "00:00:24",
+      "trimesterModifications": {
+        "All Trimesters": "This Floor Dip modification is generally safe throughout pregnancy. The low height and stable base protect the growing abdomen and balance.",
+        "Postpartum": "This is a great, gentle way to rebuild upper body strength after childbirth, particularly after checking with a doctor to ensure core recovery."
+      }
+    }
+  ],
+  "third_trimester": [
+    {
+      "id": "flexibility_butterfly_stretch",
+      "name": "Butterfly Stretch ",
+      "duration": "1-2 minutes daily",
+      "description": "A inner thigh stretch that promotes flexibility in the pelvis",
+      "benefits": [
+        "Increases hip and pelvic flexibility.",
+        "Stretches inner thigh muscles (groin).",
+        "Encourages optimal fetal positioning.",
+        "Aids in preparing the pelvic floor for birth."
+      ],
+      "steps": [
+        "Sit on the floor, ideally with your hips elevated on a yoga block or firm cushion for better alignment.",
+        "Bring the soles of your feet together. Let your knees drop out to the sides.",
+        "Keep your spine tall and neutral (avoid rounding your back). You can lean against a wall for support, especially in the third trimester.",
+        "Hold your feet or ankles with your hands.",
+        "Variation 1 (Flapping): Gently move (flap) your knees up and down, encouraging a comfortable opening in the hips (repeat 10-20 times) .",
+        "Variation 2 (Rocking/Tilting): Gently rock your torso forward and back, or side-to-side, to release tension in the lower back ."
+      ],
+      "precautions": [
+        "Only lower your knees as far as is comfortable. Never force or push them down.",
+        "If you experience any sharp pain in the front of your pelvis or pubic bone (a sign of Pelvic Girdle Pain/SPD), stop immediately and widen your feet further away from your body."
+      ],
+      "tips": [
+        "Use a folded blanket or pillow under your knees if they are very far off the floor for support.",
+        "Sit with your back against a wall for added support and stability in the third trimester."
+      ],
+      "youtubeUrl": "http://www.youtube.com/watch?v=Z-Ed7OBjHUY",
+      "videoTitle": "3 Butterfly Exercises Every Pregnant Woman Should Do for a Normal Delivery",
+      "videoDuration": "00:00:44",
+      "trimesterModifications": {
+        "First Trimester (1-12 weeks)": "Standard pose, focus on good posture.",
+        "Second Trimester (13-27 weeks)": "Continue standard pose. Widen your feet further from your groin if the stretch feels too intense.",
+        "Third Trimester (28-40 weeks)": "Crucially, use props (cushion/wall) to keep your back straight and support your growing belly. Focus on gentle movement and relaxation."
+      }
+    },
+    {
+      "id": "cardio_walk_brisk",
+      "name": "Walking",
+      "duration": "30 mins daily or 150 mins/week",
+      "description": "An excellent exercise for every trimester. ",
+      "benefits": [
+        "Boosts energy, improves mood.",
+        "Reduces health risks (like gestational diabetes).",
+        "Eases common discomforts (like constipation).",
+        "Aids healthy weight gain."
+      ],
+      "steps": [
+        "Walk with correct posture (keep your back straight).",
+        "Maintain a brisk pace, but only if you feel comfortable.",
+        "Stay well-hydrated before, during, and after your walk.",
+        "Avoid exercising in hot or humid environments.",
+        "Stop immediately if you feel any discomfort or dizziness."
+      ],
+      "precautions": [
+        "Avoid exercising in hot or humid environments.",
+        "Stop if you feel any discomfort or dizziness."
+      ],
+      "tips": [
+        "Can continue your pre-pregnancy pace if medically cleared."
+      ],
+      "youtubeUrl": "https://www.youtube.com/watch?v=Ull8oGTilAk",
+      "videoTitle": "First Trimester Cardio: Brisk Walking",
+      "videoDuration": "00:04:19",
+      "trimesterModifications": {
+        "First Trimester (1-12 weeks)": "Brisk power walk is generally safe if comfortable.",
+        "Second Trimester (13-27 weeks)": "Adjust pace to moderate stroll.",
+        "Third Trimester (28-40 weeks)": "Regress to a slightly slower stroll."
+      }
+    },
+    {
+      "id": "strength_squat_weighted",
+      "name": "Squats",
+      "duration": "3 sets of 10-15 reps",
+      "description": "Strengthens legs, glutes, core, and pelvic floor.",
+      "benefits": [
+        "Strengthens legs, core.",
+        "Improves posture, alignment.",
+        "Boosts energy, reduces fatigue.",
+        "Prepares hips for labor."
+      ],
+      "steps": [
+        "* If you consistently performed weighted squats (barbell, dumbbells, kettlebell) before pregnancy, it is generally safe to continue in the first trimester. However, you must reduce the weight—never attempt a personal best or lift heavy to the point of straining your form.",
+        "If you did not perform weighted squats before pregnancy, only perform unweighted (bodyweight) squats.",
+        "Start with feet shoulder-width or slightly wider than shoulder-width apart. A wider stance (sumo squat) can be more comfortable.",
+        "*Lower slowly as if sitting in a chair, keeping your chest lifted and your back neutral (avoid rounding or over-arching).Imagine allowing your baby to relax as you maintain a stable spine.",
+        "Ensure your knees track out over your toes; do not let them cave inward.",
+        "Push through your heels to return to a standing position, squeezing your glutes at the top.",
+        "Throughout the movement, keep your core gently engaged. Focus on a controlled pelvic floor engagement as you push up."
+      ],
+      "precautions": [
+        "*Lower only to a comfortable depth where you can maintain good form and feel no joint pain, particularly in the knees or lower back.",
+        "Listen for any joint pain (especially knees or lower back)."
+      ],
+      "tips": [
+        "Can use a chair/bench to gauge depth initially."
+      ],
+      "youtubeUrl": "https://www.youtube.com/watch?v=B0KImLBgqxo",
+      "videoTitle": "Safe Squatting Techniques for Pregnancy",
+      "videoDuration": "00:00:31",
+      "trimesterModifications": {
+        "First Trimester (1-12 weeks)": "Can continue weighted/unweighted squats if done pre-pregnancy.",
+        "Second Trimester (13-27 weeks)": "Reduce weight, widen stance, use support (chair/bench).",
+        "Third Trimester (28-40 weeks)": "Focus on bodyweight squats with support/bench."
+      }
+    },
+        {
+      "id": "core_stability_march",
+      "name": "Stability Ball Exercises",
+      "duration": "3 sets of 10-15 reps per leg",
+      "description": "Improves core stability and balance while strengthening muscles.",
+      "benefits": [
+        "Builds core stability.",
+        "Enhances balance, posture.",
+        "Strengthens deep abdominal muscles.",
+        "Activates hip flexors."
+      ],
+      "steps": [
+        "Sit tall on the stability ball with your feet flat on the floor, hip-width apart, and your knees bent at 90 degrees.",
+        "Engage your core muscles to maintain an upright, neutral, and stable posture.",
+        "Slowly exhale and lift one foot off the ground. Aim to lift the knee only high enough to bring the shin parallel to the floor, similar to a slow marching motion.",
+        "Maintain a perfectly still torso and ball; avoid letting your hips or the ball shift to the side.",
+        "Lower the foot slowly and with control.",
+        "Repeat the same lifting and lowering motion with the other foot. This completes one rep per leg."
+      ],
+      "precautions": [
+        "Keep movements slow and controlled to challenge your core and safely maintain balance.",
+        "Ensure your hips remain level and your upper body stays vertical throughout the exercise.",
+        "Ensure the ball is properly sized so that your hips are slightly higher than your knees when sitting.",
+        "Avoid holding your breath; maintain a steady breathing pattern."
+      ],
+      "tips": [
+        "Start by touching only your heel to the floor to reduce the challenge, then progress to fully lifting the foot.",
+        "If you need a stability aid, you can start by holding onto a nearby wall or chair for balance until your core strength improves."
+      ],
+      "youtubeUrl": "https://www.youtube.com/watch?v=OUEpTBFcIJQ",
+      "videoTitle": "Stability Ball  Exercise",
+      "videoDuration": "00:00:30",
+      "trimesterModifications": {
+        "First Trimester (1-12 weeks)": "Can be performed to build core awareness.",
+        "Second Trimester (13-27 weeks)": "Excellent, safe core exercise.",
+        "Third Trimester (28-40 weeks)": "Highly recommended for stability and back relief."
+      }
+    },
+    {
+      "id": "core_stability_pelvic_tilt2",
+      "name": "Stability Ball Pelvic Tilts",
+      "duration": "3 sets of 10-15 reps",
+      "description": "Highly recommended for targeting lower back pain and strengthening the deep core muscles for labor.",
+      "benefits": [
+        "Alleviates lower back pain.",
+        "Develops deep core muscles.",
+        "Promotes hip mobility."
+      ],
+      "steps": [
+        "Sit on the stability ball, feet planted.",
+        "Exhale and slowly curl your hips forward (rounding lower back).",
+        "Inhale and return to a neutral position."
+      ],
+      "precautions": [
+        "Ensure the stability ball is stable and correctly inflated.",
+        "Initiate the movement from the core, not the legs."
+      ],
+      "tips": [
+        "Effective for back pain relief."
+      ],
+      "youtubeUrl": "https://www.youtube.com/watch?v=CMGsBQcK5Xk",
+      "videoTitle": "Pelvic Tilts for Third Trimester Back Pain",
+      "videoDuration": "00:01:31",
+      "trimesterModifications": {
+        "First Trimester (1-12 weeks)": "Can be performed if comfortable.",
+        "Second Trimester (13-27 weeks)": "Excellent exercise as other core work is omitted.",
+        "Third Trimester (28-40 weeks)": "Highly recommended for back pain relief."
+      }
+    },
+
+    {
+      "id": "flex_prenatal_yoga_cont",
+      "name": "Prenatal Yoga ",
+      "duration": "As comfortable",
+      "description": "An excellent way to keep moving and reduce stress. ",
+      "benefits": [
+        "Reduces stress, anxiety, nausea.",
+        "Improves mood and sleep.",
+        "Builds strength, flexibility, endurance.",
+        "Enhances mind-body connection."
+      ],
+      "steps": [
+        "Begin by standing still for a few minutes, focusing on calm, deep breaths. Gently raise and lower your arms to start moving your body.",
+        "Slowly move through standing poses (like Warrior or Triangle) to strengthen your legs and improve your balance. Hold each pose for a few breaths to focus on form.",
+        "Practice deep, supported squat positions (like Yogi Squat) to gently open your hips. If your heels lift, place a cushion or rolled towel under them for support.",
+        "Get down on your hands and knees. Gently arch and round your back (Cat-Cow) and do slow Hip Circles to relieve pressure and stiffness in your lower back.",
+        "Perform safe core work like Reverse Tabletop (a gentle backbend that strengthens the back of the body) and safe hip stretches like Figure Four while lying on your back (in the first trimester).",
+        " End the session by lying comfortably on your side (especially in later pregnancy). Take a few minutes to be still, focus on your breath, and connect with your baby."
+      ],
+      "precautions": [
+        "AVOID Hot Yoga, inversions, and big bends.",
+        "When it is time to rest or stretch while lying down, always avoid lying flat on your back after the first trimester. Instead, roll onto your left side and use pillows for support."
+      ],
+      "tips": [
+        "Focus on poses that feel grounding and comfortable."
+      ],
+      "youtubeUrl": "https://www.youtube.com/watch?v=3VHnnpBJVsk",
+      "videoTitle": "Safe Prenatal Yoga Poses and Modifications",
+      "videoDuration": "00:28:00",
+      "trimesterModifications": {
+        "First Trimester (1-12 weeks)": "Focus on building a routine; most poses are safe.",
+        "Second Trimester (13-27 weeks)": "Crucially, avoid lying flat on the back; modify all back-lying poses with props.",
+        "Third Trimester (28-40 weeks)": "Prioritize restorative and gentle Hatha; continue to avoid back-lying poses."
+      }
+    },
+    {
+      "id": "strength_wall_pushups_prenatal_mod",
+      "name": "Wall Pushup (Prenatal Modification)",
+      "duration": "Aim for a controlled, steady pace",
+      "description": "Strengthens the chest muscles .",
+      "benefits": [
+        "Builds upper body strength.",
+        "Maintains good posture.",
+        "Safe, upright position.",
+        "Strengthens chest, arms.",
+        "Avoids the need to be on the floor, which can prevent strain on the lower back that might occur with a regular push-up."
+      ],
+      "steps": [
+        "Stand facing a wall, about an arm's length away.",
+        "Place your hands against the wall, positioned shoulder-width apart and at about shoulder level.",
+        "Your feet should also be about shoulder-width apart.",
+        "Simply lean your body in toward the wall and press yourself away.",
+        "Keep your entire body in a straight, aligned line throughout the movement.",
+        "Do not rush through the movement."
+      ],
+      "precautions": [
+        "Avoid this exercise if you have any issues with your **wrist or carpal tunnel syndrome**. The exercise could place strain on the wrist, which can already be an issue as pregnancy progresses.",
+        "A common mistake is to 'break at the waist' or allow your body to sag in. Ensure you keep your body straight and aligned as you execute the movement."
+      ],
+      "tips": [
+        "Focus on maintaining a straight body line, engaging your core as if you were in a standing plank.",
+        "Control the movement and avoid rushing the repetitions."
+      ],
+      "youtubeUrl": "http://www.youtube.com/watch?v=3dcDbbUDCtU",
+      "videoTitle": "Prenatal Fitness - Wall Push Up",
+      "videoDuration": "00:01:23",
+      "trimesterModifications": {
+        "All Trimesters": "The Wall Pushup is suitable for all three trimesters, but pay close attention to the precaution regarding wrist discomfort."
+      }
+    }
+  ]
+}

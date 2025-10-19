@@ -1,0 +1,643 @@
+[
+  {
+    "name": "Paropakar Maternity and Women's Hospital",
+    "latitude": 27.68948288368439,
+    "longitude": 85.31906176547521,
+    "address":"Prasuti Griha Marg, Thapathali, Kathmandu-11, Kathmandu",
+    "phone": ["01-5353276, 01-4212568"],
+    "type": "Government",
+    "specialties": ["Maternity", "Obstetrics", "Gynecology"],
+    "website": "http://pmwh.gov.np/",
+    "emergency": "yes"
+  },
+  {
+    "name": "Tribhuvan University Teaching Hospital", 
+    "latitude": 27.73586231471215,
+    "longitude": 85.32973481741051,
+    "address":  "Maharajganj Sadak, Narayan Gopal Chowk, Maharajganj, Kathmandu-3, Kathmandu",
+    "phone": "01-4412303",
+    "type": "Government",
+    "specialties": ["General Medicine", "Obstetrics", "Gynecology", "Pediatrics"],
+    "website": "http://www.tuth.org.np",
+    "emergency": "yes"
+  },
+  {
+    "name": "Patan Hospital", 
+    "latitude": 27.668492016059915,
+    "longitude": 85.32054683695287,
+    "address": "Lagankhel, Lalitpur, Kathmandu",
+    "phone": "01-5522295",
+    "type": "Government",
+    "specialties": ["General Medicine", "Maternity", "Obstetrics", "Gynecology"],
+    "website": "http://www.pahs.edu.np/",
+    "emergency": "yes"
+  },
+  {
+    "name": "Grande International Hospital",
+    "latitude": 27.753113341815762,
+    "longitude": 85.32586753695654,
+    "address": "Tokha Rd, Kathmandu",
+    "phone": "01-5159266",
+    "type": "Private",
+    "specialties": ["Maternity", "Obstetrics", "Gynecology", "Neonatology"],
+    "website": "https://www.grandehospital.com/",
+    "emergency": "yes"
+  },
+  {
+    "name": "Nepal Mediciti Hospital",
+    "latitude": 27.662157337290335,
+    "longitude": 85.30274682530977,
+    "address": "Karyabinayak, Lalitpur",
+    "phone": "01-4217766",
+    "type": "Private",
+    "specialties": ["Maternity", "Obstetrics", "Gynecology"],
+    "website": "https://www.medicitihospital.com",
+    "emergency": "yes"
+  },
+  {
+    "name": "Norvic International Hospital",
+    "latitude": 27.69015847870648,
+    "longitude": 85.31893549462526,
+    "address": "Thapathali, Kathmandu",
+    "phone": "01-5970032",
+    "type": "Private",
+    "specialties": ["Maternity", "Obstetrics", "Gynecology"],
+    "website": null,
+    "emergency": "yes"
+  },
+  {
+    "name": "Om Hospital & Research Center",
+    "latitude": 27.721667207725343,
+    "longitude": 85.34479366579089,
+    "address": "Chabahil, Kathmandu",
+    "phone": "01-4566178",
+    "type": "Private",
+    "specialties": ["Maternity", "Obstetrics", "Gynecology"],
+    "website": null,
+    "emergency": "yes"
+  },
+  {
+    "name": "Vayodha Hospitals",
+    "latitude": 27.684474293159752,
+    "longitude": 85.29833942346069 ,
+    "address": "University Path, Balkhu Chowk, Balkhu, Kathmandu-14, Kathmandu",
+    "phone": "01-5385280",
+    "type": "Private",
+    "specialties": ["Maternity", "Obstetrics", "Gynecology", "Neonatology"],
+    "website": "https://vayodhahospitals.com",
+    "emergency": "yes"
+  },
+ 
+  {
+    "name": "Kathmandu Medical College",
+    "latitude": 27.699431092385492,
+    "longitude": 85.35284761360661,
+    "address": "Sinamangal, Kathmandu",
+    "phone": "01-4469064",
+    "type": "Private",
+    "specialties": ["Maternity", "Obstetrics", "Gynecology", "Emergency Medicine"],
+    "website": "http://kmc.edu.np",
+    "emergency": "yes"
+  },
+  
+  {
+    "name": "Venus Hospital",
+    "latitude": 27.69812752421335,
+    "longitude":85.33765131933372,
+    "address": "Devkota Sadak, Kathmandu",
+    "phone": "01-4590255",
+    "type": "Private",
+    "specialties": ["General Medicine", "Maternity", "Obstetrics", "Gynecology"],
+    "website": "https://venushospital.com.np/",
+    "emergency": "yes"
+
+  },
+  {
+    "name": "Medicare Hospital",
+    "latitude": 27.71864680513693,
+    "longitude":85.34652595229797,
+    "address": "Hospital Marg, Gopi Krishna, Chabahil, Kathmandu-7, Kathmandu",
+    "phone": "015971606",
+    "type": "Private",
+    "specialties": ["Maternity", "Obstetrics", "Gynecology"],
+    "website": "https://medicarehosp.com",
+    "emergency": "yes"
+
+  },
+  {
+    "name": "B&B Hospital, Gwarko (Baidya & Banskota)",
+    "latitude": 27.665196542409454,
+    "longitude": 85.32925839462413,
+    "address": "Gwarko, Kathmandu",
+    "phone": "01--5970999",
+    "type": "Private",
+    "specialties": ["Maternity", "Obstetrics", "Gynecology"],
+    "website": "https://bbhospital.com.np/",
+    "emergency": "yes"
+  },
+ 
+  {
+    "name": "Alka Hospital Pvt. Ltd.",
+    "latitude": 27.674388608778226, 
+    "longitude": 85.31521775229601,
+    "address": "Jawalakhel, Kathmandu",
+    "phone": "01-5970795",
+    "type": "Private",
+    "specialties": ["Maternity", "Obstetrics", "Gynecology"],
+    "website": "http://www.alkahospital.com",
+    "emergency": "yes"
+  },
+    {
+    "name": "Metro Kathmandu Hospital",
+    "latitude": 27.74002934221236, 
+    "longitude": 85.33715530054356,
+    "address": "Maharajgunj, Narayan Gopal Chowk Kathmandu",
+    "phone": "01-4721515",
+    "type": "Private",
+    "specialties": ["Obstetrics", "Gynecology"],
+    "website": "http://metrokathmanduhospital.com/",
+    "emergency": "yes"
+  },
+    {
+    "name": "Stupa Community Hospital",
+    "latitude": 27.72063783484149,  
+    "longitude": 85.35131196240077,
+    "address": "Chuchepati, Kathmandu ",
+    "phone": "01-4916372,01-4916287 ",
+    "type": "Community",
+    "specialties": ["Obstetrics", "Gynecology"],
+    "website": "https://stupahospital.com/",
+    "emergency": "yes"
+  },
+    {
+    "name": "Bir Hospital",
+    "latitude": 27.706062216487183, 
+    "longitude":85.3138194452958,
+    "address": "Ratna Park, Kathmandu",
+    "phone": "01-4221119",
+    "type": "Government",
+    "specialties": ["Gynecology"],
+    "website": "https://birhospital.gov.np/",
+    "emergency": "yes"
+  },
+    {
+    "name": "Ayurveda Hospital",
+    "latitude": 27.70784012490475, 
+    "longitude":  85.30548488617758,
+    "address": "Nardevi, Kathmandu",
+    "phone": "01-4256883",
+    "type": "Government",
+    "specialties": ["Reproductive Health"],
+    "website": "https://www.nah.gov.np/",
+    "emergency": "no"
+  },
+    {
+    "name": "Sumeru City Hospital",
+    "latitude": 27.675916484891864, 
+    "longitude": 85.31472859057122,
+    "address": "Damkalchowk, Lalitpur",
+    "phone": "01-5970795",
+    "type": "Private",
+    "specialties": [ "Obstetrics", "Gynecology"],
+    "website": "http://www.sumerucityhospital.com/",
+    "emergency": "yes"
+  },
+{
+    "name": "Greencity Hospital Pvt.Ltd.",
+    "latitude": 27.737453571954756, 
+    "longitude": 85.32297998113448,
+    "address": "Ring Rd,Tokha, Kathmandu",
+    "phone": "01-4952248",
+    "type": "Private",
+    "specialties": ["General", "Obstetrics", "Gynecology"],
+    "website": "http://www.gch.com.np/",
+    "emergency": "yes"
+  },
+{
+    "name": "Motherland Hospital",
+    "latitude": 27.68965888019597, 
+    "longitude": 85.35981935229665,
+    "address": "Pepsicola,Bhaktapur, Kathmandu",
+    "phone": "01-4992799, 01-4992788,01-4992292, 9813305501",
+    "type": "Private",
+    "specialties": ["Gynecology"," Obstetrics"],
+    "website": "https://motherlandhospital.org.np/",
+    "emergency": "yes"
+  },
+  
+{
+    "name": "NITA POLYCLINIC & DIAGNOSTIC CENTER",
+    "latitude": 27.731388957971543,
+    "longitude":  85.32668259462704,
+    "address": "Near Rastrapati Bhawan, Maharajgunj-3, नारायण गोपाल सडक",
+    "phone": "01-4003006",
+    "type": "Polyclinic",
+    "specialties": ["Gynecology"," Obstetrics"],
+    "website": "https://www.nitapolyclinic.com.np",
+    "emergency": "no"
+  },
+{
+    "name": "Capital Hospital",
+    "latitude": 27.702592832333274, 
+    "longitude": 85.32162190287329,
+    "address": "Putali Sadak (Opposite of Shanker Dev Campus)",
+    "phone": "01-4168222,01-4168284,9843052823",
+    "type": "Private",
+    "specialties": ["Gynecology"," Obstetrics","Infertility"],
+    "website": "https://capitalhospital.com.np/",
+    "emergency": "yes"
+  },
+{
+    "name": "Bharosa  Hospital",
+    "latitude": 27.694562970147704,
+    "longitude":  85.33699140811315,
+    "address": "New Baneshwor 10, Kathmandu",
+    "phone": "01-4589891",
+    "type": "Private",
+    "specialties": ["Gynecology"," Obstetrics","Infertility"],
+    "website": "https://bharosahospital.com.np/",
+    "emergency": "yes"
+  },
+{
+    "name": "Nepal Police Hospital",
+    "latitude": 27.731183715798362,
+    "longitude": 85.32347997333471,
+    "address": "Panipokhari Marg, Kathmandu",
+    "phone": "01-4412430",
+    "type": "Government",
+    "specialties": ["Gynecology"," Obstetrics","Pregnancy Care"],
+    "website": "https://nph.nepalpolice.gov.np/",
+    "emergency": "yes"
+  },
+
+{
+    "name": "Nepal National Hospital",
+    "latitude": 27.694904168911506,
+    "longitude":  85.28198139462545,
+    "address": "Kalanki, Kathmandu",
+    "phone": "01-5225101,01-5225102,01-5225202",
+    "type": "private",
+    "specialties": ["Gynecology"," Obstetrics"],
+    "website": "http://nepalnationalhospital.com.np/",
+    "emergency": "yes"
+  },
+
+  {
+  "name": "Kantipur Dental Hospital",
+  "latitude": 27.73662,
+  "longitude": 85.32406,
+  "address": "Kathmandu Ringroad, Ekata Colony, Basundhara Chauki, Kathmandu-3, Kathmandu, Nepal",
+  "phone": ["01-4985910", "01-4985911"],
+  "type": "Private",
+  "specialties": ["Dental", "Maternity (Limited)"],
+  "website": "http://www.kantipurdental.edu.np/",
+  "emergency": "no"
+},
+{
+  "name": "B.P. Smriti Hospital",
+  "latitude": 27.73756,
+  "longitude": 85.32600,
+  "address": "Shree Kanti Marga‑3, Basundhara, Kathmandu, Nepal",
+  "phone": ["01-4987094", "01-4987096"],
+  "type": "Private",
+  "specialties": ["General Medicine", "Maternity", "Obstetrics", "Gynecology"],
+  "website": "https://bpsmritihospital.com.np/",
+  "emergency": "yes"
+},
+{
+  "name": "Everest Hospital",
+  "latitude": 27.68856,
+  "longitude": 85.33361,
+  "address": "Madan Bhandari Path, Bogati Tol, Naya Baneshwor, Kathmandu-10, Kathmandu, Nepal",
+  "phone": ["01-4793024", "01-4781294"],
+  "type": "Private",
+  "specialties": ["General Medicine", "Maternity", "Obstetrics", "Gynecology"],
+  "website": null,
+  "emergency": "yes"
+  
+},
+{
+  "name": "Annapurna Neuro Hospital",
+  "latitude": 27.69493,
+  "longitude": 85.32181,
+  "address": "Maitighar‑11, Kathmandu 44600, Bagmati Province, Nepal",
+  "phone": ["01-5356568", "01-4256656"],
+  "type": "Private",
+  "specialties": ["General Medicine", "Maternity", "Obstetrics", "Gynecology"],
+  "website": "https://annapurnahospital.com.np/",
+  "emergency": "yes"
+},
+{
+  "name": "Civil Service Hospital",
+  "latitude": 27.68646,
+  "longitude": 85.33879,
+  "address": "Madan Bhandari Path, Aalok Nagar, Minbhawan, Kathmandu-31, Kathmandu, Nepal",
+  "phone": ["+977-1-4107000", "01-4793000"],
+  "type": "Government",
+  "specialties": ["General Medicine", "Maternity", "Obstetrics", "Gynecology"],
+  "website": "http://www.civilservicehospital.org/",
+  "emergency": "yes"
+},
+{
+  "name": "Birendra Army Hospital",
+  "latitude": 27.711506135945566,
+  "longitude": 85.29132094098654,
+  "address": "Chhauni Hospital Rd, Kathmandu, Nepal",
+  "phone": ["01-4274019", "01-4271941"],
+  "type": "Military",
+  "specialties": ["General Medicine", "Maternity", "Obstetrics", "Gynecology"],
+  "website": null,
+  "emergency": "yes"
+},
+{
+  "name": "Kathmandu Neuro & General Hospital",
+  "latitude": 27.699201059923436,
+  "longitude": 85.31135316982241,
+  "address": "Bagdurbar Marg, Sundhara, Kathmandu-22, Kathmandu, Nepal",
+  "phone": ["01-5327735", "9801887073"],
+  "type": "Private",
+  "specialties": ["Neurology", "Maternity", "Obstetrics", "Gynecology"],
+  "website": null,
+  "emergency": "no"
+},
+{
+  "name": "Blue Cross Hospital",
+  "latitude": 27.69391007181392,
+  "longitude": 85.31522055447721,
+  "address": "Dashrath Marg, Dasharath Stadium, Tripureshwar, Kathmandu-11, Kathmandu, Nepal",
+  "phone": ["01-4262027"],
+  "type": "Private",
+  "specialties": ["Maternity", "Obstetrics", "Gynecology"],
+  "website": "https://bluecross.com.np/",
+  "emergency": "yes"
+},
+{
+  "name": "Nepal Medical College Teaching Hospital",
+  "latitude": 27.733516013793622,
+  "longitude": 85.38083877538506,
+  "address": "Attarkhel, Jorpati‑8, Gokarneshwor Municipality, Kathmandu 44600, Nepal",
+  "phone": ["01-4911008"],
+  "type": "Private",
+  "specialties": ["General Medicine", "Maternity", "Obstetrics", "Gynecology", "Surgery", "Pediatrics"],
+  "website": "https://nmcth.edu",
+  "emergency": "yes"
+},
+{
+  "name": "Ishan Children and Women's Hospital",
+  "latitude": 27.7447676507308,
+  "longitude": 85.33301065447873,
+  "address": "Dhapasi Marg, Shrijanshil Tol, Basundhara, Tokha-5, Kathmandu, Nepal",
+  "phone": ["01-4959560"],
+  "type": "Private",
+  "specialties": ["Pediatrics", "Maternity", "Gynecology", "Neonatology"],
+  "website": "https://www.ishanhospital.com.np/",
+  "emergency": "yes"
+},
+{
+  "name": "HAMS Hospital",
+  "latitude": 27.733558633897474, 
+  "longitude": 85.34634942891694,
+  "address": "Mandikhatar Road, Dhumbarahi, Kathmandu-11, Kathmandu, Nepal",
+  "phone": ["01-4377404", "01-4377704", "01-4377781", "01-4376997", "01-4376926", "01-4376914"],
+  "type": "Private",
+  "specialties": ["Obstetrics & Gynecology", "Pediatrics", "Emergency Medicine", "Radiology", "Anesthesiology"],
+  "website": "http://hamshospital.com/",
+  "emergency": "yes"
+},
+{
+  "name": "Valley Maternity Nursing Home",
+  "latitude": 27.70552287052859,
+  "longitude": 85.32387961668498,
+  "address": "Putalisadak, Kathmandu 44600, Nepal",
+  "phone": ["01-4420224", "01-4413091"],
+  "type": "Private",
+  "specialties": ["Maternity", "Obstetrics", "Gynecology"],
+  "website": null,
+  "emergency": "yes"
+},
+{
+  "name": "CIWEC Hospital",
+  "latitude": 27.72060892023985, 
+  "longitude": 85.31800721771218,
+  "address": "Kapurdhara Marg, Kathmandu 44600, Nepal",
+  "phone": ["01-4524111", "01-4524242", "01-4535232"],
+  "type": "Private",
+  "specialties": ["Travel Medicine", "General Medicine", "Immunizations"],
+  "website": "https://ciwec-clinic.com/",
+  "emergency": "yes"
+},
+{
+  "name": "Vinayak Hospital & Maternity Home",
+  "latitude": 27.73544806120522,
+  "longitude": 85.31334998887631,
+  "address": "Ring Road, Gongabu, Kathmandu 44600, Nepal",
+  "phone": ["01-4983152"],
+  "type": "Private",
+  "specialties": ["Maternity", "Obstetrics", "Gynecology"],
+  "website": "http://vinayakhospital.com.np/",
+  "emergency": "yes"
+},
+{
+  "name": "Helping Hands Community Hospital",
+  "latitude": 27.720091850034034,
+  "longitude": 85.3458376576725,
+  "address": "Rishi Bhakta Marg, Chabahil Chowk, Kathmandu 44600, Nepal",
+  "phone": ["01-4473518", "01-4496807"],
+  "type": "Non-Profit",
+  "specialties": ["Maternity & Obstetrics", "Emergency Medicine", "General Surgery", "Pediatrics", "Orthopedics & Trauma"],
+  "website": "https://helpinghandshospital.org.np/",
+  "emergency": "yes"
+},
+{
+  "name": "City Hospital",
+  "latitude": 27.71277278384007,
+  "longitude": 85.31472036995501,
+  "address": "Jyoti Bhawan, Kantipath, Kathmandu 44600, Nepal",
+  "phone": ["01-4163500", "01-4163600", "01-4163700", "01-4163666", "01-4163777", "01-4163524"],
+  "type": "Private",
+  "specialties": ["General Medicine", "Gynecology & Obstetrics", "Pediatrics", "Cardiology", "Orthopedics", "ENT", "Dermatology", "Radiology"],
+  "website": "https://grandecityhospital.com.np/",
+  "emergency": "yes"
+},
+{
+  "name": "Kirtipur Hospital (PHECT Nepal)",
+  "latitude": 27.68284349107823,
+  "longitude": 85.27409488331311,
+  "address": "Devdhoka‑2, Kirtipur Municipality, Kathmandu 44618, Nepal",
+  "phone": ["01-4331390"],
+  "type": "Non‑Profit",
+  "specialties": ["Maternity & Obstetrics", "Pediatrics", "Emergency Medicine", "General Surgery", "Burn & Plastic Surgery"],
+  "website": "http://www.phectnepal.org/",
+  "emergency": "yes"
+},
+{
+  "name": "Bhaktapur Hospital",
+  "latitude": 27.672108833555008,
+  "longitude": 85.42263251483108,
+  "address": "Dudhpati‑1, Bhaktapur Municipality, Bhaktapur, Nepal",
+  "phone": ["01-6610798"],
+  "type": "Government",
+  "specialties": ["Maternity, Obstetrics, Gynecology, Pediatrics, Emergency Medicine, General Medicine, Surgery"],
+  "website": "http://www.bhaktapurhospital.gov.np/",
+  "emergency": "yes"
+},
+{
+  "name": "Kalpana Health Care Center",
+  "latitude": 27.775367104618628,
+  "longitude": 85.29729202534128,
+  "address": "Sano Bypass, Tarakeshwar 44600, Nepal",
+  "phone": ["01-5168121", "9851310669"],
+  "type": "Private",
+  "specialties": [
+    "General Medicine",
+    "Outpatient Services"
+  ],
+  "website": "https://inqr.com.np/#/menu/37683D",
+  "emergency": "yes"
+},
+{
+  "name": "Kantipur Hospital",
+  "latitude": 27.68589789166071, 
+  "longitude": 85.34528109443649,
+  "address": "Subidhanagar, Tinkune, Koteshwor, Kathmandu 44600, Nepal",
+  "phone": ["01-4111627", "01-4111858", "01-4461609"],
+  "type": "Private",
+  "specialties": ["Emergency Medicine", "Gynecology & Obstetrics", "Pediatrics", "General Surgery", "Internal Medicine", "Orthopedics", "Dermatology", "Radiology", "Urology", "Cardiology", "Anesthesiology"],
+  "website": "http://www.kantipurhospital.com.np/",
+  "emergency": "yes"
+},
+{
+  "name": "Nepal Korea Friendship Municipality Hospital",
+  "latitude": 27.678869405700933, 
+  "longitude": 85.38402891771089,
+  "address": "Madhyapur Thimi‑5, Bhaktapur Municipality, Bhaktapur 44600, Nepal",
+  "phone": ["01-6633442", "01-6633439", "9802304806"],
+  "type": "Government",
+  "specialties": ["General Medicine, Pediatrics, Obstetrics & Gynecology, Emergency Medicine, ICU, Cardiology, Nephrology, Neurosurgery, Orthopedics, ENT, Radiology"],
+  "website": "http://www.nkfmh.org.np/",
+  "emergency": "yes"
+},
+{
+  "name": "Tokha Chandeshwori Hospital",
+  "latitude": 27.770257611271873,
+  "longitude": 85.32991843120483,
+  "address": "Golphutar Sadak, Tokha-2, Tokha Municipality, Kathmandu 44600, Nepal",
+  "phone": ["01-5110089","9851337192"],
+  "type": "Government",
+  "specialties": ["Emergency Medicine", "Maternity & Obstetrics", "General Medicine", "General Surgery", "Pediatrics", "Burn & Plastic Surgery", "Dental"],
+  "website": null,
+  "emergency": "no"
+},
+{
+  "name": "All Nepal Hospital",
+  "latitude": 27.733232010577698, 
+  "longitude": 85.31541252883584,
+  "address": "Samakhusi Marg, Gongabu, Kathmandu 44600, Nepal",
+  "phone": ["01-4989905", "01-4989906"],
+  "type": "Private",
+  "specialties": ["Pediatrics, Orthopedics, Obstetrics & Gynecology, General Medicine, Emergency Medicine"],
+  "website": "https://allnepalhospital.com.np/",
+  "emergency": "yes"
+},
+{
+  "name": "Suryabinayak Municipal Hospital",
+  "latitude": 27.665523681212363, 
+  "longitude": 85.43536641462434,
+  "address": "Jagati Chowk, Suryabinayak-8, Bhaktapur 44800, Nepal",
+  "phone": ["01-6618946", "01-6620193", "01-6620293", "01-6620393"],
+  "type": "Public",
+  "specialties": ["General Medicine", "Orthopedics", "Gynecology & Obstetrics", "Dermatology", "General Surgery", "Emergency Services", "ICU", "Pharmacy", "Ambulance Services"],
+  "website": "https://sbmh.bagamati.gov.np/",
+  "emergency": "yes"
+},
+{
+  "name": "Vision Polyclinic",
+  "latitude": 27.67793049177252, 
+  "longitude": 85.34557698087694,
+  "address": "Koteshwor-32, Kathmandu, Nepal",
+  "phone": ["+977-1-5100930"],
+  "type": "Private",
+  "specialties": ["General Medicine", "Pediatrics", "Orthopedics", "Physiotherapy", "Emergency Services", "Radiology", "Pharmacy"],
+  "website": "https://www.visionpolyclinic.com",
+  "emergency": "yes"
+},
+{
+  "name": "Karuna Hospital",
+  "latitude": 27.75169556874011, 
+  "longitude": 85.36295269763212,
+  "address": "Karuna Road, Ghatta Chowk, Chunikhel Marg, Budhanilkantha-13, Kathmandu 44660, Nepal",
+  "phone": ["+977-1-5128202", "+977-1-5128203", "+977-1-5128204", "+977-9847491703"],
+  "type": "Private",
+  "specialties": ["General Medicine, Emergency Medicine, ICU, Neurosurgery, Orthopedics, Obstetrics & Gynecology, Pediatrics, ENT, Cardiology, Urology, Surgery"],
+  "website": "http://www.karunahospital.com.np/",
+  "emergency": "yes"
+},
+{
+  "name": "Nature Care Hospital Pvt. Ltd.",
+  "latitude": 27.688898780088795, 
+  "longitude": 85.33471996611438,
+  "address": "Chakubaku Galli, New Baneshwor, Kathmandu 44601, Nepal",
+  "phone": ["01-4785708", "01-4783477"],
+  "type": "Private",
+  "specialties": ["Ayurveda, Panchakarma, Ksharsutra, Acupuncture, Physiotherapy, Pediatrics, Obstetrics & Gynecology, Dermatology"],
+  "website": "http://www.naturecarenepal.com.np/",
+  "emergency": "no"
+},
+{
+  "name": "Star Hospital",
+  "latitude": 27.681423435900935, 
+  "longitude": 85.3030911484012,
+  "address": "Sanepa Heights Rd, Sanepa‑2, Lalitpur, Kathmandu 44600, Nepal",
+  "phone": ["01-5450197", "01-5450198", "01-540478", "9860555163"],
+  "type": "Private",
+  "specialties": ["General Medicine, Emergency Medicine, Surgery, Orthopedics, Cardiology, Obstetrics & Gynecology, Pediatrics, Neurology, Nephrology, Urology, Radiology, Pathology, ICU"],
+  "website": "http://www.starhospitallimited.com/",
+  "emergency": "yes"
+},
+{
+  "name": "Ganesh Man Singh Memorial Hospital & Research Center",
+  "latitude": 27.662052145195048, 
+  "longitude": 85.31923616559955,
+  "address": "Mahalaxmisthan-15, Ring Road, Lalitpur, Bagmati Province, Nepal",
+  "phone": ["01-5530885","9749719765"],
+  "type": "Private",
+  "specialties": ["Maternity", "Obstetrics", "Gynecology", "Pediatrics", "Emergency Medicine"],
+  "website": "https://ganeshmansinghhospital.com/",
+  "emergency": "yes"
+},
+{
+  "name": "Mahendra Narayan Nidhi Memorial Hospital",
+  "latitude": 27.737634663509166,
+  "longitude": 85.32614192327433,
+  "address": "Basundhara, Shree Kanti Marg, Kathmandu 44600, Nepal",
+  "phone": ["01-4380506", "01-4383957"],
+  "type": "Community",
+  "specialties": ["Maternity", "Obstetrics", "Gynecology", "Pediatrics", "Emergency Medicine", "General Medicine"],
+  "website": "http://mnnidhihospital.org.np",
+  "emergency": "yes"
+},
+{
+  "name": "HUAWE International Hospital",
+  "latitude": 27.71382540419526, 
+  "longitude": 85.34621915396376,
+  "address": "Mitrapark‑7, Chabahil, Kathmandu, Nepal",
+  "phone": ["+977‑9864258283", "+977‑1‑4581616"],
+  "type": "Private",
+  "specialties": ["Maternity", "Obstetrics", "Gynecology", "Pediatrics", "Emergency Medicine"],
+  "website": "http://www.huawehospital.com.np/",
+  "emergency": "yes"
+},
+{
+
+  "name": "Frontline Hospital",
+  "latitude":27.702781247565206, 
+  "longitude":85.33841500811867,
+  "address": "Old Baneshwor,Kathmandu",
+  "phone": "015970132",
+  "type": "Private",
+  "specialties": ["Maternity", "Obstetrics", "Gynecology", "Emergency"],
+  "website": "https://frontlinehospital.com.np/",
+  "emergency": "yes"
+}
+
+]

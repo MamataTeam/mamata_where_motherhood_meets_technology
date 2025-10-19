@@ -1,21 +1,21 @@
 {
   "project_info": {
-    "project_number": "1092405209786",
-    "project_id": "mamata--storage",
-    "storage_bucket": "mamata--storage.firebasestorage.app"
+    "project_number": "685426197521",
+    "project_id": "preg-frontend",
+    "storage_bucket": "preg-frontend.firebasestorage.app"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:1092405209786:android:5842a248ffd4cd4650b083",
+        "mobilesdk_app_id": "1:685426197521:android:95074d319e94d931f21db0",
         "android_client_info": {
-          "package_name": "com.example.mamata_where_motherhood_meets_technology"
+          "package_name": "com.example.flutter_application"
         }
       },
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyDkcicNaQ8Lf8ZhIsTWlhMnhUBbvsMX3VE"
+          "current_key": "AIzaSyA9xmP5_Jie_28jp352G86BQQ_57rVjYX4"
         }
       ],
       "services": {

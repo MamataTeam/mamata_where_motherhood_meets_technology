@@ -1,0 +1,556 @@
+{
+  "pregnancyNutritionGuide": {
+    "title": "Nepali Pregnancy Nutrition Guide: Trimester-wise Food Recommendations",
+    "description": "A comprehensive guide to key nutritional foods for pregnant women in Nepal, integrating both traditional and modern recommendations.",
+    "trimesters": [
+      {
+        "trimesterNumber": 1,
+        "name": "First Trimester",
+        "weeks": "1-12",
+        "focus": "Folate/Folic Acid (neural tube development) and managing nausea.",
+        "categories": [
+          {
+            "name": "Dairy & Protein",
+            "items": [
+              {
+                "food": "Curd",
+                "localName": "dahi"
+              },
+              {
+                "food": "Boiled Eggs",
+                "localName": "anda"
+              },
+              {
+                "food": "Lentil Soup",
+                "localName": "dal"
+              },
+              {
+                "food": "Soybeans/Soya chunks",
+                "localName": "bhatmas/masyura"
+              },
+              {
+                "food": "Sprouted Beans (mixed legumes)",
+                "localName": "kwati"
+              }
+            ]
+          },
+          {
+            "name": "Vegetables & Greens",
+            "items": [
+              {
+                "food": "Spinach/Greens",
+                "localName": "palungo/saag"
+              },
+              {
+                "food": "Cabbage (cooked)",
+                "localName": "Banda Gobi/Pattagobhi"
+              },
+              {
+                "food": "Asparagus (cooked)",
+                "localName": "kurilo"
+              },
+              {
+                "food": "Pumpkin",
+                "localName": "pharsi"
+              },
+              {
+                "food": "Broccoli",
+                "localName": "Hariyo Phool Gobhi"
+              }
+            ]
+          },
+          {
+            "name": "Fruits",
+            "items": [
+              {
+                "food": "Orange/Citrus Fruits",
+                "localName": "suntala"
+              },
+              {
+                "food": "Pomegranate",
+                "localName": "anar"
+              },
+              {
+                "food": "Apple/Pear",
+                "localName": "syau/nashpati"
+              },
+              {
+                "food": "Banana",
+                "localName": "kera"
+              },
+              {
+                "food": "Guava",
+                "localName": "amba"
+              }
+            ]
+          },
+          {
+            "name": "Nuts & Seeds",
+            "items": [
+              {
+                "food": "Almonds (soaked)",
+                "localName": "badam"
+              },
+              {
+                "food": "Walnuts",
+                "localName": "okhar"
+              },
+              {
+                "food": "Flaxseeds",
+                "localName": "alas"
+              },
+              {
+                "food": "Sesame",
+                "localName": "til"
+              }
+            ]
+          },
+          {
+            "name": "Hydration & Fluids",
+            "items": [
+              {
+                "food": "Warm water",
+                "localName": "pani"
+              },
+              {
+                "food": "Coconut Water",
+                "localName": "nariwal pani"
+              },
+              {
+                "food": "Buttermilk",
+                "localName": "mohi"
+              },
+              {
+                "food": "Lemon Water",
+                "localName": "nimbu pani"
+              },
+              {
+                "food": "Fruit Juice (freshly squeezed)",
+                "localName": ""
+              }
+            ]
+          }
+        ],
+        "foodsToAvoid": [
+          {
+            "food": "Raw Papaya",
+            "localName": "kacho mewa",
+            "reason": "May trigger contractions"
+          },
+          {
+            "food": "Alcohol",
+            "localName": "raksi",
+            "reason": "Risk of miscarriage"
+          },
+          {
+            "food": "Unpasteurized Dairy (Milk, Dahi)",
+            "localName": "",
+            "reason": "Risk of Listeria bacteria, harmful to early fetal development."
+          },
+          {
+            "food": "Raw Meats/Eggs/Fish",
+            "localName": "kacho masu/machha/anda",
+            "reason": "Harmful for fetal brain development"
+          },
+          {
+            "food": "Liver/Liver Products",
+            "localName": "",
+            "reason": "Very high levels of Vitamin A (Retinol) which can be toxic in high doses in early pregnancy."
+          }
+        ]
+      },
+      {
+        "trimesterNumber": 2,
+        "name": "Second Trimester",
+        "weeks": "13-27",
+        "focus": "Increased intake of Calcium, Protein, and Omega-3s for fetal growth and bone hardening.",
+        "categories": [
+          {
+            "name": "Grains & Cereals",
+            "items": [
+              {
+                "food": "Finger Millet",
+                "localName": "kodo"
+              },
+              {
+                "food": "Buckwheat",
+                "localName": "phapar"
+              },
+              {
+                "food": "Brown Rice",
+                "localName": "khairo chamal"
+              },
+              {
+                "food": "Barley",
+                "localName": "jau"
+              },
+              {
+                "food": "Oats Porridge",
+                "localName": "Dalia"
+              }
+            ]
+          },
+          {
+            "name": "Protein & Meat",
+            "items": [
+              {
+                "food": "Meat (Mutton/Goat/Chicken)",
+                "localName": "masu"
+              },
+              {
+                "food": "Lentil Soup (thick)",
+                "localName": "dal"
+              },
+              {
+                "food": "Paneer/Tofu",
+                "localName": ""
+              },
+              {
+                "food": "Dahi/Yogurt",
+                "localName": "dahi"
+              },
+              {
+                "food": "Small Fish ( cooked)",
+                "localName": "machha"
+              }
+            ]
+          },
+          {
+            "name": "Vegetables & Greens",
+            "items": [
+              {
+                "food": "Spinach/Greens",
+                "localName": "palungo/saag"
+              },
+              {
+                "food": "Sweet Potato",
+                "localName": "sakhar khanda"
+              },
+              {
+                "food": "Carrot",
+                "localName": "gajar"
+              },
+              {
+                "food": "Beans",
+                "localName": "simi"
+              },
+              {
+                "food": "Cauliflower/Cabbage",
+                "localName": "cauliflower/bandakobi"
+              }
+            ]
+          },
+          {
+            "name": "Fruits",
+            "items": [
+              {
+                "food": "Orange/Citrus Fruits",
+                "localName": "suntala"
+              },
+              {
+                "food": "Kiwi",
+                "localName": ""
+              },
+              {
+                "food": "Grapes",
+                "localName": "angur"
+              },
+              {
+                "food": "Banana",
+                "localName": "kera"
+              },
+              {
+                "food": "Apple/Pear",
+                "localName": "syau/nashpati"
+              }
+            ]
+          },
+          {
+            "name": "Nuts & Seeds",
+            "items": [
+              {
+                "food": "Walnuts",
+                "localName": "okhar"
+              },
+              {
+                "food": "Almonds",
+                "localName": "badam"
+              },
+              {
+                "food": "Dates",
+                "localName": "khajur"
+              },
+              {
+                "food": "Pumpkin Seeds",
+                "localName": "farsi ko biu"
+              },
+              {
+                "food": "Sunflower Seeds",
+                "localName": "Surya Mukhi Biya"
+              }
+            ]
+          },
+          {
+            "name": "Hydration & Fluids",
+            "items": [
+              {
+                "food": "Warm water",
+                "localName": "pani"
+              },
+              {
+                "food": "Coconut Water",
+                "localName": "nariwal pani"
+              },
+              {
+                "food": "Lemon Water",
+                "localName": "nimbu pani"
+              },
+              {
+                "food": "Fruit Juice (freshly squeezed)",
+                "localName": ""
+              },
+              {
+                "food": "Herbal Tea",
+                "localName": "tulsi chiya"
+              }
+            ]
+          }
+        ],
+        "foodsToAvoid": [
+          {
+            "food": "Raw Fish/Eggs",
+            "localName": "kacho machha/anda",
+            "reason": "Risk of bacterial infection"
+          },
+          {
+            "food": "Processed Meats",
+            "localName": "",
+            "reason": "High sodium and preservatives"
+          },
+          {
+            "food": "Unwashed Vegetables",
+            "localName": "",
+            "reason": "Risk of parasites"
+          },
+          {
+            "food": "Excess Caffeine",
+            "localName": "",
+            "reason": "May affect fetal growth"
+          },
+          {
+            "food": "Artificial Sweeteners (excess)",
+            "localName": "",
+            "reason": "May affect metabolism"
+          }
+        ]
+      },
+      {
+        "trimesterNumber": 3,
+        "name": "Third Trimester",
+        "weeks": "28-40",
+        "focus": "Maximizing Iron (prevent anemia), Fiber (combat constipation), and concentrated energy for labor preparation.",
+        "categories": [
+          {
+            "name": "Dairy & Protein",
+            "items": [
+              {
+                "food": "Ghee (Clarified Butter)",
+                "localName": "gheu"
+              },
+              {
+                "food": "Curd",
+                "localName": "dahi"
+              },
+              {
+                "food": "Milk",
+                "localName": "dudh"
+              },
+              {
+                "food": "Lentils",
+                "localName": "dal"
+              },
+              {
+                "food": "Tofu",
+                "localName": ""
+              }
+            ]
+          },
+          {
+            "name": "Vegetables & Greens",
+            "items": [
+              {
+                "food": "Spinach/Greens",
+                "localName": "palungo/saag"
+              },
+              {
+                "food": "Pumpkin",
+                "localName": "pharsi"
+              },
+              {
+                "food": "Sweet Potato",
+                "localName": "sakhar khanda"
+              },
+              {
+                "food": "Cucumber",
+                "localName": "kakra"
+              },
+              {
+                "food": "Okra",
+                "localName": "bhindi"
+              }
+            ]
+          },
+          {
+            "name": "Fruits",
+            "items": [
+              {
+                "food": "Amla",
+                "localName": ""
+              },
+              {
+                "food": "Orange/Citrus Fruits",
+                "localName": "suntala"
+              },
+              {
+                "food": "Banana",
+                "localName": "kera"
+              },
+              {
+                "food": "Apple/Pear",
+                "localName": "syau/nashpati"
+              },
+              {
+                "food": "Pomegranate",
+                "localName": "anar"
+              }
+            ]
+          },
+          {
+            "name": "Nuts & Seeds",
+            "items": [
+              {
+                "food": "Walnuts",
+                "localName": "okhar"
+              },
+              {
+                "food": "Almonds",
+                "localName": "badam"
+              },
+              {
+                "food": "Dates",
+                "localName": "khajur"
+              },
+              {
+                "food": "Cashew Nuts",
+                "localName": "kaju"
+              },
+              {
+                "food": "Flaxseeds",
+                "localName": "alas"
+              }
+            ]
+          },
+          {
+            "name": "Hydration",
+            "items": [
+              {
+                "food": "Warm water",
+                "localName": "pani"
+              },
+              {
+                "food": "Coconut Water",
+                "localName": "nariwal pani"
+              },
+              {
+                "food": "Herbal Teas",
+                "localName": "aduwa/ tulsi chiya"
+              },
+              {
+                "food": "Vegetable Soup",
+                "localName": ""
+              }
+            ]
+          }
+        ],
+        "foodsToAvoid": [
+          {
+            "food": "Very Oily/Fried Foods",
+            "localName": "",
+            "reason": "Can worsen acid reflux and heartburn, which is common in the third trimester."
+          },
+          {
+            "food": "Spicy Foods",
+            "localName": "",
+            "reason": "May cause heartburn"
+          },
+          {
+            "food": "Excess Sugar/Salt",
+            "localName": "",
+            "reason": "Gestational diabetes risk"
+          },
+          {
+            "food": "Large Meals",
+            "localName": "",
+            "reason": "Eat small, frequent meals instead to ease pressure on the stomach and aid digestion."
+          },
+          {
+            "food": "Alcohol",
+            "localName": "",
+            "reason": "Harmful for baby"
+          }
+        ]
+      }
+    ],
+    "generalSafety": {
+      "name": "General Food Safety: AVOID at All Times",
+      "items": [
+        {
+          "item": "Alcohol (Raksi/Jand)",
+          "reason": "No safe amount has been established; high risk of Fetal Alcohol Syndrome."
+        },
+        {
+          "item": "Tobacco/Smoking",
+          "reason": "Avoid both active and passive smoking."
+        },
+        {
+          "item": "Raw/Unwashed Fruits and Vegetables",
+          "reason": "Risk of Toxoplasmosis and other pathogens. Wash all produce thoroughly with clean water."
+        },
+        {
+          "item": "Street-side Juices/Salads",
+          "reason": "High risk of bacterial contamination due to unclean water or poor preparation hygiene."
+        },
+        {
+          "item": "Unsafe Water",
+          "reason": "Only drink boiled, filtered, or commercially bottled water."
+        },
+        {
+          "item": "Reheated Rice or Foods Left at Room Temperature",
+          "reason": "Risk of food poisoning from bacterial growth (like *Bacillus cereus* in rice). Always store food properly and reheat until steaming hot."
+        },
+        {
+          "item": "Herbal Supplements/Traditional Medicines",
+          "reason": "Consult a doctor before taking any non-prescribed herbs (e.g., Jhar-phuk) or supplements as some can be harmful to the pregnancy."
+        },
+        {
+          "item": "Excessive Simple Sugar (Mithai)",
+          "reason": "Limit intake of processed sweets and sugary drinks to prevent excessive weight gain and manage blood sugar."
+        },
+        {
+          "item": "Very Oily/Fried Foods",
+          "reason": "Can worsen acid reflux and heartburn, which is common in the third trimester."
+        },
+        {
+          "item": "Spicy Foods",
+          "reason": "May cause heartburn"
+        },
+       
+        {
+          "item": "Large Meals",
+          "reason": "Eat small, frequent meals instead to ease pressure on the stomach and aid digestion."
+        }
+      
+      ]
+    }
+  }
+}
