@@ -2,10 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../APIs/api_service.dart';
 import '../user_profile_model.dart';
+import '../models/week_info.dart';
 import 'pregnancy_nutrition_screen.dart';
 import 'pregnancy_exercise_screen.dart';
 import 'edit_profile_screen.dart';
+import '../services/week_service.dart';
 import 'hospital_list_screen.dart';
+import 'week_detail_screen.dart';
+import 'calender_page.dart';
 
 class DashboardPage extends StatefulWidget {
   const DashboardPage({Key? key}) : super(key: key);
@@ -19,12 +23,18 @@ class _DashboardPageState extends State<DashboardPage> {
   UserProfile? _userProfile;
   bool _isLoading = true;
 
+  WeekInfo? weekInfo;
+  int currentWeek = 0;
+  bool isExpanded = false;
+
+
   @override
   void initState() {
     super.initState();
-    _loadUserProfile();
+    _loadUserProfile().then((_) => _loadWeekInfo());
   }
 
+  //User Profile
   Future<void> _loadUserProfile() async {
     try {
       final profile = await ApiService.fetchUserProfile();
@@ -50,146 +60,271 @@ class _DashboardPageState extends State<DashboardPage> {
     }
   }
 
-  // Home Page Content
-  Widget _buildHomePage() {
-    return Container(
-      decoration: BoxDecoration(
-        gradient: LinearGradient(
-          begin: Alignment.topLeft,
-          end: Alignment.bottomRight,
-          colors: [
-            Color(0xFFF5F7FA),
-            Color(0xFFC3CFE2),
-          ],
-        ),
-      ),
-      child: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Container(
-              padding: EdgeInsets.all(30),
-              decoration: BoxDecoration(
-                gradient: LinearGradient(
-                  colors: [Color(0xFF667EEA), Color(0xFF764BA2)],
-                ),
-                shape: BoxShape.circle,
-                boxShadow: [
-                  BoxShadow(
-                    color: Color(0xFF667EEA).withOpacity(0.3),
-                    blurRadius: 20,
-                    offset: Offset(0, 10),
-                  ),
-                ],
-              ),
-              child: Icon(Icons.home, size: 80, color: Colors.white),
-            ),
-            SizedBox(height: 30),
-            Text(
-              'Welcome to Home',
-              style: TextStyle(
-                fontSize: 28,
-                fontWeight: FontWeight.bold,
-                color: Color(0xFF2D3748),
-              ),
-            ),
-            SizedBox(height: 10),
-            Text(
-              'Your pregnancy journey starts here',
-              style: TextStyle(
-                fontSize: 16,
-                color: Color(0xFF4A5568),
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
+  // Pregnancy Week Info
+ Future<void> _loadWeekInfo() async {
+    if (_userProfile == null || _userProfile!.firstDayOfLastPeriod == null) return;
+
+    // Convert the first day of last period to DateTime
+    DateTime pregnancyStartDate = DateTime.parse(_userProfile!.firstDayOfLastPeriod!);
+
+    final progress = calculatePregnancyProgress(pregnancyStartDate);
+    int currentWeekCalculated = progress['weeksElapsed'];
+
+WeekInfo? fetchedWeek = await WeekService.getWeekByNumber(currentWeekCalculated);    if (fetchedWeek != null) {
+      setState(() {
+        weekInfo = WeekInfo(
+        week: fetchedWeek.week,
+        baby: fetchedWeek.baby,
+        mom: fetchedWeek.mom,
+        helpfulTips: fetchedWeek.helpfulTips,
+        imageUrl: fetchedWeek.imageUrl,
+      );
+        currentWeek = currentWeekCalculated;
+    });
+    }
   }
 
-  // Calendar Page Content
-  Widget _buildCalendarPage() {
-    return Container(
-      decoration: BoxDecoration(
-        gradient: LinearGradient(
-          begin: Alignment.topLeft,
-          end: Alignment.bottomRight,
-          colors: [
-            Color(0xFFF5F7FA),
-            Color(0xFFC3CFE2),
-          ],
-        ),
-      ),
-      child: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Container(
-              padding: EdgeInsets.all(30),
-              decoration: BoxDecoration(
-                gradient: LinearGradient(
-                  colors: [Color(0xFF667EEA), Color(0xFF764BA2)],
+  Map<String, dynamic> calculatePregnancyProgress(DateTime pregnancyStartDate) {
+   DateTime today = DateTime(DateTime.now().year, DateTime.now().month, DateTime.now().day);
+   DateTime startDate = DateTime(pregnancyStartDate.year, pregnancyStartDate.month, pregnancyStartDate.day);
+
+Duration diff = today.difference(startDate);
+
+
+    int daysElapsed = diff.inDays;
+    if (daysElapsed < 0) daysElapsed = 0;
+    if (daysElapsed > 280) daysElapsed = 280;
+
+    int weeksElapsed = daysElapsed ~/ 7;
+    int daysInWeek = daysElapsed % 7;
+
+    int totalPregnancyDays = 280;
+    int daysRemaining = totalPregnancyDays - daysElapsed;
+
+    int remainingWeeks = daysRemaining ~/ 7;
+    int remainingDays = daysRemaining % 7;
+
+    return {
+      'daysElapsed': daysElapsed,
+      'weeksElapsed': weeksElapsed,
+      'daysInWeek': daysInWeek,
+      'remainingWeeks': remainingWeeks,
+      'remainingDays': remainingDays,
+    };
+  }
+
+  String getTrimester(int week) {
+    if (week <= 13) return "Trimester 1";
+    if (week <= 27) return "Trimester 2";
+    return "Trimester 3";
+  }
+
+Widget _buildHomePage() {
+    if (_userProfile == null || weekInfo == null) {
+      return Center(child: CircularProgressIndicator());
+    }
+
+    final progress = calculatePregnancyProgress(DateTime.parse(_userProfile!.firstDayOfLastPeriod!));
+    int daysElapsed = progress['daysElapsed'];
+    int weeksElapsed = progress['weeksElapsed'];
+    int daysInWeek = progress['daysInWeek'];
+    int remainingWeeks = progress['remainingWeeks'];
+    int remainingDays = progress['remainingDays'];
+
+
+    return weekInfo == null
+        ? Center(child: CircularProgressIndicator())
+        : SingleChildScrollView(
+            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  'Hi, ${_userProfile?.fullName ?? 'Nilisha'}!',
+                  style: TextStyle(fontSize: 26, fontWeight: FontWeight.bold),
                 ),
-                shape: BoxShape.circle,
-                boxShadow: [
-                  BoxShadow(
-                    color: Color(0xFF667EEA).withOpacity(0.3),
-                    blurRadius: 20,
-                    offset: Offset(0, 10),
+                SizedBox(height: 25),
+
+                // Main week card
+                Container(
+                  width: double.infinity,
+                  padding: EdgeInsets.all(20),
+                  decoration: BoxDecoration(
+                    color: Color(0xFFFEE1DF),
+                    borderRadius: BorderRadius.circular(16),
                   ),
-                ],
-              ),
-              child: Icon(Icons.calendar_today, size: 80, color: Colors.white),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        "Today",
+                        style: TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.w600,
+                          color: Colors.pinkAccent,
+                        ),
+                      ),
+                      SizedBox(height: 10),
+
+                      ClipRRect(
+                        borderRadius: BorderRadius.circular(10),
+                        child: Image.network(
+                          weekInfo!.imageUrl,
+                          height: 300,
+                          width: double.infinity,
+                          fit: BoxFit.contain,
+                          errorBuilder: (context, error, stackTrace) {
+                            return Container(
+                              height: 300,
+                              color: Colors.grey.shade200,
+                              child: Center(
+                                child: Icon(Icons.broken_image,
+                                    size: 80, color: Colors.grey),
+                              ),
+                            );
+                          },
+                        ),
+                      ),
+                      SizedBox(height: 10),
+
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            "${weekInfo!.week} weeks",
+                            style: const TextStyle(
+                              fontSize: 28,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          IconButton(
+                            icon: Icon(Icons.chevron_right, size: 30),
+                            onPressed: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) =>
+                                      WeekDetailScreen(weekInfo: weekInfo!),
+                                ),
+                              );
+                            },
+                          ),
+                        ],
+                      ),
+
+                      SizedBox(height: 10),
+
+                      if (isExpanded) ...[
+                        SizedBox(height: 25),
+                        Text("Baby Development",
+                            style: TextStyle(
+                                fontSize: 20, fontWeight: FontWeight.w600)),
+                        SizedBox(height: 10),
+                        Container(
+                          width: double.infinity,
+                          padding: EdgeInsets.all(16),
+                          decoration: BoxDecoration(
+                            color: Colors.blue.shade50,
+                            borderRadius: BorderRadius.circular(12),
+                          ),
+                          child: Text(weekInfo!.baby, style: TextStyle(fontSize: 16)),
+                        ),
+
+                        SizedBox(height: 25),
+                        Text("Mom",
+                            style: TextStyle(
+                                fontSize: 20, fontWeight: FontWeight.w600)),
+                        SizedBox(height: 10),
+                        Container(
+                          width: double.infinity,
+                          padding: EdgeInsets.all(16),
+                          decoration: BoxDecoration(
+                            color: Colors.orange.shade50,
+                            borderRadius: BorderRadius.circular(12),
+                          ),
+                          child: Text(weekInfo!.mom, style: TextStyle(fontSize: 16)),
+                        ),
+
+                        SizedBox(height: 25),
+                        Text("Helpful Tips",
+                            style: TextStyle(
+                                fontSize: 20, fontWeight: FontWeight.w600)),
+                        SizedBox(height: 10),
+                        Container(
+                          width: double.infinity,
+                          padding: EdgeInsets.all(16),
+                          decoration: BoxDecoration(
+                            color: Colors.teal.shade50,
+                            borderRadius: BorderRadius.circular(12),
+                          ),
+                          child:
+                              Text(weekInfo!.helpfulTips, style: TextStyle(fontSize: 16)),
+                        ),
+                      ],
+                    ],
+                  ),
+                ),
+
+                SizedBox(height: 25),
+
+                // Progress and summary info
+                Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+                  decoration: BoxDecoration(
+                    color: Colors.grey.shade100,
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text("${weekInfo!.week} weeks"),
+                          Text(getTrimester(weekInfo!.week)),
+                        ],
+                      ),
+                      SizedBox(height: 10),
+                      LinearProgressIndicator(
+                        value: weekInfo!.week / 40,
+                        backgroundColor: Colors.grey.shade300,
+                        valueColor: AlwaysStoppedAnimation<Color>(Colors.teal),
+                      ),
+                      SizedBox(height: 8),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                              "Before birth: $remainingWeeks weeks $remainingDays days"),
+                          Text("Day $daysElapsed (${weeksElapsed}w + ${daysInWeek}d)"),
+                        ],
+                      ),
+                    ],
+                  ),
+                ),
+                SizedBox(height: 25),
+              ],
             ),
-            SizedBox(height: 30),
-            Text(
-              'Calendar',
-              style: TextStyle(
-                fontSize: 28,
-                fontWeight: FontWeight.bold,
-                color: Color(0xFF2D3748),
-              ),
-            ),
-            SizedBox(height: 10),
-            Text(
-              'Track your important dates',
-              style: TextStyle(
-                fontSize: 16,
-                color: Color(0xFF4A5568),
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
+          );
   }
 
   // Hospital Page Content
-  Widget _buildHospitalPage() {
-    return HospitalListScreen();
-  }
+  Widget _buildHospitalPage() => HospitalListScreen();
 
-  // Exercise Page Content
-  Widget _buildExercisePage() {
-    return PregnancyExerciseScreen();
-  }
+   // Exercise Page Content
+  Widget _buildExercisePage() => PregnancyExerciseScreen();
 
-  // Health Page Content shows Pregnancy Nutrition
-  Widget _buildHealthPage() {
-    return PregnancyNutritionScreen();
-  }
+    // Health Page Content shows Pregnancy Nutrition
+  Widget _buildHealthPage() => PregnancyNutritionScreen();
 
-  // Profile Page Content
+ // Profile Page Content
   Widget _buildProfilePage() {
     return Container(
       decoration: BoxDecoration(
         gradient: LinearGradient(
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
-          colors: [
-            Color(0xFFF5F7FA),
-            Color(0xFFC3CFE2),
-          ],
+          colors: [Color(0xFFF5F7FA), Color(0xFFC3CFE2)],
         ),
       ),
       child: _isLoading
@@ -241,14 +376,12 @@ class _DashboardPageState extends State<DashboardPage> {
                                 ? NetworkImage(_userProfile!.photoUrl!)
                                 : null,
                             child: _userProfile!.photoUrl == null
-                                ? Icon(Icons.person,
-                                    size: 60, color: Color(0xFF667EEA))
+                                ? Icon(Icons.person, size: 60, color: Color(0xFF667EEA))
                                 : null,
                           ),
                         ),
                       ),
                       SizedBox(height: 20),
-
                       Text(
                         _userProfile!.fullName,
                         style: TextStyle(
@@ -258,8 +391,6 @@ class _DashboardPageState extends State<DashboardPage> {
                         ),
                       ),
                       SizedBox(height: 10),
-
-                      // Email
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
@@ -311,8 +442,8 @@ class _DashboardPageState extends State<DashboardPage> {
                             _buildProfileItem(
                               icon: Icons.calendar_today,
                               label: 'First Day of Last Period',
-                              value: _userProfile!.firstDayOfLastPeriod ??
-                                  'Not provided',
+                              value:
+                                  _userProfile!.firstDayOfLastPeriod ?? 'Not provided',
                             ),
                             SizedBox(height: 15),
                             _buildProfileItem(
@@ -331,6 +462,7 @@ class _DashboardPageState extends State<DashboardPage> {
                       ),
                       SizedBox(height: 30),
 
+                      // Edit & Logout Buttons
                       Container(
                         decoration: BoxDecoration(
                           color: Colors.white,
@@ -346,39 +478,32 @@ class _DashboardPageState extends State<DashboardPage> {
                         padding: EdgeInsets.all(20),
                         child: Column(
                           children: [
-                            // Edit Profile Button
+                            // Edit Profile Button 
                             InkWell(
                               onTap: () async {
                                 if (_userProfile != null) {
                                   final result = await Get.to(() =>
-                                      EditProfileScreen(
-                                          userProfile: _userProfile!));
-
+                                      EditProfileScreen(userProfile: _userProfile!));
                                   if (result == true) {
-                                    _loadUserProfile();
+                                    await _loadUserProfile();
+                                    await _loadWeekInfo();
+                                    setState(() {}); 
                                   }
                                 }
                               },
                               borderRadius: BorderRadius.circular(12),
-                              splashColor: Colors.white.withOpacity(0.3),
-                              highlightColor: Colors.white.withOpacity(0.1),
                               child: Container(
-                                padding: EdgeInsets.symmetric(
-                                    horizontal: 20, vertical: 16),
+                                padding:
+                                    EdgeInsets.symmetric(horizontal: 20, vertical: 16),
                                 decoration: BoxDecoration(
                                   gradient: LinearGradient(
-                                    colors: [
-                                      Color(0xFF667EEA),
-                                      Color(0xFF764BA2)
-                                    ],
-                                  ),
+                                      colors: [Color(0xFF667EEA), Color(0xFF764BA2)]),
                                   borderRadius: BorderRadius.circular(12),
                                   boxShadow: [
                                     BoxShadow(
-                                      color: Color(0xFF667EEA).withOpacity(0.3),
-                                      blurRadius: 8,
-                                      offset: Offset(0, 4),
-                                    ),
+                                        color: Color(0xFF667EEA).withOpacity(0.3),
+                                        blurRadius: 8,
+                                        offset: Offset(0, 4)),
                                   ],
                                 ),
                                 child: Row(
@@ -387,37 +512,27 @@ class _DashboardPageState extends State<DashboardPage> {
                                     Icon(Icons.edit_outlined,
                                         color: Colors.white, size: 22),
                                     SizedBox(width: 10),
-                                    Text(
-                                      'Edit Profile',
-                                      style: TextStyle(
-                                        color: Colors.white,
-                                        fontSize: 16,
-                                        fontWeight: FontWeight.w600,
-                                      ),
-                                    ),
+                                    Text('Edit Profile',
+                                        style: TextStyle(
+                                            color: Colors.white,
+                                            fontSize: 16,
+                                            fontWeight: FontWeight.w600)),
                                   ],
                                 ),
                               ),
                             ),
                             SizedBox(height: 15),
-                            // Logout Button
+                            // Logout
                             InkWell(
-                              onTap: () {
-                                _showLogoutDialog();
-                              },
+                              onTap: _showLogoutDialog,
                               borderRadius: BorderRadius.circular(12),
-                              splashColor: Colors.red.withOpacity(0.1),
-                              highlightColor: Colors.red.withOpacity(0.05),
                               child: Container(
-                                padding: EdgeInsets.symmetric(
-                                    horizontal: 20, vertical: 16),
+                                padding:
+                                    EdgeInsets.symmetric(horizontal: 20, vertical: 16),
                                 decoration: BoxDecoration(
                                   color: Colors.white,
                                   borderRadius: BorderRadius.circular(12),
-                                  border: Border.all(
-                                    color: Colors.red[400]!,
-                                    width: 2,
-                                  ),
+                                  border: Border.all(color: Colors.red[400]!, width: 2),
                                 ),
                                 child: Row(
                                   mainAxisAlignment: MainAxisAlignment.center,
@@ -425,14 +540,11 @@ class _DashboardPageState extends State<DashboardPage> {
                                     Icon(Icons.logout,
                                         color: Colors.red[400], size: 22),
                                     SizedBox(width: 10),
-                                    Text(
-                                      'Logout',
-                                      style: TextStyle(
-                                        color: Colors.red[400],
-                                        fontSize: 16,
-                                        fontWeight: FontWeight.w600,
-                                      ),
-                                    ),
+                                    Text('Logout',
+                                        style: TextStyle(
+                                            color: Colors.red[400],
+                                            fontSize: 16,
+                                            fontWeight: FontWeight.w600)),
                                   ],
                                 ),
                               ),
@@ -447,23 +559,19 @@ class _DashboardPageState extends State<DashboardPage> {
     );
   }
 
-  // Logout Confirmation Dialog
+  //Logout Dialog
   void _showLogoutDialog() {
     Get.dialog(
       AlertDialog(
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(20),
-        ),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
         title: Row(
           children: [
             Container(
               padding: EdgeInsets.all(6),
               decoration: BoxDecoration(
-                gradient: LinearGradient(
-                  colors: [Color(0xFF667EEA), Color(0xFF764BA2)],
-                ),
-                borderRadius: BorderRadius.circular(8),
-              ),
+                  gradient: LinearGradient(
+                      colors: [Color(0xFF667EEA), Color(0xFF764BA2)]),
+                  borderRadius: BorderRadius.circular(8)),
               child: Icon(Icons.logout, color: Colors.white, size: 20),
             ),
             SizedBox(width: 12),
@@ -476,32 +584,21 @@ class _DashboardPageState extends State<DashboardPage> {
             ),
           ],
         ),
-        content: Text(
-          'Are you sure you want to logout?',
-          style: TextStyle(
-            fontSize: 16,
-            color: Color(0xFF4A5568),
-          ),
-        ),
+        content: Text('Are you sure you want to logout?',
+            style: TextStyle(fontSize: 16, color: Color(0xFF4A5568))),
         actions: [
           TextButton(
-            onPressed: () {
-              Get.back(); // Close dialog
-            },
-            child: Text(
-              'Cancel',
-              style: TextStyle(
-                color: Color(0xFF718096),
-                fontSize: 16,
-                fontWeight: FontWeight.w600,
-              ),
-            ),
+            onPressed: () => Get.back(),
+            child: Text('Cancel',
+                style: TextStyle(
+                    color: Color(0xFF718096),
+                    fontSize: 16,
+                    fontWeight: FontWeight.w600)),
           ),
           Container(
             decoration: BoxDecoration(
               gradient: LinearGradient(
-                colors: [Color(0xFF667EEA), Color(0xFF764BA2)],
-              ),
+                  colors: [Color(0xFF667EEA), Color(0xFF764BA2)]),
               borderRadius: BorderRadius.circular(10),
               boxShadow: [
                 BoxShadow(
@@ -513,7 +610,7 @@ class _DashboardPageState extends State<DashboardPage> {
             ),
             child: ElevatedButton(
               onPressed: () async {
-                Get.back(); // Close dialog
+                Get.back();
                 await ApiService.deleteToken();
                 Get.offAllNamed('/login');
               },
@@ -526,13 +623,8 @@ class _DashboardPageState extends State<DashboardPage> {
                 ),
                 padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
               ),
-              child: Text(
-                'Logout',
-                style: TextStyle(
-                  fontSize: 15,
-                  fontWeight: FontWeight.w600,
-                ),
-              ),
+              child: Text('Logout',
+                  style: TextStyle(fontSize: 15, fontWeight: FontWeight.w600)),
             ),
           ),
         ],
@@ -541,11 +633,8 @@ class _DashboardPageState extends State<DashboardPage> {
     );
   }
 
-  Widget _buildProfileItem({
-    required IconData icon,
-    required String label,
-    required String value,
-  }) {
+  Widget _buildProfileItem(
+      {required IconData icon, required String label, required String value}) {
     return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -555,23 +644,13 @@ class _DashboardPageState extends State<DashboardPage> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
-                label,
-                style: TextStyle(
-                  fontSize: 12,
-                  color: Color(0xFF718096),
-                  fontWeight: FontWeight.w500,
-                ),
-              ),
+              Text(label,
+                  style: TextStyle(
+                      fontSize: 12, color: Color(0xFF718096), fontWeight: FontWeight.w500)),
               SizedBox(height: 4),
-              Text(
-                value,
-                style: TextStyle(
-                  fontSize: 16,
-                  fontWeight: FontWeight.w600,
-                  color: Color(0xFF2D3748),
-                ),
-              ),
+              Text(value,
+                  style: TextStyle(
+                      fontSize: 16, fontWeight: FontWeight.w600, color: Color(0xFF2D3748))),
             ],
           ),
         ),
@@ -585,66 +664,52 @@ class _DashboardPageState extends State<DashboardPage> {
 
   @override
   Widget build(BuildContext context) {
-    // List of pages
     final List<Widget> _pages = [
       _buildHomePage(),
-      _buildCalendarPage(),
       _buildHospitalPage(),
       _buildHealthPage(),
       _buildExercisePage(),
       _buildProfilePage(),
     ];
 
-    // Show AppBar only for Home (0) and Profile (4) pages
     bool showAppBar = _selectedIndex == 0 || _selectedIndex == 5;
 
     return Scaffold(
       appBar: showAppBar
           ? AppBar(
-              title: Text('MaMata-Emracing Motherhood'),
+              title: Text('MaMata - Embracing Motherhood'),
               flexibleSpace: Container(
                 decoration: BoxDecoration(
                   gradient: LinearGradient(
                     begin: Alignment.topLeft,
                     end: Alignment.bottomRight,
-                    colors: [
-                      Color(0xFF667EEA),
-                      Color(0xFF764BA2),
-                    ],
+                    colors: [Color(0xFF667EEA), Color(0xFF764BA2)],
                   ),
                 ),
               ),
               foregroundColor: Colors.white,
               elevation: 0,
+             actions: [
+                if (_selectedIndex == 0) // show only on Home page
+                    IconButton(
+                       icon: Icon(Icons.calendar_today),
+                       onPressed: () {
+                // Navigate to the calendar page
+                Get.to(() => MyCalendarPage());
+              },
+            ),
+        ],
+
             )
           : null,
       body: _pages[_selectedIndex],
       bottomNavigationBar: BottomNavigationBar(
-        items: const <BottomNavigationBarItem>[
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: 'Home',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.calendar_today),
-            label: 'Calendar',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.local_hospital),
-            label: 'Hospital',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.favorite),
-            label: 'Nutrition',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.fitness_center),
-            label: 'Exercise',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.person),
-            label: 'Profile',
-          ),
+        items: const [
+          BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
+          BottomNavigationBarItem(icon: Icon(Icons.local_hospital), label: 'Hospital'),
+          BottomNavigationBarItem(icon: Icon(Icons.favorite), label: 'Nutrition'),
+          BottomNavigationBarItem(icon: Icon(Icons.fitness_center), label: 'Exercise'),
+          BottomNavigationBarItem(icon: Icon(Icons.person), label: 'Profile'),
         ],
         currentIndex: _selectedIndex,
         selectedItemColor: Color(0xFF667EEA),

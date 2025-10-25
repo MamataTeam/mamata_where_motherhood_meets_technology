@@ -4,6 +4,8 @@ import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get/get.dart';
 import '../config.dart';
 import '../user_profile_model.dart';
+import '../models/week_info.dart';
+
 
 class ApiService {
   // Secure Storage instance
@@ -213,4 +215,58 @@ class ApiService {
       throw Exception('An error occurred while updating profile.');
     }
   }
+  // Week info API
+static Future<WeekInfo?> fetchWeekInfo(int weekNumber) async {
+  final url = Uri.parse('$baseUrl/get-week/$weekNumber');
+  try {
+    final response = await http.get(url);
+
+    print('WeekInfo Response Status: ${response.statusCode}');
+    print('WeekInfo Response Body: ${response.body}');
+
+    if (response.statusCode == 200) {
+      final jsonData = json.decode(response.body);
+
+      if (jsonData['error'] == null) {
+        return WeekInfo.fromJson(jsonData);
+      } else {
+        print('Week not found: ${jsonData['error']}');
+        return null;
+      }
+    } else {
+      print('Failed to fetch week info: ${response.statusCode}');
+      return null;
+    }
+  } catch (e) {
+    print('Exception caught while fetching week info: $e');
+    return null;
+  }
 }
+//CURRENT PREGNANCY WEEK 
+  static Future<int?> fetchPregnancyWeek() async {
+    final token = await _storage.read(key: 'jwt_token');
+    if (token == null) return null;
+
+    final url = Uri.parse('$baseUrl/users/pregnancy-week');
+    try {
+      final response = await http.get(url, headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $token',
+      });
+
+      if (response.statusCode == 200) {
+        // Backend returns just an int as string or JSON {"week": 6}
+        final data = json.decode(response.body);
+        if (data is int) return data;
+        if (data is Map && data.containsKey('week')) return data['week'];
+      } else {
+        print('Failed to fetch pregnancy week: ${response.body}');
+      }
+      return null;
+    } catch (e) {
+      print('Error fetching pregnancy week: $e');
+      return null;
+    }
+  }
+}
+
