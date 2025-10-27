@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'dart:async';
+import 'package:intl/intl.dart';
 import '../APIs/api_service.dart';
 import '../user_profile_model.dart';
 import '../models/week_info.dart';
@@ -22,16 +24,47 @@ class _DashboardPageState extends State<DashboardPage> {
   int _selectedIndex = 0;
   UserProfile? _userProfile;
   bool _isLoading = true;
+  String appBarTitle = '';
+  Timer? _dateTimer;
 
   WeekInfo? weekInfo;
   int currentWeek = 0;
   bool isExpanded = false;
 
+  // Gradient colors
+  static const primaryColor = Color(0xFF667EEA);
+  static const secondaryColor = Color(0xFF764BA2);
 
   @override
   void initState() {
     super.initState();
+    _updateAppBarDate();       // set initial date
+    _startDailyDateUpdater();
     _loadUserProfile().then((_) => _loadWeekInfo());
+  }
+
+
+ @override
+  void dispose() {
+    _dateTimer?.cancel();
+    super.dispose();
+  }
+  
+ void _updateAppBarDate() {
+    setState(() {
+      appBarTitle = DateFormat('E, MMM d').format(DateTime.now());
+    });
+  }
+
+ void _startDailyDateUpdater() {
+    final now = DateTime.now();
+    final nextMidnight = DateTime(now.year, now.month, now.day + 1);
+    final durationUntilMidnight = nextMidnight.difference(now);
+
+    _dateTimer = Timer(durationUntilMidnight, () {
+      _updateAppBarDate();
+      _startDailyDateUpdater();
+    });
   }
 
   //User Profile
@@ -140,7 +173,7 @@ Widget _buildHomePage() {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  'Hi, ${_userProfile?.fullName ?? 'Nilisha'}!',
+                  'Hi, ${_userProfile?.fullName}!',
                   style: TextStyle(fontSize: 26, fontWeight: FontWeight.bold),
                 ),
                 SizedBox(height: 25),
@@ -269,26 +302,48 @@ Widget _buildHomePage() {
 
                 // Progress and summary info
                 Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-                  decoration: BoxDecoration(
-                    color: Colors.grey.shade100,
-                    borderRadius: BorderRadius.circular(12),
-                  ),
+                padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+                decoration: BoxDecoration(
+                  color: Colors.white, // Changed to white for a cleaner look like the image
+                  borderRadius: BorderRadius.circular(12),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.black.withOpacity(0.05), // Lighter shadow
+                      blurRadius: 10,
+                      offset: Offset(0, 5),
+                    ),
+                  ],
+                ),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Text("${weekInfo!.week} weeks"),
-                          Text(getTrimester(weekInfo!.week)),
-                        ],
-                      ),
+                          Text(
+                             "${weekInfo!.week} weeks",
+                             style: const TextStyle(
+                             color: Color(0xFF5B2C6F), 
+                             fontWeight: FontWeight.bold,
+                            ),
+                         ),
+    Text(
+      getTrimester(weekInfo!.week),
+      style: const TextStyle(
+        color: Color(0xFF0A3D62), // Dark Blue
+        fontWeight: FontWeight.bold,
+      ),
+    ),
+  ],
+),
+
                       SizedBox(height: 10),
                       LinearProgressIndicator(
                         value: weekInfo!.week / 40,
                         backgroundColor: Colors.grey.shade300,
-                        valueColor: AlwaysStoppedAnimation<Color>(Colors.teal),
+                        valueColor: AlwaysStoppedAnimation<Color>(Color(0xFF667EEA)),
+                        minHeight: 8, 
+                      borderRadius: BorderRadius.circular(5),
                       ),
                       SizedBox(height: 8),
                       Row(
@@ -341,7 +396,7 @@ Widget _buildHomePage() {
                       ElevatedButton(
                         onPressed: _loadUserProfile,
                         style: ElevatedButton.styleFrom(
-                          backgroundColor: Color(0xFF667EEA),
+                          backgroundColor: primaryColor,
                           foregroundColor: Colors.white,
                         ),
                         child: Text('Retry'),
@@ -360,7 +415,7 @@ Widget _buildHomePage() {
                           shape: BoxShape.circle,
                           boxShadow: [
                             BoxShadow(
-                              color: Color(0xFF667EEA).withOpacity(0.3),
+                              color: primaryColor.withOpacity(0.3),
                               blurRadius: 20,
                               offset: Offset(0, 10),
                             ),
@@ -371,12 +426,12 @@ Widget _buildHomePage() {
                           backgroundColor: Colors.white,
                           child: CircleAvatar(
                             radius: 55,
-                            backgroundColor: Color(0xFF667EEA).withOpacity(0.1),
+                            backgroundColor: primaryColor.withOpacity(0.1),
                             backgroundImage: _userProfile!.photoUrl != null
                                 ? NetworkImage(_userProfile!.photoUrl!)
                                 : null,
                             child: _userProfile!.photoUrl == null
-                                ? Icon(Icons.person, size: 60, color: Color(0xFF667EEA))
+                                ? Icon(Icons.person, size: 60, color: primaryColor)
                                 : null,
                           ),
                         ),
@@ -429,7 +484,7 @@ Widget _buildHomePage() {
                               style: TextStyle(
                                 fontSize: 20,
                                 fontWeight: FontWeight.bold,
-                                color: Color(0xFF667EEA),
+                                color: primaryColor,
                               ),
                             ),
                             Divider(height: 30),
@@ -497,11 +552,11 @@ Widget _buildHomePage() {
                                     EdgeInsets.symmetric(horizontal: 20, vertical: 16),
                                 decoration: BoxDecoration(
                                   gradient: LinearGradient(
-                                      colors: [Color(0xFF667EEA), Color(0xFF764BA2)]),
+                                      colors: [primaryColor, secondaryColor]),
                                   borderRadius: BorderRadius.circular(12),
                                   boxShadow: [
                                     BoxShadow(
-                                        color: Color(0xFF667EEA).withOpacity(0.3),
+                                        color: primaryColor.withOpacity(0.3),
                                         blurRadius: 8,
                                         offset: Offset(0, 4)),
                                   ],
@@ -570,7 +625,7 @@ Widget _buildHomePage() {
               padding: EdgeInsets.all(6),
               decoration: BoxDecoration(
                   gradient: LinearGradient(
-                      colors: [Color(0xFF667EEA), Color(0xFF764BA2)]),
+                      colors: [primaryColor, secondaryColor]),
                   borderRadius: BorderRadius.circular(8)),
               child: Icon(Icons.logout, color: Colors.white, size: 20),
             ),
@@ -598,11 +653,11 @@ Widget _buildHomePage() {
           Container(
             decoration: BoxDecoration(
               gradient: LinearGradient(
-                  colors: [Color(0xFF667EEA), Color(0xFF764BA2)]),
+                  colors: [primaryColor, secondaryColor]),
               borderRadius: BorderRadius.circular(10),
               boxShadow: [
                 BoxShadow(
-                  color: Color(0xFF667EEA).withOpacity(0.3),
+                  color: primaryColor.withOpacity(0.3),
                   blurRadius: 8,
                   offset: Offset(0, 4),
                 ),
@@ -638,7 +693,7 @@ Widget _buildHomePage() {
     return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Icon(icon, size: 20, color: Color(0xFF667EEA)),
+        Icon(icon, size: 20, color: primaryColor),
         SizedBox(width: 10),
         Expanded(
           child: Column(
@@ -674,49 +729,66 @@ Widget _buildHomePage() {
 
     bool showAppBar = _selectedIndex == 0 || _selectedIndex == 5;
 
-    return Scaffold(
-      appBar: showAppBar
-          ? AppBar(
-              title: Text('MaMata - Embracing Motherhood'),
+  return Scaffold(
+  appBar: showAppBar
+      ? AppBar(
+          centerTitle: true, 
+          title: Text(
+            appBarTitle,
+            style: const TextStyle(
+              color: Colors.white, 
+              fontWeight: FontWeight.w600,
+              fontSize: 20,
+            ),
+          ),
               flexibleSpace: Container(
                 decoration: BoxDecoration(
                   gradient: LinearGradient(
                     begin: Alignment.topLeft,
                     end: Alignment.bottomRight,
-                    colors: [Color(0xFF667EEA), Color(0xFF764BA2)],
+                    colors: [primaryColor, secondaryColor],
                   ),
                 ),
               ),
-              foregroundColor: Colors.white,
-              elevation: 0,
-             actions: [
-                if (_selectedIndex == 0) // show only on Home page
-                    IconButton(
-                       icon: Icon(Icons.calendar_today),
-                       onPressed: () {
-                // Navigate to the calendar page
-                Get.to(() => MyCalendarPage());
-              },
-            ),
-        ],
-
-            )
-          : null,
-      body: _pages[_selectedIndex],
-      bottomNavigationBar: BottomNavigationBar(
-        items: const [
-          BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
-          BottomNavigationBarItem(icon: Icon(Icons.local_hospital), label: 'Hospital'),
-          BottomNavigationBarItem(icon: Icon(Icons.favorite), label: 'Nutrition'),
-          BottomNavigationBarItem(icon: Icon(Icons.fitness_center), label: 'Exercise'),
-          BottomNavigationBarItem(icon: Icon(Icons.person), label: 'Profile'),
-        ],
-        currentIndex: _selectedIndex,
-        selectedItemColor: Color(0xFF667EEA),
-        unselectedItemColor: Colors.grey,
-        onTap: _onItemTapped,
-        type: BottomNavigationBarType.fixed,
-      ),
-    );
-  }
+            foregroundColor: Colors.white,
+            elevation: 0,
+            actions: [
+              if (_selectedIndex == 0)
+                IconButton(
+                  icon: Container(
+                    padding: EdgeInsets.all(6),
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      color: Colors.white.withOpacity(0.2),
+                    ),
+                    child: Icon(Icons.calendar_today, color: Colors.white, size: 28),
+                  ),
+                  onPressed: () {
+                      DateTime? dueDate;
+                      if (_userProfile?.dueDate != null) {
+                        dueDate = DateTime.tryParse(_userProfile!.dueDate!);
+                      }
+                      Get.to(() => MyCalendarPage(dueDate: dueDate));
+                    },
+                ),
+            ],
+          )
+        : null,
+    body: _pages[_selectedIndex],
+    bottomNavigationBar: BottomNavigationBar(
+      items: const [
+        BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
+        BottomNavigationBarItem(icon: Icon(Icons.local_hospital), label: 'Hospital'),
+        BottomNavigationBarItem(icon: Icon(Icons.favorite), label: 'Nutrition'),
+        BottomNavigationBarItem(icon: Icon(Icons.fitness_center), label: 'Exercise'),
+        BottomNavigationBarItem(icon: Icon(Icons.person), label: 'Profile'),
+      ],
+      currentIndex: _selectedIndex,
+      selectedItemColor: primaryColor,
+      unselectedItemColor: Colors.grey,
+      onTap: _onItemTapped,
+      type: BottomNavigationBarType.fixed,
+    ),
+  );
+}
 }
