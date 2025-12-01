@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:timezone/data/latest_all.dart' as tz;
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'firebase_options.dart';
 
@@ -21,6 +22,8 @@ void main() async {
     print('Firebase initialization error: $e');
   }
 
+    // Required for scheduled notifications
+  tz.initializeTimeZones();
   runApp(const MyApp());
 }
 
