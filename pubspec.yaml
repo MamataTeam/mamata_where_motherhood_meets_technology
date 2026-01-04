@@ -21,14 +21,13 @@ dependencies:
 
   flutter_secure_storage: ^9.2.4
   get: ^4.6.5
-  fluttertoast: ^8.2.8
   table_calendar: ^3.0.9
   intl: ^0.20.2
   nepali_date_picker: ^6.0.2
   flutter_localizations:
     sdk: flutter
   cupertino_icons: ^1.0.8
-  flutter_local_notifications: ^17.1.2
+  flutter_local_notifications: ^17.2.4
   timezone: ^0.9.4
   flutter_slidable: ^3.0.0
 

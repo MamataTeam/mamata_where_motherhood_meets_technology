@@ -667,6 +667,7 @@ Widget _buildHomePage() {
               onPressed: () async {
                 Get.back();
                 await ApiService.deleteToken();
+                // DO NOT delete email - it will be needed for calendar events
                 Get.offAllNamed('/login');
               },
               style: ElevatedButton.styleFrom(
@@ -763,13 +764,20 @@ Widget _buildHomePage() {
                     ),
                     child: Icon(Icons.calendar_today, color: Colors.white, size: 28),
                   ),
-                  onPressed: () {
-                      DateTime? dueDate;
-                      if (_userProfile?.dueDate != null) {
-                        dueDate = DateTime.tryParse(_userProfile!.dueDate!);
-                      }
-                      Get.to(() => MyCalendarPage(dueDate: dueDate));
-                    },
+                  onPressed: () async {
+                    // GET USER EMAIL
+                    final userEmail = await ApiService.getUserEmail();
+                    
+                    DateTime? dueDate;
+                    if (_userProfile?.dueDate != null) {
+                      dueDate = DateTime.tryParse(_userProfile!.dueDate!);
+                    }
+                    
+                    Get.to(() => MyCalendarPage(
+                      dueDate: dueDate,
+                      userId: userEmail,  // PASS EMAIL as userId
+                    ));
+                  },
                 ),
             ],
           )

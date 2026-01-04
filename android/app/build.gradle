@@ -21,16 +21,22 @@ android {
 
     defaultConfig {
         applicationId = "com.example.mamata_app"
-        minSdk = 21
+        minSdk = 23
         targetSdk = 35
         versionCode = 1
         versionName = "1.0"
+        multiDexEnabled = true
     }
 
     buildTypes {
         release {
             signingConfig = signingConfigs.debug
         }
+    }
+
+    // Enable desugaring
+    compileOptions {
+        coreLibraryDesugaringEnabled true
     }
 }
 
@@ -39,6 +45,5 @@ flutter {
 }
 
 dependencies {
-    // implementation platform('com.google.firebase:firebase-bom:32.7.0')
-    // implementation 'com.google.firebase:firebase-auth'
+    coreLibraryDesugaring 'com.android.tools:desugar_jdk_libs:2.0.3'
 }

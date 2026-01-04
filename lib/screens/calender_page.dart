@@ -10,6 +10,7 @@ import 'package:timezone/timezone.dart' as tz;
 import 'package:timezone/data/latest_all.dart' as tzdata;
 import 'package:flutter_slidable/flutter_slidable.dart';
 
+
 class MyCalendarPage extends StatefulWidget {
   final DateTime? dueDate;
   final String? userId;
@@ -62,9 +63,22 @@ class _MyCalendarPageState extends State<MyCalendarPage> {
   }
 
   Future<void> _initNotifications() async {
-    const androidInit = AndroidInitializationSettings('@mipmap/ic_launcher');
-    const iosInit = DarwinInitializationSettings();
-    await _fln.initialize(const InitializationSettings(android: androidInit, iOS: iosInit));
+    try {
+      const androidInit = AndroidInitializationSettings('@mipmap/ic_launcher');
+      const iosInit = DarwinInitializationSettings(
+        requestSoundPermission: true,
+        requestBadgePermission: true,
+        requestAlertPermission: true,
+      );
+      
+      await _fln.initialize(
+        const InitializationSettings(android: androidInit, iOS: iosInit),
+      );
+      
+      debugPrint('✓ Notifications initialized successfully');
+    } catch (e) {
+      debugPrint('✗ Error initializing notifications: $e');
+    }
   }
 
   Future<void> _scheduleNotificationForEvent({
@@ -72,38 +86,77 @@ class _MyCalendarPageState extends State<MyCalendarPage> {
     required String title,
     required DateTime scheduledDateTime,
   }) async {
-    if (kIsWeb || scheduledDateTime.isBefore(DateTime.now())) return;
+    debugPrint('\n=== SCHEDULING NOTIFICATION ===');
+    debugPrint('Event ID: $id');
+    debugPrint('Title: $title');
+    debugPrint('Scheduled Time: $scheduledDateTime');
+    debugPrint('Current Time: ${DateTime.now()}');
+    
+    if (kIsWeb || scheduledDateTime.isBefore(DateTime.now())) {
+      debugPrint('❌ Skipped: Time is in the past or running on web');
+      return;
+    }
 
-    final tz.TZDateTime tzDate = tz.TZDateTime.from(scheduledDateTime, tz.local);
-    final androidDetails = AndroidNotificationDetails(
-      'event_channel',
-      'Event Notifications',
-      channelDescription: 'Reminders for your calendar events',
-      importance: Importance.max,
-      priority: Priority.high,
-      playSound: true,
-      sound: const RawResourceAndroidNotificationSound('reminder'),
-    );
-    final iosDetails = DarwinNotificationDetails(presentSound: true);
-    final details = NotificationDetails(android: androidDetails, iOS: iosDetails);
-    final int notifId = id.hashCode & 0x7fffffff;
+    try {
+      final tz.TZDateTime tzDate = tz.TZDateTime.from(scheduledDateTime, tz.local);
+      debugPrint('TZ DateTime: $tzDate');
+      
+      final androidDetails = AndroidNotificationDetails(
+        'event_channel',
+        'Event Notifications',
+        channelDescription: 'Reminders for your calendar events',
+        importance: Importance.max,
+        priority: Priority.high,
+        playSound: true,
+        enableVibration: true,
+        enableLights: true,
+        ledColor: const Color.fromARGB(255, 255, 0, 0),
+        fullScreenIntent: true,
+        sound: const RawResourceAndroidNotificationSound('notification'),
+      );
+      
+      final iosDetails = DarwinNotificationDetails(
+        presentSound: true,
+        presentAlert: true,
+        presentBadge: true,
+        sound: 'notification.mp3',
+      );
+      
+      final details = NotificationDetails(android: androidDetails, iOS: iosDetails);
+      final int notifId = id.hashCode & 0x7fffffff;
 
-    await _fln.zonedSchedule(
-      notifId,
-      'Reminder',
-      title,
-      tzDate,
-      details,
-      uiLocalNotificationDateInterpretation: UILocalNotificationDateInterpretation.absoluteTime,
-      androidScheduleMode: AndroidScheduleMode.exactAllowWhileIdle,
-      matchDateTimeComponents: DateTimeComponents.dateAndTime,
-    );
+      debugPrint('Notification ID: $notifId');
+      debugPrint('Attempting to schedule...');
+      
+      await _fln.zonedSchedule(
+        notifId,
+        'Event Reminder',
+        title,
+        tzDate,
+        details,
+        uiLocalNotificationDateInterpretation: UILocalNotificationDateInterpretation.absoluteTime,
+        androidScheduleMode: AndroidScheduleMode.exactAllowWhileIdle,
+        matchDateTimeComponents: DateTimeComponents.dateAndTime,
+      );
+      
+      debugPrint('✓ Notification scheduled successfully!');
+      debugPrint('============================\n');
+    } catch (e, stackTrace) {
+      debugPrint('✗ ERROR scheduling notification: $e');
+      debugPrint('Stack trace: $stackTrace');
+      debugPrint('============================\n');
+    }
   }
 
   Future<void> _cancelNotificationForEvent(String id) async {
     if (kIsWeb) return;
-    final int notifId = id.hashCode & 0x7fffffff;
-    await _fln.cancel(notifId);
+    try {
+      final int notifId = id.hashCode & 0x7fffffff;
+      await _fln.cancel(notifId);
+      debugPrint('✓ Notification cancelled for ID: $notifId');
+    } catch (e) {
+      debugPrint('✗ Error cancelling notification: $e');
+    }
   }
 
   Future<void> _resolveUserIdAndListen() async {
@@ -210,7 +263,15 @@ class _MyCalendarPageState extends State<MyCalendarPage> {
                         initialDate: selectedDate,
                         firstDate: DateTime(2020),
                         lastDate: DateTime(2035),
+                        builder: (context, child) {
+                          return Localizations.override(
+                            context: context,
+                            locale: const Locale('en', 'US'),
+                            child: child,
+                          );
+                        },
                       );
+
                       if (picked != null) setState(() => selectedDate = picked);
                     },
                   ),
@@ -223,7 +284,18 @@ class _MyCalendarPageState extends State<MyCalendarPage> {
                   IconButton(
                     icon: Icon(Icons.edit, color: themeColor1),
                     onPressed: () async {
-                      TimeOfDay? picked = await showTimePicker(context: context, initialTime: selectedTime);
+                      TimeOfDay? picked = await showTimePicker(
+                        context: context,
+                        initialTime: selectedTime,
+                        builder: (context, child) {
+                          return Localizations.override(
+                            context: context,
+                            locale: const Locale('en', 'US'),
+                            child: child,
+                          );
+                        },
+                      );
+
                       if (picked != null) {
                         setState(() {
                           selectedTime = picked;

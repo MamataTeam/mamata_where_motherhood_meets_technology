@@ -22,7 +22,7 @@ void main() async {
     print('Firebase initialization error: $e');
   }
 
-    // Required for scheduled notifications
+  // Required for scheduled notifications
   tz.initializeTimeZones();
   runApp(const MyApp());
 }
@@ -97,8 +97,8 @@ class MyApp extends StatelessWidget {
         GetPage(name: '/login', page: () => const LoginPage()),
         GetPage(name: '/register', page: () => const RegistrationPage()),
         GetPage(name: '/dashboard', page: () => const DashboardPage()),
-        GetPage(name: '/health', page: () => HealthPage()),
-        GetPage(name: '/hospital_list', page: () => HospitalListScreen()),
+        GetPage(name: '/health', page: () => const HealthPage()),
+        GetPage(name: '/hospital_list', page: () => const HospitalListScreen()),
       ],
     );
   }

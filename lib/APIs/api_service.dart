@@ -26,6 +26,16 @@ class ApiService {
     await _storage.delete(key: 'jwt_token');
   }
 
+  // NEW: Save user email (unique identifier for calendar events)
+  static Future<void> saveUserEmail(String email) async {
+    await _storage.write(key: 'userEmail', value: email);
+  }
+
+  // NEW: Get user email
+  static Future<String?> getUserEmail() async {
+    return await _storage.read(key: 'userEmail');
+  }
+
   // User profile mapping with null-safety
   static UserProfile _userProfileFromJson(Map<String, dynamic> json) {
     return UserProfile(
@@ -68,7 +78,12 @@ class ApiService {
 
       if (response.statusCode == 200) {
         final Map<String, dynamic> data = json.decode(response.body);
-        print('Parsed JSON: $data'); // DEBUG to See what fields exist
+        print('Parsed JSON: $data');
+        
+        // SAVE USER EMAIL
+        String userEmail = data['email'] as String;
+        await saveUserEmail(userEmail);
+        
         return _userProfileFromJson(data);
       } else if (response.statusCode == 401) {
         // Token is invalid or expired
@@ -155,6 +170,10 @@ class ApiService {
         var responseData = jsonDecode(response.body);
         String accessToken = responseData['access_token'];
         await saveToken(accessToken);
+        
+        // SAVE USER EMAIL AFTER LOGIN
+        await saveUserEmail(email);
+        
         return true;
       } else {
         final error = jsonDecode(response.body);
@@ -215,34 +234,36 @@ class ApiService {
       throw Exception('An error occurred while updating profile.');
     }
   }
+
   // Week info API
-static Future<WeekInfo?> fetchWeekInfo(int weekNumber) async {
-  final url = Uri.parse('$baseUrl/get-week/$weekNumber');
-  try {
-    final response = await http.get(url);
+  static Future<WeekInfo?> fetchWeekInfo(int weekNumber) async {
+    final url = Uri.parse('$baseUrl/get-week/$weekNumber');
+    try {
+      final response = await http.get(url);
 
-    print('WeekInfo Response Status: ${response.statusCode}');
-    print('WeekInfo Response Body: ${response.body}');
+      print('WeekInfo Response Status: ${response.statusCode}');
+      print('WeekInfo Response Body: ${response.body}');
 
-    if (response.statusCode == 200) {
-      final jsonData = json.decode(response.body);
+      if (response.statusCode == 200) {
+        final jsonData = json.decode(response.body);
 
-      if (jsonData['error'] == null) {
-        return WeekInfo.fromJson(jsonData);
+        if (jsonData['error'] == null) {
+          return WeekInfo.fromJson(jsonData);
+        } else {
+          print('Week not found: ${jsonData['error']}');
+          return null;
+        }
       } else {
-        print('Week not found: ${jsonData['error']}');
+        print('Failed to fetch week info: ${response.statusCode}');
         return null;
       }
-    } else {
-      print('Failed to fetch week info: ${response.statusCode}');
+    } catch (e) {
+      print('Exception caught while fetching week info: $e');
       return null;
     }
-  } catch (e) {
-    print('Exception caught while fetching week info: $e');
-    return null;
   }
-}
-//CURRENT PREGNANCY WEEK 
+
+  // CURRENT PREGNANCY WEEK 
   static Future<int?> fetchPregnancyWeek() async {
     final token = await _storage.read(key: 'jwt_token');
     if (token == null) return null;
@@ -269,4 +290,3 @@ static Future<WeekInfo?> fetchWeekInfo(int weekNumber) async {
     }
   }
 }
-
