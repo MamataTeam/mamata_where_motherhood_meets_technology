@@ -1,4 +1,4 @@
-const String serverIP = "192.168.0.101";
+const String serverIP = "10.166.193.244";
 const int serverPort = 8000;
 const String serverProtocol = "http";
 

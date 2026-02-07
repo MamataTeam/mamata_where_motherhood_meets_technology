@@ -37,7 +37,10 @@ class _PregnancyNutritionScreenState extends State<PregnancyNutritionScreen> {
   }
 
   void _showAllFoodsDialog(
-      BuildContext context, FoodCategory category, Color color) {
+    BuildContext context,
+    FoodCategory category,
+    Color color,
+  ) {
     showDialog(
       context: context,
       barrierColor: Colors.black.withOpacity(0.5),
@@ -69,13 +72,15 @@ class _PregnancyNutritionScreenState extends State<PregnancyNutritionScreen> {
               mainAxisSize: MainAxisSize.min,
               children: [
                 Container(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 24, vertical: 20),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 24,
+                    vertical: 20,
+                  ),
                   decoration: BoxDecoration(
                     gradient: LinearGradient(
                       colors: [
                         color.withOpacity(0.08),
-                        color.withOpacity(0.03)
+                        color.withOpacity(0.03),
                       ],
                       begin: Alignment.topLeft,
                       end: Alignment.bottomRight,
@@ -129,8 +134,11 @@ class _PregnancyNutritionScreenState extends State<PregnancyNutritionScreen> {
                           borderRadius: BorderRadius.circular(8),
                         ),
                         child: IconButton(
-                          icon:
-                              Icon(Icons.close_rounded, color: color, size: 20),
+                          icon: Icon(
+                            Icons.close_rounded,
+                            color: color,
+                            size: 20,
+                          ),
                           onPressed: () => Navigator.of(context).pop(),
                           padding: EdgeInsets.all(8),
                           constraints: BoxConstraints(),
@@ -145,7 +153,9 @@ class _PregnancyNutritionScreenState extends State<PregnancyNutritionScreen> {
                 Flexible(
                   child: ListView.builder(
                     padding: const EdgeInsets.symmetric(
-                        horizontal: 24, vertical: 16),
+                      horizontal: 24,
+                      vertical: 16,
+                    ),
                     shrinkWrap: true,
                     itemCount: category.items.length,
                     itemBuilder: (context, index) {
@@ -235,10 +245,7 @@ class _PregnancyNutritionScreenState extends State<PregnancyNutritionScreen> {
           gradient: LinearGradient(
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
-            colors: [
-              Color(0xFFF5F7FA),
-              Color(0xFFC3CFE2),
-            ],
+            colors: [Color(0xFFF5F7FA), Color(0xFFC3CFE2)],
           ),
         ),
         child: Column(
@@ -248,84 +255,87 @@ class _PregnancyNutritionScreenState extends State<PregnancyNutritionScreen> {
               child: _isLoading
                   ? Center(child: CircularProgressIndicator())
                   : _error != null
-                      ? Center(
-                          child: Padding(
-                            padding: const EdgeInsets.all(20),
+                  ? Center(
+                      child: Padding(
+                        padding: const EdgeInsets.all(20),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Icon(
+                              Icons.error_outline,
+                              size: 60,
+                              color: Colors.red,
+                            ),
+                            SizedBox(height: 16),
+                            Text(
+                              'Failed to load nutrition data',
+                              style: TextStyle(
+                                fontSize: 18,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            SizedBox(height: 8),
+                            Text(
+                              _error!,
+                              textAlign: TextAlign.center,
+                              style: TextStyle(color: Colors.red),
+                            ),
+                            SizedBox(height: 16),
+                            ElevatedButton(
+                              onPressed: () {
+                                setState(() {
+                                  _isLoading = true;
+                                  _error = null;
+                                });
+                                _loadNutrition();
+                              },
+                              child: Text('Retry'),
+                            ),
+                          ],
+                        ),
+                      ),
+                    )
+                  : SingleChildScrollView(
+                      padding: const EdgeInsets.symmetric(vertical: 20),
+                      child: Column(
+                        children: [
+                          _buildTrimesterSection(
+                            context: context,
+                            trimester: _nutritionData!.firstTrimester!,
+                            trimesterNumber: '1',
+                            color: Color(0xFF667EEA),
+                          ),
+                          const SizedBox(height: 20),
+                          _buildTrimesterSection(
+                            context: context,
+                            trimester: _nutritionData!.secondTrimester!,
+                            trimesterNumber: '2',
+                            color: Color(0xFF764BA2),
+                          ),
+                          const SizedBox(height: 20),
+                          _buildTrimesterSection(
+                            context: context,
+                            trimester: _nutritionData!.thirdTrimester!,
+                            trimesterNumber: '3',
+                            color: Color(0xFFE77E7E),
+                          ),
+                          const SizedBox(height: 20),
+                          Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 16),
                             child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                                Icon(Icons.error_outline,
-                                    size: 60, color: Colors.red),
-                                SizedBox(height: 16),
-                                Text(
-                                  'Failed to load nutrition data',
-                                  style: TextStyle(
-                                      fontSize: 18,
-                                      fontWeight: FontWeight.bold),
-                                ),
-                                SizedBox(height: 8),
-                                Text(
-                                  _error!,
-                                  textAlign: TextAlign.center,
-                                  style: TextStyle(color: Colors.red),
-                                ),
-                                SizedBox(height: 16),
-                                ElevatedButton(
-                                  onPressed: () {
-                                    setState(() {
-                                      _isLoading = true;
-                                      _error = null;
-                                    });
-                                    _loadNutrition();
-                                  },
-                                  child: Text('Retry'),
-                                ),
+                                _buildGeneralSafetySection(),
+                                const SizedBox(height: 16),
+                                _buildTipsSection(),
+                                const SizedBox(height: 16),
+                                _buildDisclaimer(),
                               ],
                             ),
                           ),
-                        )
-                      : SingleChildScrollView(
-                          padding: const EdgeInsets.symmetric(vertical: 20),
-                          child: Column(
-                            children: [
-                              _buildTrimesterSection(
-                                context: context,
-                                trimester: _nutritionData!.firstTrimester!,
-                                trimesterNumber: '1',
-                                color: Color(0xFF667EEA),
-                              ),
-                              const SizedBox(height: 20),
-                              _buildTrimesterSection(
-                                context: context,
-                                trimester: _nutritionData!.secondTrimester!,
-                                trimesterNumber: '2',
-                                color: Color(0xFF764BA2),
-                              ),
-                              const SizedBox(height: 20),
-                              _buildTrimesterSection(
-                                context: context,
-                                trimester: _nutritionData!.thirdTrimester!,
-                                trimesterNumber: '3',
-                                color: Color(0xFFE77E7E),
-                              ),
-                              const SizedBox(height: 20),
-                              Padding(
-                                padding:
-                                    const EdgeInsets.symmetric(horizontal: 16),
-                                child: Column(
-                                  children: [
-                                    _buildGeneralSafetySection(),
-                                    const SizedBox(height: 16),
-                                    _buildTipsSection(),
-                                    const SizedBox(height: 16),
-                                    _buildDisclaimer(),
-                                  ],
-                                ),
-                              ),
-                              const SizedBox(height: 20),
-                            ],
-                          ),
-                        ),
+                          const SizedBox(height: 20),
+                        ],
+                      ),
+                    ),
             ),
           ],
         ),
@@ -340,18 +350,10 @@ class _PregnancyNutritionScreenState extends State<PregnancyNutritionScreen> {
         gradient: LinearGradient(
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
-          colors: [
-            Color(0xFF667EEA),
-            Color(0xFF764BA2),
-          ],
+          colors: [Color(0xFF667EEA), Color(0xFF764BA2)],
         ),
       ),
-      padding: EdgeInsets.only(
-        top: 50,
-        left: 20,
-        right: 30,
-        bottom: 30,
-      ),
+      padding: EdgeInsets.only(top: 50, left: 20, right: 30, bottom: 30),
       child: Column(
         children: [
           Text(
@@ -391,9 +393,7 @@ class _PregnancyNutritionScreenState extends State<PregnancyNutritionScreen> {
           child: Container(
             padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
             decoration: BoxDecoration(
-              gradient: LinearGradient(
-                colors: [color, color.withOpacity(0.7)],
-              ),
+              gradient: LinearGradient(colors: [color, color.withOpacity(0.7)]),
               borderRadius: BorderRadius.circular(12),
               boxShadow: [
                 BoxShadow(
@@ -468,7 +468,10 @@ class _PregnancyNutritionScreenState extends State<PregnancyNutritionScreen> {
   }
 
   Widget _buildFoodCard(
-      BuildContext context, FoodCategory category, Color color) {
+    BuildContext context,
+    FoodCategory category,
+    Color color,
+  ) {
     // Show only first 4 items
     final displayItems = category.items.take(4).toList();
     final hasMore = category.items.length > 4;
@@ -504,10 +507,7 @@ class _PregnancyNutritionScreenState extends State<PregnancyNutritionScreen> {
                 topRight: Radius.circular(20),
               ),
               border: Border(
-                bottom: BorderSide(
-                  color: color.withOpacity(0.2),
-                  width: 1,
-                ),
+                bottom: BorderSide(color: color.withOpacity(0.2), width: 1),
               ),
             ),
             child: Text(
@@ -595,10 +595,7 @@ class _PregnancyNutritionScreenState extends State<PregnancyNutritionScreen> {
                         padding: const EdgeInsets.symmetric(vertical: 12),
                         decoration: BoxDecoration(
                           border: Border(
-                            top: BorderSide(
-                              color: Color(0xFFE2E8F0),
-                              width: 1,
-                            ),
+                            top: BorderSide(color: Color(0xFFE2E8F0), width: 1),
                           ),
                         ),
                         child: Row(
@@ -735,10 +732,7 @@ class _PregnancyNutritionScreenState extends State<PregnancyNutritionScreen> {
         children: [
           Row(
             children: [
-              Text(
-                '💡',
-                style: TextStyle(fontSize: 22),
-              ),
+              Text('💡', style: TextStyle(fontSize: 22)),
               const SizedBox(width: 10),
               Expanded(
                 child: Text(
@@ -753,32 +747,31 @@ class _PregnancyNutritionScreenState extends State<PregnancyNutritionScreen> {
             ],
           ),
           const SizedBox(height: 14),
-          ...tips.map((tip) => Padding(
-                padding: const EdgeInsets.only(bottom: 10),
-                child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      '→',
-                      style: TextStyle(
-                        color: Color(0xFF48BB78),
-                        fontWeight: FontWeight.bold,
-                        fontSize: 16,
-                      ),
+          ...tips.map(
+            (tip) => Padding(
+              padding: const EdgeInsets.only(bottom: 10),
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    '→',
+                    style: TextStyle(
+                      color: Color(0xFF48BB78),
+                      fontWeight: FontWeight.bold,
+                      fontSize: 16,
                     ),
-                    const SizedBox(width: 10),
-                    Expanded(
-                      child: Text(
-                        tip,
-                        style: TextStyle(
-                          fontSize: 13,
-                          color: Color(0xFF2F855A),
-                        ),
-                      ),
+                  ),
+                  const SizedBox(width: 10),
+                  Expanded(
+                    child: Text(
+                      tip,
+                      style: TextStyle(fontSize: 13, color: Color(0xFF2F855A)),
                     ),
-                  ],
-                ),
-              )),
+                  ),
+                ],
+              ),
+            ),
+          ),
         ],
       ),
     );
@@ -790,17 +783,12 @@ class _PregnancyNutritionScreenState extends State<PregnancyNutritionScreen> {
       decoration: BoxDecoration(
         color: Color(0xFFEDF2F7),
         borderRadius: BorderRadius.circular(8),
-        border: Border(
-          left: BorderSide(color: Color(0xFF4299E1), width: 4),
-        ),
+        border: Border(left: BorderSide(color: Color(0xFF4299E1), width: 4)),
       ),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
-            '⚕️',
-            style: TextStyle(fontSize: 18),
-          ),
+          Text('⚕️', style: TextStyle(fontSize: 18)),
           const SizedBox(width: 10),
           Expanded(
             child: RichText(

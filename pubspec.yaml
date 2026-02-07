@@ -23,6 +23,8 @@ dependencies:
   get: ^4.6.5
   table_calendar: ^3.0.9
   intl: ^0.20.2
+  device_calendar: ^4.3.2  
+  permission_handler: ^11.0.1 
   nepali_date_picker: ^6.0.2
   flutter_localizations:
     sdk: flutter
@@ -43,5 +45,7 @@ flutter:
     - assets/pregnancy_exercises.json
     - assets/pregnancy_nutrition.json
     - assets/pregnancy_weeks_info.json
+    - assets/week_images.json
+    - assets/baby_size_week.json
 
  

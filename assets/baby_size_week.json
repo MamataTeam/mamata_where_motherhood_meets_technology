@@ -1,0 +1,344 @@
+[
+  {
+    "week": 3,
+    "comparison": "Smaller than a Grain",
+    "weight_grams": 0,
+    "height_cm": 0.1,
+    "heart_rate_bpm": "0",
+    "hcg_range": "5-25",
+    "image_url": "https://i.ibb.co/XkJnV8C0/week3.png"
+  },
+  {
+    "week": 4,
+    "comparison": "Poppy seed",
+    "weight_grams": 0,
+    "height_cm": 0.1,
+    "heart_rate_bpm": "0",
+    "hcg_range": "25-156",
+    "image_url": "https://i.ibb.co/NdLTCJ60/week4.png"
+  },
+  {
+    "week": 5,
+    "comparison": "Sesame seed",
+    "weight_grams": 0.1,
+    "height_cm": 0.2,
+    "heart_rate_bpm": "80-103",
+    "hcg_range": "101-4870",
+    "image_url": "https://i.ibb.co/rgGDrpF/week5.png"
+  },
+  {
+    "week": 6,
+    "comparison": "Rice Seed",
+    "weight_grams": 0.2,
+    "height_cm": 0.6,
+    "heart_rate_bpm": "103-126",
+    "hcg_range": "1080-31500",
+    "image_url": "https://i.ibb.co/W4hg2n0P/week6.png"
+  },
+  {
+    "week": 7,
+    "comparison": "Blueberry",
+    "weight_grams": 0.5,
+    "height_cm": 1.3,
+    "heart_rate_bpm": "126-149",
+    "hcg_range": "2560-82300",
+    "image_url": "https://i.ibb.co/xSMKR8vn/week7.png"
+  },
+  {
+    "week": 8,
+    "comparison": "Raspberry",
+    "weight_grams": 1,
+    "height_cm": 1.6,
+    "heart_rate_bpm": "149-172",
+    "hcg_range": "25700-151000",
+    "image_url": "https://i.ibb.co/93HGD2hn/week8.png"
+  },
+  {
+    "week": 9,
+    "comparison": "Cherry",
+    "weight_grams": 2,
+    "height_cm": 2.3,
+    "heart_rate_bpm": "155-195",
+    "hcg_range": "27300-233000",
+    "image_url": "https://i.ibb.co/846mtrXq/week9.png"
+  },
+  {
+    "week": 10,
+    "comparison": "Strawbery",
+    "weight_grams": 4,
+    "height_cm": 3.1,
+    "heart_rate_bpm": "161-179",
+    "hcg_range": "20900-291000",
+    "image_url": "https://i.ibb.co/GfJMFbN3/week10.png"
+  },
+  {
+    "week": 11,
+    "comparison": "Fig",
+    "weight_grams": 7,
+    "height_cm": 4.1,
+    "heart_rate_bpm": "153-177",
+    "hcg_range": "20900-291000",
+    "image_url": "https://i.ibb.co/gMMM1GWK/week11.png"
+  },
+  {
+    "week": 12,
+    "comparison": "Plum",
+    "weight_grams": 14,
+    "height_cm": 5.4,
+    "heart_rate_bpm": "150-174",
+    "hcg_range": "20900-291000",
+    "image_url": "https://i.ibb.co/bjpy3Pq7/week12.png"
+  },
+  {
+    "week": 13,
+    "comparison": "Lime",
+    "weight_grams": 23,
+    "height_cm": 7.4,
+    "heart_rate_bpm": "147-171",
+    "hcg_range": "20900-291000",
+    "image_url": "https://i.ibb.co/XxvcXn6Q/week13.png"
+  },
+  {
+    "week": 14,
+    "comparison": "Peach",
+    "weight_grams": 43,
+    "height_cm": 8.7,
+    "heart_rate_bpm": "146-168",
+    "hcg_range": "6140-103000",
+    "image_url": "https://i.ibb.co/d0JKkt8T/week14.png"
+  },
+  {
+    "week": 15,
+    "comparison": "Apple",
+    "weight_grams": 70,
+    "height_cm": 10.1,
+    "heart_rate_bpm": "140-160",
+    "hcg_range": "6140-103000",
+    "image_url": "https://i.ibb.co/BHhV87Wk/week15.png"
+  },
+  {
+    "week": 16,
+    "comparison": "Avocado",
+    "weight_grams": 100,
+    "height_cm": 11.6,
+    "heart_rate_bpm": "140-160",
+    "hcg_range": "6140-103000",
+    "image_url": "https://i.ibb.co/ZRrFrB3x/week16.png"
+  },
+  {
+    "week": 17,
+    "comparison": "Orange",
+    "weight_grams": 140,
+    "height_cm": 13.0,
+    "heart_rate_bpm": "140-160",
+    "hcg_range": "6140-103000",
+    "image_url": "https://i.ibb.co/h1VjSYYQ/week17.png"
+  },
+  {
+    "week": 18,
+    "comparison": "Pomegranate",
+    "weight_grams": 190,
+    "height_cm": 14.2,
+    "heart_rate_bpm": "140-160",
+    "hcg_range": "6140-103000",
+    "image_url": "https://i.ibb.co/nsrR2Sdn/week18.png"
+  },
+  {
+    "week": 19,
+    "comparison": "Grapefruit",
+    "weight_grams": 240,
+    "height_cm": 15.3,
+    "heart_rate_bpm": "140-160",
+    "hcg_range": "4720-80100",
+    "image_url": "https://i.ibb.co/rR14TqVw/week19.png"
+  },
+  {
+    "week": 20,
+    "comparison": "Banana",
+    "weight_grams": 300,
+    "height_cm": 25.6,
+    "heart_rate_bpm": "140-160",
+    "hcg_range": "4720-80100",
+    "image_url": "https://i.ibb.co/RGt1vs62/week20.png"
+  },
+  {
+    "week": 21,
+    "comparison": "Cucumber",
+    "weight_grams": 360,
+    "height_cm": 26.7,
+    "heart_rate_bpm": "140-160",
+    "hcg_range": "4720-80100",
+    "image_url": "https://i.ibb.co/hRMnbB2P/week21.png"
+  },
+  {
+    "week": 22,
+    "comparison": "Mango",
+    "weight_grams": 430,
+    "height_cm": 27.8,
+    "heart_rate_bpm": "140-160",
+    "hcg_range": "4720-80100",
+    "image_url": "https://i.ibb.co/nN8j1CJs/week22.png"
+  },
+  {
+    "week": 23,
+    "comparison": "Corn",
+    "weight_grams": 501,
+    "height_cm": 28.9,
+    "heart_rate_bpm": "140-160",
+    "hcg_range": "4720-80100",
+    "image_url": "https://i.ibb.co/DD1xjKvJ/week23.png"
+  },
+  {
+    "week": 24,
+    "comparison": "Zucchini",
+    "weight_grams": 600,
+    "height_cm": 30.0,
+    "heart_rate_bpm": "140-160",
+    "hcg_range": "2700-78100",
+    "image_url": "https://i.ibb.co/zhhPStDM/week24.png"
+  },
+  {
+    "week": 25,
+    "comparison": "Broccoli",
+    "weight_grams": 660,
+    "height_cm": 34.6,
+    "heart_rate_bpm": "140-160",
+    "hcg_range": "2700-78100",
+    "image_url": "https://i.ibb.co/xt4gGHRf/week25.png"
+  },
+  {
+    "week": 26,
+    "comparison": "Cantaloupe",
+    "weight_grams": 760,
+    "height_cm": 35.6,
+    "heart_rate_bpm": "140-160",
+    "hcg_range": "2700-78100",
+    "image_url": "https://i.ibb.co/DDmJHbws/week26.png"
+  },
+  {
+    "week": 27,
+    "comparison": "Papaya",
+    "weight_grams": 875,
+    "height_cm": 36.6,
+    "heart_rate_bpm": "140-160",
+    "hcg_range": "2700-78100",
+    "image_url": "https://i.ibb.co/PHjnPf6/week27.png"
+  },
+  {
+    "week": 28,
+    "comparison": "Pomelo",
+    "weight_grams": 1000,
+    "height_cm": 37.6,
+    "heart_rate_bpm": "140-160",
+    "hcg_range": "2700-78100",
+    "image_url": "https://i.ibb.co/0jftJj8N/week28.png"
+  },
+  {
+    "week": 29,
+    "comparison": "Eggplant",
+    "weight_grams": 1150,
+    "height_cm": 38.6,
+    "heart_rate_bpm": "140-160",
+    "hcg_range": "2700-78100",
+    "image_url": "https://i.ibb.co/vxz1vqFF/week29.png"
+  },
+  {
+    "week": 30,
+    "comparison": "Cauliflower",
+    "weight_grams": 1319,
+    "height_cm": 39.9,
+    "heart_rate_bpm": "140-160",
+    "hcg_range": "2700-78100",
+    "image_url": "https://i.ibb.co/hFH9nJHp/week30.png"
+  },
+  {
+    "week": 31,
+    "comparison": "Coconut",
+    "weight_grams": 1502,
+    "height_cm": 41.1,
+    "heart_rate_bpm": "140-160",
+    "hcg_range": "2700-78100",
+    "image_url": "https://i.ibb.co/hxRvJR1X/week31.png"
+  },
+  {
+    "week": 32,
+    "comparison": "Chinese cabbage",
+    "weight_grams": 1702,
+    "height_cm": 42.4,
+    "heart_rate_bpm": "140-160",
+    "hcg_range": "2700-78100",
+    "image_url": "https://i.ibb.co/NgcYKx03/week32.png"
+  },
+  {
+    "week": 33,
+    "comparison": "Cabbage",
+    "weight_grams": 1918,
+    "height_cm": 43.7,
+    "heart_rate_bpm": "140-160",
+    "hcg_range": "2700-78100",
+    "image_url": "https://i.ibb.co/27K222x4/week33.png"
+  },
+  {
+    "week": 34,
+    "comparison": "Pineapple",
+    "weight_grams": 2146,
+    "height_cm": 45.0,
+    "heart_rate_bpm": "140-160",
+    "hcg_range": "2700-78100",
+    "image_url": "https://i.ibb.co/pvGK3KsV/week34.png"
+  },
+  {
+    "week": 35,
+    "comparison": "Durian",
+    "weight_grams": 2383,
+    "height_cm": 46.2,
+    "heart_rate_bpm": "140-160",
+    "hcg_range": "2700-78100",
+    "image_url": "https://i.ibb.co/jkmqqxmm/week35.png"
+  },
+  {
+    "week": 36,
+    "comparison": "Butternut squash",
+    "weight_grams": 2622,
+    "height_cm": 47.4,
+    "heart_rate_bpm": "140-160",
+    "hcg_range": "2700-78100",
+    "image_url": "https://i.ibb.co/Nnkr4LDr/week36.png"
+  },
+  {
+    "week": 37,
+    "comparison": "Jackfruit",
+    "weight_grams": 2859,
+    "height_cm": 48.6,
+    "heart_rate_bpm": "140-160",
+    "hcg_range": "2700-78100",
+    "image_url": "https://i.ibb.co/0VF6H5zD/week37.png"
+  },
+  {
+    "week": 38,
+    "comparison": "Melon torpedo",
+    "weight_grams": 3083,
+    "height_cm": 49.8,
+    "heart_rate_bpm": "140-160",
+    "hcg_range": "2700-78100",
+    "image_url": "https://i.ibb.co/gZnXdmP5/week38.png"
+  },
+  {
+    "week": 39,
+    "comparison": "Watermelon",
+    "weight_grams": 3288,
+    "height_cm": 50.7,
+    "heart_rate_bpm": "140-160",
+    "hcg_range": "2700-78100",
+    "image_url": "https://i.ibb.co/ynb0kPLv/week39.png"
+  },
+  {
+    "week": 40,
+    "comparison": "Pumpkin",
+    "weight_grams": 3400,
+    "height_cm": 51.2,
+    "heart_rate_bpm": "140-160",
+    "hcg_range": "2700-78100",
+    "image_url": "https://i.ibb.co/209K8t6D/week40.png"
+  }
+]
