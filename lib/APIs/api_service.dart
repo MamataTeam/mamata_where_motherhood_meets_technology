@@ -289,4 +289,29 @@ class ApiService {
       return null;
     }
   }
+    
+  // Chatbot API
+  static Future<String> sendMessageToBot(String message) async {
+   final url = Uri.parse('$chatbotUrl/chat'); // Android emulator
+
+    try {
+      final response = await http.post(
+        url,
+        headers: {"Content-Type": "application/json"},
+        body: jsonEncode({"message": message}),
+      );
+
+      if (response.statusCode == 200) {
+        final data = jsonDecode(response.body);
+        return data['response'] as String;
+      } else {
+        throw Exception(
+            'Failed to get chatbot response: ${response.statusCode}');
+      }
+    } catch (e) {
+      print('Chatbot API Error: $e');
+      throw Exception('Could not connect to chatbot server');
+    }
+  }
 }
+
