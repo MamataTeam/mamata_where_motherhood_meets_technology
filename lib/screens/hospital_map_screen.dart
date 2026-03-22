@@ -15,10 +15,19 @@ class HospitalMapScreen extends StatefulWidget {
 }
 
 class _HospitalMapScreenState extends State<HospitalMapScreen> {
-  // Purple/Violet Professional Theme
-  static const primaryColor = Color(0xFF667EEA); // Purple
-  static const secondaryColor = Color(0xFF764BA2); // Violet
-  static const errorColor = Color(0xFFE74C3C); // Hospital marker
+  // ── Palette — matches calendar screen ────────────────────────────────────
+  static const _purple = Color(0xFF764BA2);
+  static const _purpleMid = Color(0xFF9B6EC4);
+  static const _purpleSoft = Color(0xFFF3EDF9);
+  static const _gold = Color(0xFFC9933A);
+  static const _crimson = Color(0xFFB83232);
+  static const _crimsonSoft = Color(0xFFFAECEC);
+  static const _green = Color(0xFF27AE60);
+  static const _greenSoft = Color(0xFFE8F8EE);
+  static const _ink = Color(0xFF2D1B4E);
+  static const _ghost = Color(0xFFBEB3CC);
+  static const _white = Color(0xFFFFFFFF);
+  static const _border = Color(0xFFF0E8F5);
 
   LatLng? userLocation;
   List<LatLng> routePoints = [];
@@ -42,28 +51,32 @@ class _HospitalMapScreenState extends State<HospitalMapScreen> {
       await Geolocator.requestPermission();
       final pos = await Geolocator.getCurrentPosition();
       final userLatLng = LatLng(pos.latitude, pos.longitude);
-      final hospitalLatLng =
-          LatLng(widget.hospital.latitude, widget.hospital.longitude);
-
+      final hospitalLatLng = LatLng(
+        widget.hospital.latitude,
+        widget.hospital.longitude,
+      );
       final url =
-          'http://router.project-osrm.org/route/v1/driving/${userLatLng.longitude},${userLatLng.latitude};${hospitalLatLng.longitude},${hospitalLatLng.latitude}?overview=full&geometries=geojson';
+          'http://router.project-osrm.org/route/v1/driving/'
+          '${userLatLng.longitude},${userLatLng.latitude};'
+          '${hospitalLatLng.longitude},${hospitalLatLng.latitude}'
+          '?overview=full&geometries=geojson';
       final res = await http.get(Uri.parse(url));
-
       if (res.statusCode == 200) {
-        final coords =
-            json.decode(res.body)['routes'][0]['geometry']['coordinates'];
-        routePoints = coords.map<LatLng>((c) => LatLng(c[1], c[0])).toList();
+        final coords = json.decode(
+          res.body,
+        )['routes'][0]['geometry']['coordinates'];
+        routePoints = coords
+            .map<LatLng>((c) => LatLng(c[1] as double, c[0] as double))
+            .toList();
       }
-
       if (mounted) {
         setState(() {
           userLocation = userLatLng;
           isLoading = false;
         });
-
         if (routePoints.isNotEmpty) _fitBounds();
       }
-    } catch (e) {
+    } catch (_) {
       if (mounted) setState(() => isLoading = false);
     }
   }
@@ -72,43 +85,53 @@ class _HospitalMapScreenState extends State<HospitalMapScreen> {
     final points = [
       userLocation!,
       LatLng(widget.hospital.latitude, widget.hospital.longitude),
-      ...routePoints
+      ...routePoints,
     ];
     final lats = points.map((p) => p.latitude);
     final lngs = points.map((p) => p.longitude);
-
-    _mapController.fitCamera(CameraFit.bounds(
-      bounds: LatLngBounds(
-        LatLng(lats.reduce((a, b) => a < b ? a : b),
-            lngs.reduce((a, b) => a < b ? a : b)),
-        LatLng(lats.reduce((a, b) => a > b ? a : b),
-            lngs.reduce((a, b) => a > b ? a : b)),
+    _mapController.fitCamera(
+      CameraFit.bounds(
+        bounds: LatLngBounds(
+          LatLng(
+            lats.reduce((a, b) => a < b ? a : b),
+            lngs.reduce((a, b) => a < b ? a : b),
+          ),
+          LatLng(
+            lats.reduce((a, b) => a > b ? a : b),
+            lngs.reduce((a, b) => a > b ? a : b),
+          ),
+        ),
+        padding: const EdgeInsets.fromLTRB(50, 50, 50, 220),
       ),
-      padding: const EdgeInsets.all(50),
-    ));
+    );
   }
 
   void _zoom(LatLng point) => _mapController.move(point, 16);
 
-  Widget _buildMapButton(IconData icon, VoidCallback onTap, Color color) {
+  Widget _buildMapBtn({
+    required IconData icon,
+    required VoidCallback onTap,
+    required Color color,
+  }) {
     return Container(
-      margin: const EdgeInsets.only(bottom: 12),
+      margin: const EdgeInsets.only(bottom: 10),
       decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(10),
+        color: _white,
+        borderRadius: BorderRadius.circular(12),
+        border: Border.all(color: _border, width: 1),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.1),
-            blurRadius: 8,
-            offset: const Offset(0, 2),
-          )
+            color: _purple.withOpacity(0.12),
+            blurRadius: 12,
+            offset: const Offset(0, 4),
+          ),
         ],
       ),
       child: IconButton(
-        icon: Icon(icon, color: color),
+        icon: Icon(icon, color: color, size: 19),
         onPressed: onTap,
-        iconSize: 24,
-        padding: const EdgeInsets.all(12),
+        padding: const EdgeInsets.all(10),
+        constraints: const BoxConstraints(minWidth: 42, minHeight: 42),
       ),
     );
   }
@@ -116,8 +139,8 @@ class _HospitalMapScreenState extends State<HospitalMapScreen> {
   Marker _buildMarker({
     required LatLng point,
     required IconData icon,
-    required Color color,
-    bool hasBorder = false,
+    required Color bgColor,
+    bool isUser = false,
   }) {
     return Marker(
       point: point,
@@ -126,17 +149,20 @@ class _HospitalMapScreenState extends State<HospitalMapScreen> {
       child: GestureDetector(
         onTap: () => _zoom(point),
         child: Container(
-          padding: const EdgeInsets.all(8),
+          padding: const EdgeInsets.all(11),
           decoration: BoxDecoration(
-            color: color,
+            color: bgColor,
             shape: BoxShape.circle,
-            border:
-                hasBorder ? Border.all(color: Colors.white, width: 3) : null,
+            border: Border.all(color: _white, width: 2.5),
             boxShadow: [
-              BoxShadow(color: Colors.black.withOpacity(0.2), blurRadius: 6)
+              BoxShadow(
+                color: bgColor.withOpacity(0.4),
+                blurRadius: 12,
+                offset: const Offset(0, 5),
+              ),
             ],
           ),
-          child: Icon(icon, color: Colors.white, size: hasBorder ? 20 : 22),
+          child: Icon(icon, color: _white, size: isUser ? 15 : 16),
         ),
       ),
     );
@@ -144,51 +170,64 @@ class _HospitalMapScreenState extends State<HospitalMapScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final hospitalLatLng =
-        LatLng(widget.hospital.latitude, widget.hospital.longitude);
+    final hospitalLatLng = LatLng(
+      widget.hospital.latitude,
+      widget.hospital.longitude,
+    );
 
     return Scaffold(
       appBar: AppBar(
-        title: Text(
-          widget.hospital.name,
-          style: const TextStyle(
-            fontWeight: FontWeight.w600,
-            fontSize: 18,
-            color: Colors.white,
-          ),
-        ),
-        flexibleSpace: Container(
-          decoration: const BoxDecoration(
-            gradient: LinearGradient(
-              begin: Alignment.topLeft,
-              end: Alignment.bottomRight,
-              colors: [primaryColor, secondaryColor],
-            ),
-          ),
-        ),
+        elevation: 0,
+        backgroundColor: const Color(0xFF7B4F9E),
+        surfaceTintColor: const Color(0xFF7B4F9E),
         foregroundColor: Colors.white,
+        title: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              widget.hospital.name,
+              style: const TextStyle(
+                color: Colors.white,
+                fontWeight: FontWeight.w700,
+                fontSize: 15.5,
+                letterSpacing: -0.3,
+              ),
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
+            ),
+            Text(
+              widget.hospital.address,
+              style: TextStyle(
+                color: Colors.white.withOpacity(0.65),
+                fontSize: 11.5,
+              ),
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
+            ),
+          ],
+        ),
       ),
+
       body: Stack(
         children: [
+          // ── Map ────────────────────────────────────────────────────────
           FlutterMap(
             mapController: _mapController,
-            options: MapOptions(
-              initialCenter: hospitalLatLng,
-              initialZoom: 13,
-            ),
+            options: MapOptions(initialCenter: hospitalLatLng, initialZoom: 14),
             children: [
               TileLayer(
                 urlTemplate:
-                    'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
-                subdomains: const ['a', 'b', 'c'],
+                    'https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png',
+                subdomains: const ['a', 'b', 'c', 'd'],
+                userAgentPackageName: 'com.example.mamata_app',
               ),
               if (routePoints.isNotEmpty)
                 PolylineLayer(
                   polylines: [
                     Polyline(
                       points: routePoints,
-                      strokeWidth: 5,
-                      color: primaryColor,
+                      strokeWidth: 4.5,
+                      color: const Color(0xFF7B4F9E).withOpacity(0.85),
                     ),
                   ],
                 ),
@@ -196,79 +235,221 @@ class _HospitalMapScreenState extends State<HospitalMapScreen> {
                 markers: [
                   _buildMarker(
                     point: hospitalLatLng,
-                    icon: Icons.local_hospital,
-                    color: errorColor,
+                    icon: Icons.local_hospital_rounded,
+                    bgColor: _crimson,
                   ),
                   if (userLocation != null)
                     _buildMarker(
                       point: userLocation!,
-                      icon: Icons.person,
-                      color: primaryColor,
-                      hasBorder: true,
+                      icon: Icons.person_rounded,
+                      bgColor: const Color(0xFF7B4F9E),
+                      isUser: true,
                     ),
                 ],
               ),
             ],
           ),
+
+          // ── Loading pill ───────────────────────────────────────────────
           if (isLoading)
             Positioned(
-              top: 16,
-              left: 16,
+              top: 14,
+              left: 14,
               child: Container(
-                padding: const EdgeInsets.all(12),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 14,
+                  vertical: 10,
+                ),
                 decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(10),
+                  color: _white,
+                  borderRadius: BorderRadius.circular(12),
+                  border: Border.all(color: _border, width: 1),
                   boxShadow: [
                     BoxShadow(
-                      color: Colors.black.withOpacity(0.1),
-                      blurRadius: 8,
-                    )
+                      color: _purple.withOpacity(0.12),
+                      blurRadius: 12,
+                      offset: const Offset(0, 3),
+                    ),
                   ],
                 ),
                 child: Row(
                   mainAxisSize: MainAxisSize.min,
                   children: [
                     SizedBox(
-                      width: 20,
-                      height: 20,
+                      width: 14,
+                      height: 14,
                       child: CircularProgressIndicator(
-                        strokeWidth: 2.5,
-                        valueColor: AlwaysStoppedAnimation<Color>(primaryColor),
+                        strokeWidth: 2,
+                        valueColor: AlwaysStoppedAnimation(_purple),
                       ),
                     ),
-                    const SizedBox(width: 12),
+                    const SizedBox(width: 9),
                     const Text(
-                      'Loading route...',
+                      'Loading route…',
                       style: TextStyle(
-                        fontSize: 14,
-                        fontWeight: FontWeight.w500,
+                        fontSize: 12.5,
+                        fontWeight: FontWeight.w600,
+                        color: _ink,
                       ),
                     ),
                   ],
                 ),
               ),
             ),
+
+          // ── Map control buttons ────────────────────────────────────────
           Positioned(
-            bottom: 16,
-            right: 16,
+            top: 14,
+            right: 14,
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
                 if (routePoints.isNotEmpty)
-                  _buildMapButton(Icons.route, _fitBounds, primaryColor),
-                if (userLocation != null)
-                  _buildMapButton(
-                    Icons.my_location,
-                    () => _zoom(userLocation!),
-                    primaryColor,
+                  _buildMapBtn(
+                    icon: Icons.fit_screen_rounded,
+                    onTap: _fitBounds,
+                    color: _purple,
                   ),
-                _buildMapButton(
-                  Icons.local_hospital,
-                  () => _zoom(hospitalLatLng),
-                  errorColor,
+                if (userLocation != null)
+                  _buildMapBtn(
+                    icon: Icons.my_location_rounded,
+                    onTap: () => _zoom(userLocation!),
+                    color: _purple,
+                  ),
+                _buildMapBtn(
+                  icon: Icons.local_hospital_rounded,
+                  onTap: () => _zoom(hospitalLatLng),
+                  color: _crimson,
                 ),
               ],
+            ),
+          ),
+
+          // ── Bottom info card ───────────────────────────────────────────
+          Positioned(
+            bottom: 20,
+            left: 16,
+            right: 16,
+            child: Container(
+              decoration: BoxDecoration(
+                color: _white,
+                borderRadius: BorderRadius.circular(22),
+                border: Border.all(color: _border, width: 1),
+                boxShadow: [
+                  BoxShadow(
+                    color: _purple.withOpacity(0.14),
+                    blurRadius: 28,
+                    offset: const Offset(0, 8),
+                  ),
+                ],
+              ),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  // Solid purple header strip
+                  Container(
+                    padding: const EdgeInsets.fromLTRB(16, 14, 16, 13),
+                    decoration: const BoxDecoration(
+                      color: Color(0xFF7B4F9E),
+                      borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(22),
+                        topRight: Radius.circular(22),
+                      ),
+                    ),
+                    child: Row(
+                      children: [
+                        Container(
+                          width: 42,
+                          height: 42,
+                          decoration: BoxDecoration(
+                            color: Colors.white.withOpacity(0.18),
+                            borderRadius: BorderRadius.circular(12),
+                          ),
+                          child: const Icon(
+                            Icons.local_hospital_rounded,
+                            color: Colors.white,
+                            size: 20,
+                          ),
+                        ),
+                        const SizedBox(width: 12),
+                        Expanded(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                widget.hospital.name,
+                                style: const TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 14.5,
+                                  fontWeight: FontWeight.w700,
+                                  letterSpacing: -0.2,
+                                ),
+                                maxLines: 1,
+                                overflow: TextOverflow.ellipsis,
+                              ),
+                              if (widget.hospital.distance != null) ...[
+                                const SizedBox(height: 3),
+                                Text(
+                                  widget.hospital.distance! < 1000
+                                      ? '${widget.hospital.distance!.toStringAsFixed(0)} m away'
+                                      : '${(widget.hospital.distance! / 1000).toStringAsFixed(1)} km away',
+                                  style: TextStyle(
+                                    color: Colors.white.withOpacity(0.7),
+                                    fontSize: 12,
+                                  ),
+                                ),
+                              ],
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+
+                  // Emergency badge row (white section)
+                  if (widget.hospital.emergency)
+                    Padding(
+                      padding: const EdgeInsets.fromLTRB(16, 12, 16, 14),
+                      child: Row(
+                        children: [
+                          Container(
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 10,
+                              vertical: 5,
+                            ),
+                            decoration: BoxDecoration(
+                              color: _greenSoft,
+                              borderRadius: BorderRadius.circular(8),
+                              border: Border.all(
+                                color: _green.withOpacity(0.25),
+                                width: 1,
+                              ),
+                            ),
+                            child: const Row(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                Icon(
+                                  Icons.emergency_rounded,
+                                  size: 11,
+                                  color: _green,
+                                ),
+                                SizedBox(width: 5),
+                                Text(
+                                  '24h Emergency Available',
+                                  style: TextStyle(
+                                    color: _green,
+                                    fontSize: 12,
+                                    fontWeight: FontWeight.w600,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                ],
+              ),
             ),
           ),
         ],

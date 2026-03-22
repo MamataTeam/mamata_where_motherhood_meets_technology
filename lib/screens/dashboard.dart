@@ -10,11 +10,12 @@ import 'edit_profile_screen.dart';
 import '../services/week_service.dart';
 import '../services/week_image_service.dart';
 import '../services/baby_week_service.dart';
+import '../services/permission_service.dart';
 import '../models/baby_week.dart';
 import 'hospital_list_screen.dart';
 import 'week_detail_screen.dart';
 import 'calender_page.dart';
-import 'chatbot_screen.dart'; // ← ADDED
+import 'chatbot_screen.dart';
 
 class DashboardPage extends StatefulWidget {
   const DashboardPage({Key? key}) : super(key: key);
@@ -40,14 +41,19 @@ class _DashboardPageState extends State<DashboardPage> {
   static const secondaryColor = Color(0xFF764BA2);
 
   // ── Clay Palette (chatbot banner only) ────────────────────────
-  static const clayPrimary  = Color(0xFF924629); // Terracotta
-  static const claySurface  = Color(0xFFF1EEE5); // Dusty Rose / Peach
-  static const clayBg       = Color(0xFFFCF9F0); // Soft Cream
+  static const clayPrimary = Color(0xFF924629); // Terracotta
+  static const claySurface = Color(0xFFF1EEE5); // Dusty Rose / Peach
+  static const clayBg = Color(0xFFFCF9F0); // Soft Cream
   // ──────────────────────────────────────────────────────────────
 
   @override
   void initState() {
     super.initState();
+
+    // Request permissions after first frame renders
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      PermissionService.requestAllPermissions(context);
+    });
     _loadUserProfile().then((_) => _loadWeekInfo());
   }
 
@@ -404,7 +410,7 @@ class _DashboardPageState extends State<DashboardPage> {
                 LinearProgressIndicator(
                   value: weekInfo!.week / 40,
                   backgroundColor: Colors.grey.shade300,
-                  valueColor: AlwaysStoppedAnimation<Color>(Colors.purple),
+                  valueColor: AlwaysStoppedAnimation<Color>(Color(0xFF764BA2)),
                   minHeight: 8,
                   borderRadius: BorderRadius.circular(5),
                 ),
@@ -557,8 +563,12 @@ class _DashboardPageState extends State<DashboardPage> {
                               top: 70,
                               child: ColorFiltered(
                                 colorFilter: ColorFilter.mode(
-                                  Color.fromRGBO(255, 232, 204, 1)
-                                      .withOpacity(0.3),
+                                  Color.fromRGBO(
+                                    255,
+                                    232,
+                                    204,
+                                    1,
+                                  ).withOpacity(0.3),
                                   BlendMode.multiply,
                                 ),
                                 child: Image.network(
@@ -587,7 +597,7 @@ class _DashboardPageState extends State<DashboardPage> {
                                   Text(
                                     "Baby size:",
                                     style: TextStyle(
-                                      color: Color(0xFFEA580C),
+                                      color: Color(0xFF78350F),
                                       fontSize: 18,
                                       fontWeight: FontWeight.w600,
                                     ),
@@ -596,7 +606,7 @@ class _DashboardPageState extends State<DashboardPage> {
                                   Text(
                                     "a ${babyWeekData!.comparison}",
                                     style: TextStyle(
-                                      color: Color(0xFF78350F),
+                                      color: Color(0xFF78350F).withOpacity(0.6),
                                       fontSize: 14,
                                       fontWeight: FontWeight.bold,
                                     ),
@@ -623,9 +633,9 @@ class _DashboardPageState extends State<DashboardPage> {
                   child: _buildDashboardCard(
                     title: "Nutrition",
                     subtitle: "Stay healthy",
-                    color: Color.fromRGBO(175, 244, 198, 0.929),
+                    color: Colors.purple.withOpacity(0.15),
                     icon: Icons.restaurant_menu_rounded,
-                    iconColor: Color(0xFF1A5C2E),
+                    iconColor: Color(0xFF764BA2),
                     onTap: () {
                       Navigator.push(
                         context,
@@ -641,7 +651,7 @@ class _DashboardPageState extends State<DashboardPage> {
                   child: _buildDashboardCard(
                     title: "Exercise",
                     subtitle: "Safe workouts",
-                    color: Color.fromARGB(255, 255, 213, 237),
+                    color: Colors.orange.withOpacity(0.10),
                     icon: Icons.fitness_center_rounded,
                     iconColor: Color(0xFF7B2D3E),
                     onTap: () {
@@ -718,10 +728,7 @@ class _DashboardPageState extends State<DashboardPage> {
                   SizedBox(height: 3),
                   Text(
                     'Ask me anything about your pregnancy',
-                    style: TextStyle(
-                      color: Color(0xFF6B3A28),
-                      fontSize: 13,
-                    ),
+                    style: TextStyle(color: Color(0xFF6B3A28), fontSize: 13),
                   ),
                 ],
               ),
@@ -885,7 +892,7 @@ class _DashboardPageState extends State<DashboardPage> {
                                           style: TextStyle(
                                             fontSize: 24,
                                             fontWeight: FontWeight.bold,
-                                            color: primaryColor,
+                                            color: Color(0xFF0E4C87),
                                           ),
                                         ),
                                         if (index == currentWeek) ...[
@@ -896,7 +903,7 @@ class _DashboardPageState extends State<DashboardPage> {
                                               vertical: 4,
                                             ),
                                             decoration: BoxDecoration(
-                                              color: primaryColor,
+                                              color: Color(0xFF0E4C87),
                                               borderRadius:
                                                   BorderRadius.circular(12),
                                             ),
@@ -923,14 +930,14 @@ class _DashboardPageState extends State<DashboardPage> {
                                         fit: BoxFit.contain,
                                         errorBuilder:
                                             (context, error, stackTrace) {
-                                          return Center(
-                                            child: Icon(
-                                              Icons.broken_image,
-                                              size: 80,
-                                              color: Colors.grey,
-                                            ),
-                                          );
-                                        },
+                                              return Center(
+                                                child: Icon(
+                                                  Icons.broken_image,
+                                                  size: 80,
+                                                  color: Colors.grey,
+                                                ),
+                                              );
+                                            },
                                       ),
                                     ),
                                   ),
@@ -1049,7 +1056,7 @@ class _DashboardPageState extends State<DashboardPage> {
                                             style: TextStyle(
                                               fontSize: 24,
                                               fontWeight: FontWeight.bold,
-                                              color: primaryColor,
+                                              color: Color(0xFF78350F),
                                             ),
                                           ),
                                           if (babyWeek.week == currentWeek) ...[
@@ -1060,7 +1067,7 @@ class _DashboardPageState extends State<DashboardPage> {
                                                 vertical: 4,
                                               ),
                                               decoration: BoxDecoration(
-                                                color: primaryColor,
+                                                color: Color(0xFF78350F),
                                                 borderRadius:
                                                     BorderRadius.circular(12),
                                               ),
@@ -1084,25 +1091,26 @@ class _DashboardPageState extends State<DashboardPage> {
                                       child: Column(
                                         children: [
                                           ClipRRect(
-                                            borderRadius:
-                                                BorderRadius.circular(16),
+                                            borderRadius: BorderRadius.circular(
+                                              16,
+                                            ),
                                             child: Image.network(
                                               babyWeek.imageUrl,
                                               height: 200,
                                               fit: BoxFit.contain,
-                                              errorBuilder: (context, error,
-                                                  stackTrace) {
-                                                return Container(
-                                                  height: 200,
-                                                  child: Center(
-                                                    child: Icon(
-                                                      Icons.broken_image,
-                                                      size: 80,
-                                                      color: Colors.grey,
-                                                    ),
-                                                  ),
-                                                );
-                                              },
+                                              errorBuilder:
+                                                  (context, error, stackTrace) {
+                                                    return Container(
+                                                      height: 200,
+                                                      child: Center(
+                                                        child: Icon(
+                                                          Icons.broken_image,
+                                                          size: 80,
+                                                          color: Colors.grey,
+                                                        ),
+                                                      ),
+                                                    );
+                                                  },
                                             ),
                                           ),
                                           SizedBox(height: 20),
@@ -1181,254 +1189,159 @@ class _DashboardPageState extends State<DashboardPage> {
 
   Widget _buildProfilePage() {
     return Container(
-      decoration: BoxDecoration(
-        gradient: LinearGradient(
-          begin: Alignment.topLeft,
-          end: Alignment.bottomRight,
-          colors: [Color(0xFFF5F7FA), Color(0xFFC3CFE2)],
-        ),
-      ),
+      color: const Color(0xFFF9F0FB),
       child: _isLoading
-          ? Center(child: CircularProgressIndicator())
+          ? const Center(child: CircularProgressIndicator())
           : _userProfile == null
-              ? Center(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Icon(Icons.error_outline, size: 80, color: Colors.red),
-                      SizedBox(height: 20),
-                      Text('Failed to load profile'),
-                      SizedBox(height: 10),
-                      ElevatedButton(
-                        onPressed: _loadUserProfile,
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: primaryColor,
-                          foregroundColor: Colors.white,
-                        ),
-                        child: Text('Retry'),
-                      ),
-                    ],
+          ? Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  const Icon(Icons.error_outline, size: 60, color: Colors.red),
+                  const SizedBox(height: 16),
+                  const Text('Failed to load profile'),
+                  const SizedBox(height: 10),
+                  ElevatedButton(
+                    onPressed: _loadUserProfile,
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: const Color(0xFF7B4F9E),
+                      foregroundColor: Colors.white,
+                    ),
+                    child: const Text('Retry'),
                   ),
-                )
-              : SingleChildScrollView(
-                  padding: EdgeInsets.all(20),
-                  child: Column(
-                    children: [
-                      SizedBox(height: 20),
-                      Container(
-                        decoration: BoxDecoration(
-                          shape: BoxShape.circle,
-                          boxShadow: [
-                            BoxShadow(
-                              color: primaryColor.withOpacity(0.3),
-                              blurRadius: 20,
-                              offset: Offset(0, 10),
-                            ),
-                          ],
-                        ),
-                        child: CircleAvatar(
-                          radius: 60,
-                          backgroundColor: Colors.white,
-                          child: CircleAvatar(
-                            radius: 55,
-                            backgroundColor: primaryColor.withOpacity(0.1),
-                            backgroundImage: _userProfile!.photoUrl != null
-                                ? NetworkImage(_userProfile!.photoUrl!)
-                                : null,
-                            child: _userProfile!.photoUrl == null
-                                ? Icon(Icons.person,
-                                    size: 60, color: primaryColor)
-                                : null,
-                          ),
-                        ),
-                      ),
-                      SizedBox(height: 20),
-                      Text(
-                        _userProfile!.fullName,
-                        style: TextStyle(
-                          fontSize: 28,
-                          fontWeight: FontWeight.bold,
-                          color: Color(0xFF2D3748),
-                        ),
-                      ),
-                      SizedBox(height: 10),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Icon(Icons.email, size: 16, color: Color(0xFF718096)),
-                          SizedBox(width: 5),
-                          Text(
-                            _userProfile!.email,
-                            style: TextStyle(
-                              fontSize: 16,
-                              color: Color(0xFF718096),
-                            ),
-                          ),
-                        ],
-                      ),
-                      SizedBox(height: 30),
-                      Container(
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(20),
-                          boxShadow: [
-                            BoxShadow(
-                              color: Colors.black.withOpacity(0.1),
-                              blurRadius: 20,
-                              offset: Offset(0, 5),
-                            ),
-                          ],
-                        ),
-                        padding: EdgeInsets.all(20),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              'Profile Details',
-                              style: TextStyle(
-                                fontSize: 20,
-                                fontWeight: FontWeight.bold,
-                                color: primaryColor,
-                              ),
-                            ),
-                            Divider(height: 30),
-                            _buildProfileItem(
-                              icon: Icons.location_on,
-                              label: 'Address',
-                              value: _userProfile!.address ?? 'Not provided',
-                            ),
-                            SizedBox(height: 15),
-                            _buildProfileItem(
-                              icon: Icons.calendar_today,
-                              label: 'First Day of Last Period',
-                              value: _userProfile!.firstDayOfLastPeriod ??
-                                  'Not provided',
-                            ),
-                            SizedBox(height: 15),
-                            _buildProfileItem(
-                              icon: Icons.baby_changing_station,
-                              label: 'Due Date',
-                              value: _userProfile!.dueDate ?? 'Not calculated',
-                            ),
-                            SizedBox(height: 15),
-                            _buildProfileItem(
-                              icon: Icons.access_time,
-                              label: 'Member Since',
-                              value: _formatDate(_userProfile!.createdAt),
-                            ),
-                          ],
-                        ),
-                      ),
-                      SizedBox(height: 30),
-                      Container(
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(20),
-                          boxShadow: [
-                            BoxShadow(
-                              color: Colors.black.withOpacity(0.1),
-                              blurRadius: 20,
-                              offset: Offset(0, 5),
-                            ),
-                          ],
-                        ),
-                        padding: EdgeInsets.all(20),
-                        child: Column(
-                          children: [
-                            InkWell(
-                              onTap: () async {
-                                if (_userProfile != null) {
-                                  final result = await Get.to(
-                                    () => EditProfileScreen(
-                                      userProfile: _userProfile!,
-                                    ),
-                                  );
-                                  if (result == true) {
-                                    await _loadUserProfile();
-                                    await _loadWeekInfo();
-                                    setState(() {});
-                                  }
-                                }
-                              },
-                              borderRadius: BorderRadius.circular(12),
-                              child: Container(
-                                padding: EdgeInsets.symmetric(
-                                  horizontal: 20,
-                                  vertical: 16,
-                                ),
-                                decoration: BoxDecoration(
-                                  gradient: LinearGradient(
-                                    colors: [primaryColor, secondaryColor],
-                                  ),
-                                  borderRadius: BorderRadius.circular(12),
-                                  boxShadow: [
-                                    BoxShadow(
-                                      color: primaryColor.withOpacity(0.3),
-                                      blurRadius: 8,
-                                      offset: Offset(0, 4),
-                                    ),
-                                  ],
-                                ),
-                                child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Icon(Icons.edit_outlined,
-                                        color: Colors.white, size: 22),
-                                    SizedBox(width: 10),
-                                    Text(
-                                      'Edit Profile',
-                                      style: TextStyle(
-                                        color: Colors.white,
-                                        fontSize: 16,
-                                        fontWeight: FontWeight.w600,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ),
-                            SizedBox(height: 15),
-                            InkWell(
-                              onTap: _showLogoutDialog,
-                              borderRadius: BorderRadius.circular(12),
-                              child: Container(
-                                padding: EdgeInsets.symmetric(
-                                  horizontal: 20,
-                                  vertical: 16,
-                                ),
-                                decoration: BoxDecoration(
-                                  color: Colors.white,
-                                  borderRadius: BorderRadius.circular(12),
-                                  border: Border.all(
-                                    color: Colors.red[400]!,
-                                    width: 2,
-                                  ),
-                                ),
-                                child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Icon(Icons.logout,
-                                        color: Colors.red[400], size: 22),
-                                    SizedBox(width: 10),
-                                    Text(
-                                      'Logout',
-                                      style: TextStyle(
-                                        color: Colors.red[400],
-                                        fontSize: 16,
-                                        fontWeight: FontWeight.w600,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                      SizedBox(height: 20),
-                    ],
+                ],
+              ),
+            )
+          : SingleChildScrollView(
+              padding: const EdgeInsets.symmetric(horizontal: 24),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  const SizedBox(height: 50),
+
+                  // Avatar
+                  CircleAvatar(
+                    radius: 44,
+                    backgroundColor: const Color(0xFFE0C4EA),
+                    backgroundImage: _userProfile!.photoUrl != null
+                        ? NetworkImage(_userProfile!.photoUrl!)
+                        : null,
+                    child: _userProfile!.photoUrl == null
+                        ? const Icon(
+                            Icons.person,
+                            size: 44,
+                            color: Color(0xFF7B4F9E),
+                          )
+                        : null,
                   ),
-                ),
+
+                  const SizedBox(height: 14),
+
+                  Text(
+                    _userProfile!.fullName,
+                    style: const TextStyle(
+                      fontSize: 22,
+                      fontWeight: FontWeight.w700,
+                      color: Color(0xFF2C1A3A),
+                    ),
+                  ),
+
+                  const SizedBox(height: 4),
+
+                  Text(
+                    _userProfile!.email,
+                    style: const TextStyle(
+                      fontSize: 14,
+                      color: Color(0xFF9E7A8E),
+                    ),
+                  ),
+
+                  const SizedBox(height: 40),
+
+                  // Details — no card, just rows
+                  _buildProfileRow(
+                    icon: Icons.location_on_rounded,
+                    label: 'Address',
+                    value: _userProfile!.address ?? 'Not provided',
+                  ),
+                  _buildProfileRow(
+                    icon: Icons.calendar_today_rounded,
+                    label: 'First Day of Last Period',
+                    value: _userProfile!.firstDayOfLastPeriod ?? 'Not provided',
+                  ),
+                  _buildProfileRow(
+                    icon: Icons.child_care_rounded,
+                    label: 'Due Date',
+                    value: _userProfile!.dueDate ?? 'Not calculated',
+                  ),
+                  _buildProfileRow(
+                    icon: Icons.access_time_rounded,
+                    label: 'Member Since',
+                    value: _formatDate(_userProfile!.createdAt),
+                  ),
+
+                  const SizedBox(height: 40),
+
+                  // Edit Profile
+                  SizedBox(
+                    width: double.infinity,
+                    child: ElevatedButton.icon(
+                      onPressed: () async {
+                        if (_userProfile != null) {
+                          final result = await Get.to(
+                            () => EditProfileScreen(userProfile: _userProfile!),
+                          );
+                          if (result == true) {
+                            await _loadUserProfile();
+                            await _loadWeekInfo();
+                            setState(() {});
+                          }
+                        }
+                      },
+                      icon: const Icon(Icons.edit_outlined, size: 17),
+                      label: const Text('Edit Profile'),
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: const Color(0xFF7B4F9E),
+                        foregroundColor: Colors.white,
+                        elevation: 0,
+                        padding: const EdgeInsets.symmetric(vertical: 14),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(12),
+                        ),
+                      ),
+                    ),
+                  ),
+
+                  const SizedBox(height: 10),
+
+                  // Logout
+                  SizedBox(
+                    width: double.infinity,
+                    child: OutlinedButton.icon(
+                      onPressed: _showLogoutDialog,
+                      icon: Icon(
+                        Icons.logout_rounded,
+                        size: 17,
+                        color: Colors.red[400],
+                      ),
+                      label: Text(
+                        'Logout',
+                        style: TextStyle(color: Colors.red[400]),
+                      ),
+                      style: OutlinedButton.styleFrom(
+                        side: BorderSide(color: Colors.red[300]!, width: 1),
+                        padding: const EdgeInsets.symmetric(vertical: 14),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(12),
+                        ),
+                      ),
+                    ),
+                  ),
+
+                  const SizedBox(height: 30),
+                ],
+              ),
+            ),
     );
   }
 
@@ -1441,9 +1354,7 @@ class _DashboardPageState extends State<DashboardPage> {
             Container(
               padding: EdgeInsets.all(6),
               decoration: BoxDecoration(
-                gradient: LinearGradient(
-                  colors: [primaryColor, secondaryColor],
-                ),
+                color: secondaryColor,
                 borderRadius: BorderRadius.circular(8),
               ),
               child: Icon(Icons.logout, color: Colors.white, size: 20),
@@ -1476,11 +1387,11 @@ class _DashboardPageState extends State<DashboardPage> {
           ),
           Container(
             decoration: BoxDecoration(
-              gradient: LinearGradient(colors: [primaryColor, secondaryColor]),
+              color: secondaryColor,
               borderRadius: BorderRadius.circular(10),
               boxShadow: [
                 BoxShadow(
-                  color: primaryColor.withOpacity(0.3),
+                  color: secondaryColor.withOpacity(0.3),
                   blurRadius: 8,
                   offset: Offset(0, 4),
                 ),
@@ -1513,6 +1424,50 @@ class _DashboardPageState extends State<DashboardPage> {
     );
   }
 
+  Widget _buildProfileRow({
+    required IconData icon,
+    required String label,
+    required String value,
+  }) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 12),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Icon(icon, size: 18, color: const Color(0xFF7B4F9E)),
+          const SizedBox(width: 14),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  label,
+                  style: const TextStyle(
+                    fontSize: 11,
+                    color: Color(0xFF9E7A8E),
+                    fontWeight: FontWeight.w500,
+                    letterSpacing: 0.3,
+                  ),
+                ),
+                const SizedBox(height: 3),
+                Text(
+                  value,
+                  style: const TextStyle(
+                    fontSize: 15,
+                    fontWeight: FontWeight.w600,
+                    color: Color(0xFF2C1A3A),
+                  ),
+                ),
+                const SizedBox(height: 12),
+                Divider(height: 1, color: const Color(0xFFEFD9F2)),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
   Widget _buildProfileItem({
     required IconData icon,
     required String label,
@@ -1521,27 +1476,35 @@ class _DashboardPageState extends State<DashboardPage> {
     return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Icon(icon, size: 20, color: primaryColor),
-        SizedBox(width: 10),
+        Container(
+          width: 36,
+          height: 36,
+          decoration: BoxDecoration(
+            color: const Color(0xFF7B4F9E).withOpacity(0.1),
+            borderRadius: BorderRadius.circular(8),
+          ),
+          child: Icon(icon, size: 18, color: const Color(0xFF7B4F9E)),
+        ),
+        const SizedBox(width: 12),
         Expanded(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
                 label,
-                style: TextStyle(
-                  fontSize: 12,
-                  color: Color(0xFF718096),
+                style: const TextStyle(
+                  fontSize: 11,
+                  color: Color(0xFF9E7A8E),
                   fontWeight: FontWeight.w500,
                 ),
               ),
-              SizedBox(height: 4),
+              const SizedBox(height: 2),
               Text(
                 value,
-                style: TextStyle(
-                  fontSize: 16,
+                style: const TextStyle(
+                  fontSize: 14,
                   fontWeight: FontWeight.w600,
-                  color: Color(0xFF2D3748),
+                  color: Color(0xFF2C1A3A),
                 ),
               ),
             ],
@@ -1561,10 +1524,10 @@ class _DashboardPageState extends State<DashboardPage> {
         Container(
           padding: EdgeInsets.all(8),
           decoration: BoxDecoration(
-            color: primaryColor.withOpacity(0.1),
+            color: Color(0xFF78350F).withOpacity(0.1),
             borderRadius: BorderRadius.circular(8),
           ),
-          child: Icon(icon, size: 20, color: primaryColor),
+          child: Icon(icon, size: 20, color: Color(0xFF78350F)),
         ),
         SizedBox(width: 12),
         Expanded(
@@ -1620,7 +1583,7 @@ class _DashboardPageState extends State<DashboardPage> {
           BottomNavigationBarItem(icon: Icon(Icons.person), label: 'Profile'),
         ],
         currentIndex: _selectedIndex,
-        selectedItemColor: const Color(0xFF063381),
+        selectedItemColor: const Color(0xFF764BA2),
         unselectedItemColor: Colors.grey,
         onTap: _onItemTapped,
         type: BottomNavigationBarType.fixed,

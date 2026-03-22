@@ -57,13 +57,7 @@ class _WeekDetailScreenState extends State<WeekDetailScreen> {
           style: TextStyle(color: Colors.white),
         ),
         flexibleSpace: Container(
-          decoration: BoxDecoration(
-            gradient: LinearGradient(
-              colors: [primaryColor, secondaryColor],
-              begin: Alignment.topLeft,
-              end: Alignment.bottomRight,
-            ),
-          ),
+          color: const Color(0xFF764BA2) , 
         ),
       ),
       body: isLoading
@@ -95,8 +89,11 @@ class _WeekDetailScreenState extends State<WeekDetailScreen> {
                                 height: 300,
                                 color: Colors.grey.shade200,
                                 child: const Center(
-                                  child: Icon(Icons.broken_image,
-                                      size: 80, color: Colors.grey),
+                                  child: Icon(
+                                    Icons.broken_image,
+                                    size: 80,
+                                    color: Colors.grey,
+                                  ),
                                 ),
                               );
                             },
@@ -106,50 +103,68 @@ class _WeekDetailScreenState extends State<WeekDetailScreen> {
                     ),
                     const SizedBox(height: 16),
 
-                    Text("Baby Development",
-                        style: TextStyle(
-                            fontSize: 20, fontWeight: FontWeight.bold)),
+                    Text(
+                      "Baby Development",
+                      style: TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
                     const SizedBox(height: 10),
                     Container(
                       padding: EdgeInsets.all(16),
                       decoration: BoxDecoration(
-                        color: primaryColor.withOpacity(0.3),
+                        color: primaryColor.withOpacity(0.2),
                         borderRadius: BorderRadius.circular(12),
                       ),
-                      child: Text(currentWeekInfo.baby,
-                          style: TextStyle(fontSize: 16, height: 1.5)),
+                      child: Text(
+                        currentWeekInfo.baby,
+                        style: TextStyle(fontSize: 16, height: 1.5),
+                      ),
                     ),
 
                     const SizedBox(height: 20),
 
-                    Text("Mom",
-                        style: TextStyle(
-                            fontSize: 20, fontWeight: FontWeight.bold)),
+                    Text(
+                      "Mom",
+                      style: TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
                     const SizedBox(height: 10),
                     Container(
                       padding: EdgeInsets.all(16),
                       decoration: BoxDecoration(
-                        color: secondaryColor.withOpacity(0.3),
+                        color: secondaryColor.withOpacity(0.2),
                         borderRadius: BorderRadius.circular(12),
                       ),
-                      child: Text(currentWeekInfo.mom,
-                          style: TextStyle(fontSize: 16, height: 1.5)),
+                      child: Text(
+                        currentWeekInfo.mom,
+                        style: TextStyle(fontSize: 16, height: 1.5),
+                      ),
                     ),
 
                     const SizedBox(height: 20),
 
-                    Text("Helpful Tips",
-                        style: TextStyle(
-                            fontSize: 20, fontWeight: FontWeight.bold)),
+                    Text(
+                      "Helpful Tips",
+                      style: TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
                     const SizedBox(height: 15),
                     Container(
                       padding: EdgeInsets.all(16),
                       decoration: BoxDecoration(
-                        color: Colors.orange.shade50.withOpacity(0.4),
+                        color: Colors.orange.shade50.withOpacity(0.3),
                         borderRadius: BorderRadius.circular(12),
                       ),
-                      child: Text(currentWeekInfo.helpfulTips,
-                          style: TextStyle(fontSize: 16, height: 1.5)),
+                      child: Text(
+                        currentWeekInfo.helpfulTips,
+                        style: TextStyle(fontSize: 16, height: 1.5),
+                      ),
                     ),
 
                     const SizedBox(height: 30),
@@ -157,12 +172,14 @@ class _WeekDetailScreenState extends State<WeekDetailScreen> {
                     // Bottom navigation - scrolls with content
                     Container(
                       padding: const EdgeInsets.symmetric(
-                          horizontal: 16, vertical: 16),
+                        horizontal: 16,
+                        vertical: 16,
+                      ),
                       decoration: BoxDecoration(
                         gradient: LinearGradient(
                           colors: [
                             primaryColor.withOpacity(0.1),
-                            secondaryColor.withOpacity(0.1)
+                            secondaryColor.withOpacity(0.1),
                           ],
                         ),
                         borderRadius: BorderRadius.circular(16),
@@ -178,7 +195,7 @@ class _WeekDetailScreenState extends State<WeekDetailScreen> {
                             style: TextStyle(
                               fontSize: 16,
                               fontWeight: FontWeight.bold,
-                              color: primaryColor,
+                              color: secondaryColor,
                             ),
                           ),
                           SizedBox(height: 16),
@@ -190,11 +207,11 @@ class _WeekDetailScreenState extends State<WeekDetailScreen> {
                                 child: ElevatedButton(
                                   onPressed: currentWeekInfo.week > 0
                                       ? () =>
-                                          _loadWeek(currentWeekInfo.week - 1)
+                                            _loadWeek(currentWeekInfo.week - 1)
                                       : null,
                                   style: ElevatedButton.styleFrom(
                                     backgroundColor: currentWeekInfo.week > 0
-                                        ? primaryColor
+                                        ? secondaryColor
                                         : Colors.grey,
                                     foregroundColor: Colors.white,
                                     padding: EdgeInsets.symmetric(vertical: 14),
@@ -220,10 +237,12 @@ class _WeekDetailScreenState extends State<WeekDetailScreen> {
                               // Current Week Indicator
                               Container(
                                 padding: EdgeInsets.symmetric(
-                                    horizontal: 20, vertical: 14),
+                                  horizontal: 20,
+                                  vertical: 14,
+                                ),
                                 decoration: BoxDecoration(
                                   gradient: LinearGradient(
-                                    colors: [primaryColor, secondaryColor],
+                                    colors: [Color.fromARGB(255, 165, 108, 186), secondaryColor],
                                   ),
                                   borderRadius: BorderRadius.circular(12),
                                 ),
@@ -256,11 +275,11 @@ class _WeekDetailScreenState extends State<WeekDetailScreen> {
                                 child: ElevatedButton(
                                   onPressed: currentWeekInfo.week < 40
                                       ? () =>
-                                          _loadWeek(currentWeekInfo.week + 1)
+                                            _loadWeek(currentWeekInfo.week + 1)
                                       : null,
                                   style: ElevatedButton.styleFrom(
                                     backgroundColor: currentWeekInfo.week < 40
-                                        ? primaryColor
+                                        ? secondaryColor
                                         : Colors.grey,
                                     foregroundColor: Colors.white,
                                     padding: EdgeInsets.symmetric(vertical: 14),

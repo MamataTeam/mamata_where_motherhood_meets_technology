@@ -77,10 +77,7 @@ class _PregnancyExerciseScreenState extends State<PregnancyExerciseScreen> {
           gradient: LinearGradient(
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
-            colors: [
-              Color(0xFFF5F7FA),
-              Color(0xFFE8D5F2),
-            ],
+            colors: [Color(0xFFF9F0FB), Color(0xFFEFD9F2), Color(0xFFE0C4EA)],
           ),
         ),
         child: Column(
@@ -90,90 +87,98 @@ class _PregnancyExerciseScreenState extends State<PregnancyExerciseScreen> {
               child: _isLoading
                   ? Center(child: CircularProgressIndicator())
                   : _error != null
-                      ? Center(
-                          child: Padding(
-                            padding: const EdgeInsets.all(20),
+                  ? Center(
+                      child: Padding(
+                        padding: const EdgeInsets.all(20),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Icon(
+                              Icons.error_outline,
+                              size: 60,
+                              color: Colors.red,
+                            ),
+                            SizedBox(height: 16),
+                            Text(
+                              'Failed to load exercises',
+                              style: TextStyle(
+                                fontSize: 18,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            SizedBox(height: 8),
+                            Text(
+                              _error!,
+                              textAlign: TextAlign.center,
+                              style: TextStyle(color: Colors.red),
+                            ),
+                            SizedBox(height: 16),
+                            ElevatedButton(
+                              onPressed: () {
+                                setState(() {
+                                  _isLoading = true;
+                                  _error = null;
+                                });
+                                _loadExercises();
+                              },
+                              child: Text('Retry'),
+                            ),
+                          ],
+                        ),
+                      ),
+                    )
+                  : SingleChildScrollView(
+                      padding: const EdgeInsets.symmetric(vertical: 20),
+                      child: Column(
+                        children: [
+                          _buildTrimesterSection(
+                            context: context,
+                            trimesterNumber: '1',
+                            title: 'First Trimester',
+                            weeks: 'Weeks 1-12',
+                            color: Color.fromARGB(255, 183, 145, 219),
+                            exercises: _exerciseData!.firstTrimester,
+                          ),
+                          const SizedBox(height: 20),
+                          _buildTrimesterSection(
+                            context: context,
+                            trimesterNumber: '2',
+                            title: 'Second Trimester',
+                            weeks: 'Weeks 13-27',
+                            color: Color.fromARGB(255, 157, 172, 240),
+                            exercises: _exerciseData!.secondTrimester,
+                          ),
+                          const SizedBox(height: 20),
+                          _buildTrimesterSection(
+                            context: context,
+                            trimesterNumber: '3',
+                            title: 'Third Trimester',
+                            weeks: 'Weeks 28-40',
+                            color: Color.fromARGB(
+                              255,
+                              113,
+                              78,
+                              130,
+                            ), // 3rd trimester — Helpful Tips (orange)
+                            exercises: _exerciseData!.thirdTrimester,
+                          ),
+                          const SizedBox(height: 20),
+                          Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 16),
                             child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                                Icon(Icons.error_outline,
-                                    size: 60, color: Colors.red),
-                                SizedBox(height: 16),
-                                Text(
-                                  'Failed to load exercises',
-                                  style: TextStyle(
-                                      fontSize: 18,
-                                      fontWeight: FontWeight.bold),
-                                ),
-                                SizedBox(height: 8),
-                                Text(
-                                  _error!,
-                                  textAlign: TextAlign.center,
-                                  style: TextStyle(color: Colors.red),
-                                ),
-                                SizedBox(height: 16),
-                                ElevatedButton(
-                                  onPressed: () {
-                                    setState(() {
-                                      _isLoading = true;
-                                      _error = null;
-                                    });
-                                    _loadExercises();
-                                  },
-                                  child: Text('Retry'),
-                                ),
+                                _buildPrecautionsSection(),
+                                const SizedBox(height: 16),
+                                _buildGeneralTipsSection(),
+                                const SizedBox(height: 16),
+                                _buildExerciseDisclaimer(),
                               ],
                             ),
                           ),
-                        )
-                      : SingleChildScrollView(
-                          padding: const EdgeInsets.symmetric(vertical: 20),
-                          child: Column(
-                            children: [
-                              _buildTrimesterSection(
-                                context: context,
-                                trimesterNumber: '1',
-                                title: 'First Trimester',
-                                weeks: 'Weeks 1-12',
-                                color: Color(0xFF667EEA),
-                                exercises: _exerciseData!.firstTrimester,
-                              ),
-                              const SizedBox(height: 20),
-                              _buildTrimesterSection(
-                                context: context,
-                                trimesterNumber: '2',
-                                title: 'Second Trimester',
-                                weeks: 'Weeks 13-27',
-                                color: Color(0xFF764BA2),
-                                exercises: _exerciseData!.secondTrimester,
-                              ),
-                              const SizedBox(height: 20),
-                              _buildTrimesterSection(
-                                context: context,
-                                trimesterNumber: '3',
-                                title: 'Third Trimester',
-                                weeks: 'Weeks 28-40',
-                                color: Color(0xFFE77E7E),
-                                exercises: _exerciseData!.thirdTrimester,
-                              ),
-                              const SizedBox(height: 20),
-                              Padding(
-                                padding:
-                                    const EdgeInsets.symmetric(horizontal: 16),
-                                child: Column(
-                                  children: [
-                                    _buildPrecautionsSection(),
-                                    const SizedBox(height: 16),
-                                    _buildGeneralTipsSection(),
-                                    const SizedBox(height: 16),
-                                    _buildExerciseDisclaimer(),
-                                  ],
-                                ),
-                              ),
-                              const SizedBox(height: 20),
-                            ],
-                          ),
-                        ),
+                          const SizedBox(height: 20),
+                        ],
+                      ),
+                    ),
             ),
           ],
         ),
@@ -184,22 +189,8 @@ class _PregnancyExerciseScreenState extends State<PregnancyExerciseScreen> {
   Widget _buildHeader() {
     return Container(
       width: double.infinity,
-      decoration: BoxDecoration(
-        gradient: LinearGradient(
-          begin: Alignment.topLeft,
-          end: Alignment.bottomRight,
-          colors: [
-            Color(0xFF667EEA),
-            Color(0xFF764BA2),
-          ],
-        ),
-      ),
-      padding: EdgeInsets.only(
-        top: 50,
-        left: 20,
-        right: 30,
-        bottom: 30,
-      ),
+      decoration: BoxDecoration(color: Color(0xFF7B4F9E)),
+      padding: EdgeInsets.only(top: 50, left: 20, right: 30, bottom: 30),
       child: Column(
         children: [
           Text(
@@ -231,7 +222,7 @@ class _PregnancyExerciseScreenState extends State<PregnancyExerciseScreen> {
     required String title,
     required String weeks,
     required Color color,
-    required List<Exercise> exercises, 
+    required List<Exercise> exercises,
   }) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -241,9 +232,7 @@ class _PregnancyExerciseScreenState extends State<PregnancyExerciseScreen> {
           child: Container(
             padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
             decoration: BoxDecoration(
-              gradient: LinearGradient(
-                colors: [color, color.withOpacity(0.7)],
-              ),
+              gradient: LinearGradient(colors: [color, color.withOpacity(0.7)]),
               borderRadius: BorderRadius.circular(12),
               boxShadow: [
                 BoxShadow(
@@ -318,7 +307,10 @@ class _PregnancyExerciseScreenState extends State<PregnancyExerciseScreen> {
   }
 
   Widget _buildExerciseCard(
-      BuildContext context, Exercise exercise, Color color) {
+    BuildContext context,
+    Exercise exercise,
+    Color color,
+  ) {
     final emoji = _getEmojiForExercise(exercise.name);
 
     return GestureDetector(
@@ -365,10 +357,7 @@ class _PregnancyExerciseScreenState extends State<PregnancyExerciseScreen> {
                   topRight: Radius.circular(20),
                 ),
                 border: Border(
-                  bottom: BorderSide(
-                    color: color.withOpacity(0.2),
-                    width: 1,
-                  ),
+                  bottom: BorderSide(color: color.withOpacity(0.2), width: 1),
                 ),
               ),
               child: Text(
@@ -394,7 +383,9 @@ class _PregnancyExerciseScreenState extends State<PregnancyExerciseScreen> {
                     // Duration chip
                     Container(
                       padding: const EdgeInsets.symmetric(
-                          horizontal: 12, vertical: 6),
+                        horizontal: 12,
+                        vertical: 6,
+                      ),
                       decoration: BoxDecoration(
                         color: color.withOpacity(0.1),
                         borderRadius: BorderRadius.circular(20),
@@ -511,10 +502,7 @@ class _PregnancyExerciseScreenState extends State<PregnancyExerciseScreen> {
                       padding: const EdgeInsets.symmetric(vertical: 10),
                       decoration: BoxDecoration(
                         border: Border(
-                          top: BorderSide(
-                            color: Color(0xFFE2E8F0),
-                            width: 1,
-                          ),
+                          top: BorderSide(color: Color(0xFFE2E8F0), width: 1),
                         ),
                       ),
                       child: Row(
@@ -529,11 +517,7 @@ class _PregnancyExerciseScreenState extends State<PregnancyExerciseScreen> {
                             ),
                           ),
                           const SizedBox(width: 4),
-                          Icon(
-                            Icons.arrow_forward_ios,
-                            size: 12,
-                            color: color,
-                          ),
+                          Icon(Icons.arrow_forward_ios, size: 12, color: color),
                         ],
                       ),
                     ),
@@ -569,10 +553,7 @@ class _PregnancyExerciseScreenState extends State<PregnancyExerciseScreen> {
         children: [
           Row(
             children: [
-              Text(
-                '⚠️',
-                style: TextStyle(fontSize: 20),
-              ),
+              Text('⚠️', style: TextStyle(fontSize: 20)),
               const SizedBox(width: 10),
               Text(
                 'Important Precautions',
@@ -585,32 +566,31 @@ class _PregnancyExerciseScreenState extends State<PregnancyExerciseScreen> {
             ],
           ),
           const SizedBox(height: 12),
-          ...precautions.map((item) => Padding(
-                padding: const EdgeInsets.only(bottom: 8),
-                child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      '•',
-                      style: TextStyle(
-                        color: Color(0xFFC53030),
-                        fontWeight: FontWeight.bold,
-                        fontSize: 14,
-                      ),
+          ...precautions.map(
+            (item) => Padding(
+              padding: const EdgeInsets.only(bottom: 8),
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    '•',
+                    style: TextStyle(
+                      color: Color(0xFFC53030),
+                      fontWeight: FontWeight.bold,
+                      fontSize: 14,
                     ),
-                    const SizedBox(width: 10),
-                    Expanded(
-                      child: Text(
-                        item,
-                        style: TextStyle(
-                          fontSize: 12,
-                          color: Color(0xFF2D3748),
-                        ),
-                      ),
+                  ),
+                  const SizedBox(width: 10),
+                  Expanded(
+                    child: Text(
+                      item,
+                      style: TextStyle(fontSize: 12, color: Color(0xFF2D3748)),
                     ),
-                  ],
-                ),
-              )),
+                  ),
+                ],
+              ),
+            ),
+          ),
         ],
       ),
     );
@@ -638,10 +618,7 @@ class _PregnancyExerciseScreenState extends State<PregnancyExerciseScreen> {
         children: [
           Row(
             children: [
-              Text(
-                '💡',
-                style: TextStyle(fontSize: 20),
-              ),
+              Text('💡', style: TextStyle(fontSize: 20)),
               const SizedBox(width: 10),
               Text(
                 'General Tips',
@@ -654,32 +631,31 @@ class _PregnancyExerciseScreenState extends State<PregnancyExerciseScreen> {
             ],
           ),
           const SizedBox(height: 12),
-          ...tips.map((tip) => Padding(
-                padding: const EdgeInsets.only(bottom: 8),
-                child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      '→',
-                      style: TextStyle(
-                        color: Color(0xFF48BB78),
-                        fontWeight: FontWeight.bold,
-                        fontSize: 14,
-                      ),
+          ...tips.map(
+            (tip) => Padding(
+              padding: const EdgeInsets.only(bottom: 8),
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    '→',
+                    style: TextStyle(
+                      color: Color(0xFF48BB78),
+                      fontWeight: FontWeight.bold,
+                      fontSize: 14,
                     ),
-                    const SizedBox(width: 10),
-                    Expanded(
-                      child: Text(
-                        tip,
-                        style: TextStyle(
-                          fontSize: 12,
-                          color: Color(0xFF2F855A),
-                        ),
-                      ),
+                  ),
+                  const SizedBox(width: 10),
+                  Expanded(
+                    child: Text(
+                      tip,
+                      style: TextStyle(fontSize: 12, color: Color(0xFF2F855A)),
                     ),
-                  ],
-                ),
-              )),
+                  ),
+                ],
+              ),
+            ),
+          ),
         ],
       ),
     );
@@ -691,17 +667,12 @@ class _PregnancyExerciseScreenState extends State<PregnancyExerciseScreen> {
       decoration: BoxDecoration(
         color: Color(0xFFEDF2F7),
         borderRadius: BorderRadius.circular(8),
-        border: Border(
-          left: BorderSide(color: Color(0xFF4299E1), width: 3),
-        ),
+        border: Border(left: BorderSide(color: Color(0xFF4299E1), width: 3)),
       ),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
-            '⚕️',
-            style: TextStyle(fontSize: 16),
-          ),
+          Text('⚕️', style: TextStyle(fontSize: 16)),
           const SizedBox(width: 10),
           Expanded(
             child: RichText(

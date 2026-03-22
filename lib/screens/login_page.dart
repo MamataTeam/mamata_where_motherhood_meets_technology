@@ -84,7 +84,11 @@ class _LoginPageState extends State<LoginPage> {
           gradient: LinearGradient(
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
-            colors: [bgLight, bgBlue],
+            colors: [
+              const Color(0xFFF9F0FB),
+              const Color(0xFFEFD9F2),
+              const Color(0xFFE0C4EA),
+            ],
           ),
         ),
         child: SafeArea(
@@ -110,89 +114,25 @@ class _LoginPageState extends State<LoginPage> {
   Widget _buildHeader() {
     return Column(
       children: [
-        Container(
-          width: 100, 
-          height: 100, 
-          decoration: BoxDecoration(
-            gradient: LinearGradient(
-              colors: [primaryPurple, secondaryPurple],
-              begin: Alignment.topLeft,
-              end: Alignment.bottomRight,
-            ),
-            shape: BoxShape.circle,
-            boxShadow: [
-              BoxShadow(
-                color: primaryPurple.withOpacity(0.3),
-                blurRadius: 20, 
-                offset: const Offset(0, 8), 
-              ),
-            ],
-          ),
-          child: Stack(
-            alignment: Alignment.center,
-            children: [
-              Container(
-                width: 85, 
-                height: 85, 
-                decoration: BoxDecoration(
-                  color: lightPink.withOpacity(0.3),
-                  shape: BoxShape.circle,
-                ),
-              ),
-              Container(
-                width: 60, 
-                height: 75, 
-                decoration: BoxDecoration(
-                  color: Colors.white.withOpacity(0.9),
-                  borderRadius: BorderRadius.circular(30),
-                ),
-                child: Stack(
-                  children: [
-                    Positioned(
-                      top: 25, 
-                      left: 20, 
-                      child: Icon(
-                        Icons.favorite,
-                        color: accentPink,
-                        size: 18, 
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              Positioned(
-                top: 20,
-                right: 12,
-                child: Container(
-                  width: 7,
-                  height: 7,
-                  decoration: BoxDecoration(
-                    color: lightPink,
-                    shape: BoxShape.circle,
-                  ),
-                ),
-              ),
-              Positioned(
-                bottom: 25,
-                left: 10,
-                child: Container(
-                  width: 5,
-                  height: 5,
-                  decoration: BoxDecoration(
-                    color: lightPink,
-                    shape: BoxShape.circle,
-                  ),
-                ),
-              ),
-            ],
+        ColorFiltered(
+          colorFilter: const ColorFilter.matrix(<double>[
+            // Makes white pixels transparent, keeps dark line art
+            1, 0, 0, 0, 0,
+            0, 1, 0, 0, 0,
+            0, 0, 1, 0, 0,
+            -1, -1, -1, 3, -1,
+          ]),
+          child: SizedBox(
+            width: 150,
+            height: 150,
+            child: Image.asset('assets/images/logo.jpg', fit: BoxFit.contain),
           ),
         ),
-       
         const SizedBox(height: 12),
         Text(
           'Welcome Back, Mama',
           style: TextStyle(
-            fontSize: 26, 
+            fontSize: 26,
             fontWeight: FontWeight.w600,
             color: textDark,
             letterSpacing: 0.5,
@@ -283,10 +223,7 @@ class _LoginPageState extends State<LoginPage> {
         TextFormField(
           controller: controller,
           keyboardType: keyboardType,
-          style: TextStyle(
-            color: textDark,
-            fontSize: 16,
-          ),
+          style: TextStyle(color: textDark, fontSize: 16),
           decoration: InputDecoration(
             hintText: hint,
             hintStyle: TextStyle(color: textGray.withOpacity(0.5)),
@@ -294,9 +231,7 @@ class _LoginPageState extends State<LoginPage> {
               margin: const EdgeInsets.all(12),
               padding: const EdgeInsets.all(8),
               decoration: BoxDecoration(
-                gradient: LinearGradient(
-                  colors: [lightPink, Colors.white],
-                ),
+                gradient: LinearGradient(colors: [lightPink, Colors.white]),
                 borderRadius: BorderRadius.circular(8),
               ),
               child: Icon(icon, color: accentPink, size: 20),
@@ -317,7 +252,7 @@ class _LoginPageState extends State<LoginPage> {
             ),
             focusedBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(12),
-              borderSide: BorderSide(color: primaryPurple, width: 2),
+              borderSide: BorderSide(color: secondaryPurple, width: 2),
             ),
             errorBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(12),
@@ -350,10 +285,7 @@ class _LoginPageState extends State<LoginPage> {
         TextFormField(
           controller: _passwordController,
           obscureText: _obscurePassword,
-          style: TextStyle(
-            color: textDark,
-            fontSize: 16,
-          ),
+          style: TextStyle(color: textDark, fontSize: 16),
           decoration: InputDecoration(
             hintText: 'Enter your password',
             hintStyle: TextStyle(color: textGray.withOpacity(0.5)),
@@ -361,9 +293,7 @@ class _LoginPageState extends State<LoginPage> {
               margin: const EdgeInsets.all(12),
               padding: const EdgeInsets.all(8),
               decoration: BoxDecoration(
-                gradient: LinearGradient(
-                  colors: [lightPink, Colors.white],
-                ),
+                gradient: LinearGradient(colors: [lightPink, Colors.white]),
                 borderRadius: BorderRadius.circular(8),
               ),
               child: Icon(Icons.lock_outline, color: accentPink, size: 20),
@@ -395,7 +325,7 @@ class _LoginPageState extends State<LoginPage> {
             ),
             focusedBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(12),
-              borderSide: BorderSide(color: primaryPurple, width: 2),
+              borderSide: BorderSide(color: secondaryPurple, width: 2),
             ),
             errorBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(12),
@@ -420,9 +350,7 @@ class _LoginPageState extends State<LoginPage> {
       width: double.infinity,
       height: 56,
       decoration: BoxDecoration(
-        gradient: LinearGradient(
-          colors: [primaryPurple, secondaryPurple],
-        ),
+        color: const Color(0xFF764BA2),
         borderRadius: BorderRadius.circular(12),
         boxShadow: [
           BoxShadow(
@@ -465,24 +393,18 @@ class _LoginPageState extends State<LoginPage> {
 
   Widget _buildRegistrationLink() {
     return Container(
-      padding: const EdgeInsets.all(16), 
+      padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
         color: Colors.white.withOpacity(0.7),
         borderRadius: BorderRadius.circular(16),
-        border: Border.all(
-          color: primaryPurple.withOpacity(0.2),
-          width: 1.5,
-        ),
+        border: Border.all(color: primaryPurple.withOpacity(0.2), width: 1.5),
       ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Text(
             "New to Mamata?",
-            style: TextStyle(
-              fontSize: 15,
-              color: textGray,
-            ),
+            style: TextStyle(fontSize: 15, color: textGray),
           ),
           const SizedBox(width: 6),
           GestureDetector(
@@ -492,7 +414,7 @@ class _LoginPageState extends State<LoginPage> {
               style: TextStyle(
                 fontSize: 15,
                 fontWeight: FontWeight.w600,
-                color: primaryPurple,
+                color: secondaryPurple,
                 decoration: TextDecoration.underline,
               ),
             ),

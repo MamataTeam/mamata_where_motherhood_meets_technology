@@ -292,7 +292,7 @@ class ApiService {
     
   // Chatbot API
   static Future<String> sendMessageToBot(String message) async {
-   final url = Uri.parse('$chatbotUrl/chat'); // Android emulator
+   final url = Uri.parse('$chatbotUrl/chat'); 
 
     try {
       final response = await http.post(

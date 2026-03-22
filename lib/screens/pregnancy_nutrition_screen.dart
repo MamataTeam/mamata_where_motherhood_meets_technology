@@ -245,7 +245,11 @@ class _PregnancyNutritionScreenState extends State<PregnancyNutritionScreen> {
           gradient: LinearGradient(
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
-            colors: [Color(0xFFF5F7FA), Color(0xFFC3CFE2)],
+            colors: [
+              const Color(0xFFF9F0FB), // changed
+              const Color(0xFFEFD9F2), // changed
+              const Color(0xFFE0C4EA), // changed
+            ],
           ),
         ),
         child: Column(
@@ -303,21 +307,21 @@ class _PregnancyNutritionScreenState extends State<PregnancyNutritionScreen> {
                             context: context,
                             trimester: _nutritionData!.firstTrimester!,
                             trimesterNumber: '1',
-                            color: Color(0xFF667EEA),
+                            color: Color.fromARGB(255, 183, 145, 219),
                           ),
                           const SizedBox(height: 20),
                           _buildTrimesterSection(
                             context: context,
                             trimester: _nutritionData!.secondTrimester!,
                             trimesterNumber: '2',
-                            color: Color(0xFF764BA2),
+                            color: Color.fromARGB(255, 157, 172, 240),
                           ),
                           const SizedBox(height: 20),
                           _buildTrimesterSection(
                             context: context,
                             trimester: _nutritionData!.thirdTrimester!,
                             trimesterNumber: '3',
-                            color: Color(0xFFE77E7E),
+                            color: const Color.fromARGB(255, 113, 78, 130),
                           ),
                           const SizedBox(height: 20),
                           Padding(
@@ -347,11 +351,7 @@ class _PregnancyNutritionScreenState extends State<PregnancyNutritionScreen> {
     return Container(
       width: double.infinity,
       decoration: BoxDecoration(
-        gradient: LinearGradient(
-          begin: Alignment.topLeft,
-          end: Alignment.bottomRight,
-          colors: [Color(0xFF667EEA), Color(0xFF764BA2)],
-        ),
+        color: const Color(0xFF764BA2),
       ),
       padding: EdgeInsets.only(top: 50, left: 20, right: 30, bottom: 30),
       child: Column(
@@ -472,7 +472,6 @@ class _PregnancyNutritionScreenState extends State<PregnancyNutritionScreen> {
     FoodCategory category,
     Color color,
   ) {
-    // Show only first 4 items
     final displayItems = category.items.take(4).toList();
     final hasMore = category.items.length > 4;
 
@@ -523,14 +522,12 @@ class _PregnancyNutritionScreenState extends State<PregnancyNutritionScreen> {
             ),
           ),
 
-          // Content section
           Expanded(
             child: Container(
               padding: const EdgeInsets.fromLTRB(20, 16, 20, 12),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  // Foods list
                   Expanded(
                     child: ListView.builder(
                       physics: NeverScrollableScrollPhysics(),
@@ -586,7 +583,6 @@ class _PregnancyNutritionScreenState extends State<PregnancyNutritionScreen> {
                     ),
                   ),
 
-                  // View All button
                   if (hasMore) ...[
                     GestureDetector(
                       onTap: () =>
@@ -647,7 +643,7 @@ class _PregnancyNutritionScreenState extends State<PregnancyNutritionScreen> {
           Row(
             children: [
               Text(
-                '❌', // Changed from '⚠️' to '❌'
+                '❌',
                 style: TextStyle(fontSize: 22),
               ),
               const SizedBox(width: 10),

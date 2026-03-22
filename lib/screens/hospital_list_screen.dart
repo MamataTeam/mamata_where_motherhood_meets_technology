@@ -7,281 +7,261 @@ import '../widgets/hospital_card.dart';
 
 class HospitalListScreen extends StatefulWidget {
   const HospitalListScreen({super.key});
-
   @override
   State<HospitalListScreen> createState() => _HospitalListScreenState();
 }
 
 class _HospitalListScreenState extends State<HospitalListScreen>
     with SingleTickerProviderStateMixin {
-  // Purple/Violet Professional Theme
-  static const primaryColor = Color(0xFF667EEA);
-  static const secondaryColor = Color(0xFF764BA2);
-  static const errorColor = Color(0xFFE74C3C);
-  static const backgroundColor = Color(0xFFF5F7FA);
-  static const cardColor = Color(0xFFFFFFFF);
-  static const textPrimary = Color(0xFF2C3E50);
-  static const textSecondary = Color(0xFF7F8C8D);
+  // ── Palette ───────────────────────────────────────────────────────────────
+  static const _purple = Color(0xFF764BA2);
+  static const _purpleSoft = Color(0xFFF3EDF9);
+  static const _green = Color(0xFF27AE60);
+  static const _crimson = Color(0xFFB83232);
+  static const _crimsonSoft = Color(0xFFFAECEC);
+  static const _ink = Color(0xFF2D1B4E);
+  static const _sub = Color(0xFF7B6B8D);
+  static const _ghost = Color(0xFFBEB3CC);
 
-  Future<List<Hospital>>? hospitalList;
-  Position? userPosition;
-  bool isLoadingLocation = true;
-  String? locationError;
-  late AnimationController _animationController;
-  late Animation<double> _fadeAnimation;
+  Future<List<Hospital>>? _hospitalList;
+  Position? _userPosition;
+  bool _loadingLocation = true;
+  String? _locationError;
+  bool _permanentlyDenied = false; // ← new
+  late AnimationController _animCtrl;
+  late Animation<double> _fadeAnim;
 
   @override
   void initState() {
     super.initState();
-    _animationController = AnimationController(
-      duration: const Duration(milliseconds: 800),
+    _animCtrl = AnimationController(
+      duration: const Duration(milliseconds: 700),
       vsync: this,
     );
-    _fadeAnimation = CurvedAnimation(
-      parent: _animationController,
-      curve: Curves.easeInOut,
-    );
-    _animationController.forward();
-    initializeData();
+    _fadeAnim = CurvedAnimation(parent: _animCtrl, curve: Curves.easeOut);
+    _animCtrl.forward();
+    _initData();
   }
 
   @override
   void dispose() {
-    _animationController.dispose();
+    _animCtrl.dispose();
     super.dispose();
   }
 
-  Future<void> initializeData() async {
+  // ── Data init ─────────────────────────────────────────────────────────────
+  Future<void> _initData() async {
     setState(() {
-      isLoadingLocation = true;
-      locationError = null;
-      userPosition = null;
-      hospitalList = null;
+      _loadingLocation = true;
+      _locationError = null;
+      _userPosition = null;
+      _hospitalList = null;
+      _permanentlyDenied = false;
     });
-
-    await _getUserLocation();
-    setState(() {
-      hospitalList = _loadHospitals();
-    });
+    await _getLocation();
+    setState(() => _hospitalList = _loadHospitals());
   }
 
-  Future<void> _getUserLocation() async {
+  Future<void> _getLocation() async {
     try {
-      bool serviceEnabled = await Geolocator.isLocationServiceEnabled();
-      if (!serviceEnabled) {
-        locationError = 'Location services are disabled.';
+      // 1. Check if GPS is switched on
+      if (!await Geolocator.isLocationServiceEnabled()) {
+        _locationError =
+            'Location services are disabled. Please turn on GPS.';
         return;
       }
 
-      LocationPermission permission = await Geolocator.checkPermission();
-      if (permission == LocationPermission.denied) {
-        permission = await Geolocator.requestPermission();
-        if (permission == LocationPermission.denied) {
-          locationError = 'Location permission denied.';
+      // 2. Check / request permission
+      LocationPermission perm = await Geolocator.checkPermission();
+      if (perm == LocationPermission.denied) {
+        perm = await Geolocator.requestPermission();
+        if (perm == LocationPermission.denied) {
+          _locationError = 'Location permission denied.';
           return;
         }
       }
 
-      if (permission == LocationPermission.deniedForever) {
-        locationError = 'Location permissions are permanently denied.';
+      // 3. Permanently denied → send user to app Settings
+      if (perm == LocationPermission.deniedForever) {
+        _locationError =
+            'Location permanently denied. Tap "Open Settings" to enable it.';
+        _permanentlyDenied = true;
         return;
       }
 
-      Position position = await Geolocator.getCurrentPosition(
+      // 4. All good — get position
+      _userPosition = await Geolocator.getCurrentPosition(
         desiredAccuracy: LocationAccuracy.high,
       );
-
-      userPosition = position;
-    } catch (e) {
-      locationError = 'Error getting location: $e';
+    } catch (_) {
+      _locationError = 'Could not get location. Please try again.';
     } finally {
-      if (mounted) {
-        setState(() {
-          isLoadingLocation = false;
-        });
-      }
+      if (mounted) setState(() => _loadingLocation = false);
     }
   }
 
   Future<List<Hospital>> _loadHospitals() async {
-    final String jsonData =
-        await rootBundle.loadString('assets/hospitals.json');
-    final List data = json.decode(jsonData);
-    List<Hospital> hospitals =
-        data.map((json) => Hospital.fromJson(json)).toList();
-
-    if (userPosition != null) {
-      for (var hospital in hospitals) {
-        hospital.distance = Geolocator.distanceBetween(
-          userPosition!.latitude,
-          userPosition!.longitude,
-          hospital.latitude,
-          hospital.longitude,
+    final raw = await rootBundle.loadString('assets/hospitals.json');
+    final data = json.decode(raw) as List;
+    List<Hospital> list = data.map((j) => Hospital.fromJson(j)).toList();
+    if (_userPosition != null) {
+      for (var h in list) {
+        h.distance = Geolocator.distanceBetween(
+          _userPosition!.latitude,
+          _userPosition!.longitude,
+          h.latitude,
+          h.longitude,
         );
       }
-
-      // Filter hospitals within 5 KM radius (5000 meters)
-      hospitals = hospitals.where((hospital) {
-        return hospital.distance != null && hospital.distance! <= 5000;
-      }).toList();
-
-      // Sort by distance
-      hospitals.sort((a, b) {
-        if (a.distance == null) return 1;
-        if (b.distance == null) return -1;
-        return a.distance!.compareTo(b.distance!);
-      });
+      list = list
+          .where((h) => h.distance != null && h.distance! <= 5000)
+          .toList();
+      list.sort((a, b) => (a.distance ?? 0).compareTo(b.distance ?? 0));
     }
-
-    return hospitals;
+    return list;
   }
 
+  // ── Location banner ───────────────────────────────────────────────────────
   Widget _buildLocationBanner() {
-    final String title;
-    final String subtitle;
-    final Color iconColor;
-
-    if (isLoadingLocation) {
-      title = 'Locating You';
-      subtitle = 'Finding nearby hospitals...';
-      iconColor = primaryColor;
-    } else if (locationError != null) {
-      title = 'Location Unavailable';
-      subtitle = locationError!;
-      iconColor = errorColor;
-    } else if (userPosition != null) {
-      title = 'Location Found';
-      subtitle = 'Filtering results within 5 KM radius';
-      iconColor = primaryColor;
-    } else {
+    if (!_loadingLocation && _locationError == null && _userPosition == null) {
       return const SizedBox.shrink();
     }
 
+    final isError = _locationError != null && !_loadingLocation;
+    final isSuccess = !_loadingLocation && _userPosition != null;
+
     return Container(
-      margin: const EdgeInsets.fromLTRB(16, 16, 16, 8),
-      padding: const EdgeInsets.all(18),
+      margin: const EdgeInsets.fromLTRB(16, 14, 16, 4),
+      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 13),
       decoration: BoxDecoration(
-        gradient: LinearGradient(
-          colors: [
-            cardColor,
-            primaryColor.withOpacity(0.02),
-          ],
+        color: isError ? _crimsonSoft : _purpleSoft,
+        borderRadius: BorderRadius.circular(16),
+        border: Border.all(
+          color: isError
+              ? _crimson.withOpacity(0.2)
+              : _purple.withOpacity(0.2),
+          width: 1,
         ),
-        borderRadius: BorderRadius.circular(12),
-        border: Border.all(color: iconColor.withOpacity(0.15), width: 1.5),
-        boxShadow: [
-          BoxShadow(
-            color: primaryColor.withOpacity(0.08),
-            blurRadius: 10,
-            offset: const Offset(0, 3),
-          ),
-        ],
       ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+      child: Row(
         children: [
-          Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Container(
-                padding: const EdgeInsets.all(10),
-                decoration: BoxDecoration(
-                  gradient: LinearGradient(
-                    colors: [
-                      iconColor.withOpacity(0.15),
-                      iconColor.withOpacity(0.08),
-                    ],
+          // ── Icon bubble ──────────────────────────────────────────────
+          Container(
+            width: 38,
+            height: 38,
+            decoration: BoxDecoration(
+              color: isError
+                  ? _crimson.withOpacity(0.1)
+                  : _purple.withOpacity(0.1),
+              shape: BoxShape.circle,
+            ),
+            child: Center(
+              child: _loadingLocation
+                  ? SizedBox(
+                      width: 16,
+                      height: 16,
+                      child: CircularProgressIndicator(
+                        strokeWidth: 2,
+                        valueColor: AlwaysStoppedAnimation(_purple),
+                      ),
+                    )
+                  : Icon(
+                      isError
+                          ? Icons.location_off_outlined
+                          : Icons.location_on_rounded,
+                      size: 17,
+                      color: isError ? _crimson : _purple,
+                    ),
+            ),
+          ),
+
+          const SizedBox(width: 12),
+
+          // ── Status text ──────────────────────────────────────────────
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  _loadingLocation
+                      ? 'Finding your location…'
+                      : isError
+                          ? 'Location unavailable'
+                          : 'Location found',
+                  style: TextStyle(
+                    color: isError ? _crimson : _ink,
+                    fontSize: 13.5,
+                    fontWeight: FontWeight.w700,
                   ),
+                ),
+                const SizedBox(height: 1),
+                Text(
+                  _loadingLocation
+                      ? 'Searching for nearby hospitals'
+                      : isError
+                          ? _locationError!
+                          : 'Showing results within 5 km',
+                  style: TextStyle(
+                    color: isError ? _crimson.withOpacity(0.65) : _sub,
+                    fontSize: 12,
+                  ),
+                  maxLines: 2,
+                  overflow: TextOverflow.ellipsis,
+                ),
+              ],
+            ),
+          ),
+
+          const SizedBox(width: 8),
+
+          // ── Action badge / button ────────────────────────────────────
+          if (isSuccess)
+            Container(
+              padding:
+                  const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(20),
+                border: Border.all(color: _green, width: 1.5),
+              ),
+              child: const Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Icon(Icons.check_rounded, size: 11, color: _green),
+                  SizedBox(width: 4),
+                  Text(
+                    'Active',
+                    style: TextStyle(
+                      color: _green,
+                      fontSize: 11,
+                      fontWeight: FontWeight.w700,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+
+          if (isError)
+            GestureDetector(
+              // Permanently denied → open app Settings
+              // Otherwise → retry the location flow
+              onTap: _permanentlyDenied
+                  ? () => Geolocator.openAppSettings()
+                  : _initData,
+              child: Container(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 12,
+                  vertical: 7,
+                ),
+                decoration: BoxDecoration(
+                  color: _crimson,
                   borderRadius: BorderRadius.circular(10),
                 ),
-                child: isLoadingLocation
-                    ? SizedBox(
-                        width: 22,
-                        height: 22,
-                        child: CircularProgressIndicator(
-                          strokeWidth: 2.5,
-                          valueColor:
-                              AlwaysStoppedAnimation<Color>(primaryColor),
-                        ),
-                      )
-                    : Icon(
-                        locationError != null
-                            ? Icons.location_off_outlined
-                            : Icons.location_on,
-                        color: iconColor,
-                        size: 22,
-                      ),
-              ),
-              const SizedBox(width: 16),
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      title,
-                      style: const TextStyle(
-                        color: textPrimary,
-                        fontSize: 16,
-                        fontWeight: FontWeight.w600,
-                        letterSpacing: -0.2,
-                      ),
-                    ),
-                    const SizedBox(height: 3),
-                    Text(
-                      subtitle,
-                      style: const TextStyle(
-                        color: textSecondary,
-                        fontSize: 13,
-                        letterSpacing: -0.1,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ],
-          ),
-          if (locationError != null && !isLoadingLocation)
-            Padding(
-              padding: const EdgeInsets.only(top: 14),
-              child: SizedBox(
-                width: double.infinity,
-                child: Container(
-                  decoration: BoxDecoration(
-                    gradient: LinearGradient(
-                      colors: [errorColor, errorColor.withOpacity(0.85)],
-                    ),
-                    borderRadius: BorderRadius.circular(10),
-                    boxShadow: [
-                      BoxShadow(
-                        color: errorColor.withOpacity(0.25),
-                        blurRadius: 8,
-                        offset: const Offset(0, 2),
-                      ),
-                    ],
-                  ),
-                  child: Material(
-                    color: Colors.transparent,
-                    child: InkWell(
-                      onTap: initializeData,
-                      borderRadius: BorderRadius.circular(10),
-                      child: const Padding(
-                        padding: EdgeInsets.symmetric(vertical: 13),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Icon(Icons.refresh, size: 18, color: Colors.white),
-                            SizedBox(width: 8),
-                            Text(
-                              'Try Again',
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontWeight: FontWeight.w600,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
+                child: Text(
+                  _permanentlyDenied ? 'Open Settings' : 'Retry',
+                  style: const TextStyle(
+                    color: Colors.white,
+                    fontSize: 12,
+                    fontWeight: FontWeight.w700,
                   ),
                 ),
               ),
@@ -291,11 +271,11 @@ class _HospitalListScreenState extends State<HospitalListScreen>
     );
   }
 
+  // ── Empty / error state ───────────────────────────────────────────────────
   Widget _buildEmptyState({
     required IconData icon,
     required String title,
     String? subtitle,
-    Color? iconColor,
     bool isError = false,
   }) {
     return Center(
@@ -303,45 +283,36 @@ class _HospitalListScreenState extends State<HospitalListScreen>
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Container(
-            padding: const EdgeInsets.all(20),
+            padding: const EdgeInsets.all(24),
             decoration: BoxDecoration(
-              gradient: isError
-                  ? null
-                  : LinearGradient(
-                      colors: [
-                        primaryColor.withOpacity(0.1),
-                        secondaryColor.withOpacity(0.1),
-                      ],
-                    ),
-              color: isError ? errorColor.withOpacity(0.1) : null,
+              color: isError ? _crimsonSoft : _purpleSoft,
               shape: BoxShape.circle,
             ),
             child: Icon(
               icon,
-              size: 56,
-              color: iconColor ?? primaryColor.withOpacity(0.7),
+              size: 44,
+              color: isError
+                  ? _crimson.withOpacity(0.7)
+                  : _purple.withOpacity(0.6),
             ),
           ),
-          const SizedBox(height: 16),
+          const SizedBox(height: 20),
           Text(
             title,
             style: const TextStyle(
               fontSize: 17,
-              fontWeight: FontWeight.w600,
-              color: textPrimary,
+              fontWeight: FontWeight.w800,
+              color: _ink,
               letterSpacing: -0.3,
             ),
           ),
           if (subtitle != null) ...[
-            const SizedBox(height: 8),
+            const SizedBox(height: 6),
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 32),
+              padding: const EdgeInsets.symmetric(horizontal: 44),
               child: Text(
                 subtitle,
-                style: const TextStyle(
-                  color: textSecondary,
-                  fontSize: 14,
-                ),
+                style: const TextStyle(color: _ghost, fontSize: 14),
                 textAlign: TextAlign.center,
               ),
             ),
@@ -351,88 +322,95 @@ class _HospitalListScreenState extends State<HospitalListScreen>
     );
   }
 
+  // ── Build ─────────────────────────────────────────────────────────────────
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
           gradient: LinearGradient(
-            begin: Alignment.topCenter,
-            end: Alignment.bottomCenter,
             colors: [
-              primaryColor.withOpacity(0.03),
-              backgroundColor,
+              Color(0xFFF9F0FB),
+              Color(0xFFEFD9F2),
+              Color(0xFFE0C4EA),
             ],
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
           ),
         ),
         child: CustomScrollView(
           slivers: [
+            // ── AppBar ───────────────────────────────────────────────
             SliverAppBar(
               floating: true,
               pinned: true,
+              snap: false,
               elevation: 0,
-              flexibleSpace: Container(
-                decoration: const BoxDecoration(
-                  gradient: LinearGradient(
-                    begin: Alignment.topLeft,
-                    end: Alignment.bottomRight,
-                    colors: [primaryColor, secondaryColor],
-                  ),
-                ),
-              ),
+              toolbarHeight: 56,
+              expandedHeight: 56,
+              backgroundColor: const Color(0xFF7B4F9E),
+              surfaceTintColor: Colors.transparent,
               foregroundColor: Colors.white,
               title: const Text(
                 'Nearby Hospitals',
                 style: TextStyle(
-                  fontWeight: FontWeight.w600,
-                  fontSize: 20,
-                  letterSpacing: -0.5,
+                  color: Colors.white,
+                  fontWeight: FontWeight.w700,
+                  fontSize: 17,
+                  letterSpacing: -0.3,
                 ),
               ),
-              centerTitle: false,
               actions: [
                 IconButton(
-                  icon: const Icon(Icons.my_location_outlined, size: 24),
-                  onPressed: initializeData,
-                  tooltip: 'Refresh Location and List',
+                  onPressed: _initData,
+                  icon: const Icon(
+                    Icons.refresh_rounded,
+                    color: Colors.white,
+                    size: 22,
+                  ),
                 ),
-                const SizedBox(width: 8),
               ],
             ),
+
+            // ── Location banner ──────────────────────────────────────
             SliverToBoxAdapter(
               child: FadeTransition(
-                opacity: _fadeAnimation,
+                opacity: _fadeAnim,
                 child: _buildLocationBanner(),
               ),
             ),
+
+            // ── Hospital list ────────────────────────────────────────
             SliverPadding(
-              padding: const EdgeInsets.only(bottom: 16),
+              padding: const EdgeInsets.only(bottom: 36),
               sliver: FutureBuilder<List<Hospital>>(
-                future: hospitalList,
+                future: _hospitalList,
                 builder: (context, snapshot) {
                   if (snapshot.connectionState == ConnectionState.waiting) {
                     return SliverFillRemaining(
                       child: _buildEmptyState(
-                        icon: Icons.refresh,
-                        title: 'Loading hospitals...',
+                        icon: Icons.hourglass_top_rounded,
+                        title: 'Finding hospitals…',
+                        subtitle: 'Searching near your location.',
                       ),
                     );
-                  } else if (snapshot.hasError) {
+                  }
+                  if (snapshot.hasError) {
                     return SliverFillRemaining(
                       child: _buildEmptyState(
-                        icon: Icons.error_outline,
-                        title: 'Error loading data',
-                        subtitle:
-                            'An unexpected error occurred. Please try again.',
-                        iconColor: errorColor.withOpacity(0.7),
+                        icon: Icons.error_outline_rounded,
+                        title: 'Something went wrong',
+                        subtitle: 'Please try again.',
                         isError: true,
                       ),
                     );
-                  } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
+                  }
+                  if (!snapshot.hasData || snapshot.data!.isEmpty) {
                     return SliverFillRemaining(
                       child: _buildEmptyState(
                         icon: Icons.local_hospital_outlined,
-                        title: 'No hospitals found',
+                        title: 'No hospitals nearby',
+                        subtitle: 'No hospitals found within 5 km.',
                       ),
                     );
                   }
@@ -441,9 +419,42 @@ class _HospitalListScreenState extends State<HospitalListScreen>
                   return SliverList(
                     delegate: SliverChildBuilderDelegate(
                       (context, index) {
+                        if (index == 0) {
+                          return FadeTransition(
+                            opacity: _fadeAnim,
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Padding(
+                                  padding: const EdgeInsets.fromLTRB(
+                                    20, 22, 20, 16,
+                                  ),
+                                  child: Text(
+                                    '${hospitals.length} hospitals found',
+                                    style: const TextStyle(
+                                      color: _ink,
+                                      fontSize: 20,
+                                      fontWeight: FontWeight.w800,
+                                      letterSpacing: -0.5,
+                                    ),
+                                  ),
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.symmetric(
+                                    horizontal: 16,
+                                  ),
+                                  child: HospitalCard(hospital: hospitals[0]),
+                                ),
+                              ],
+                            ),
+                          );
+                        }
                         return FadeTransition(
-                          opacity: _fadeAnimation,
-                          child: HospitalCard(hospital: hospitals[index]),
+                          opacity: _fadeAnim,
+                          child: Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 16),
+                            child: HospitalCard(hospital: hospitals[index]),
+                          ),
                         );
                       },
                       childCount: hospitals.length,

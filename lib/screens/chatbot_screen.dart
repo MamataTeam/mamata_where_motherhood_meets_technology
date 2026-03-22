@@ -17,7 +17,6 @@ class _ChatbotScreenState extends State<ChatbotScreen>
   final List<ChatMessage> _messages = [];
   bool _isLoading = false;
 
-  static const primaryColor = Color(0xFF667EEA);
   static const secondaryColor = Color(0xFF764BA2);
   static const pinkColor = Color(0xFFFF6B9D);
 
@@ -32,12 +31,14 @@ class _ChatbotScreenState extends State<ChatbotScreen>
     )..repeat(reverse: true);
 
     // Welcome message
-    _messages.add(ChatMessage(
-      text:
-          "Hello! 🤰 I'm your Pregnancy Care Assistant.\n\nI'm here to help you with questions about your pregnancy journey — nutrition, symptoms, baby development, and more!\n\nHow can I help you today?",
-      isUser: false,
-      time: _currentTime(),
-    ));
+    _messages.add(
+      ChatMessage(
+        text:
+            "Hello! 🤰 I'm your Pregnancy Care Assistant.\n\nI'm here to help you with questions about your pregnancy journey — nutrition, symptoms, baby development, and more!\n\nHow can I help you today?",
+        isUser: false,
+        time: _currentTime(),
+      ),
+    );
   }
 
   @override
@@ -60,7 +61,9 @@ class _ChatbotScreenState extends State<ChatbotScreen>
     if (text.isEmpty) return;
 
     setState(() {
-      _messages.add(ChatMessage(text: text, isUser: true, time: _currentTime()));
+      _messages.add(
+        ChatMessage(text: text, isUser: true, time: _currentTime()),
+      );
       _isLoading = true;
       _messageController.clear();
     });
@@ -78,13 +81,14 @@ class _ChatbotScreenState extends State<ChatbotScreen>
 
       if (response.statusCode == 200) {
         final data = jsonDecode(response.body);
-        final botReply = data['response'] ?? data['message'] ?? 'Sorry, I could not understand that.';
+        final botReply =
+            data['response'] ??
+            data['message'] ??
+            'Sorry, I could not understand that.';
         setState(() {
-          _messages.add(ChatMessage(
-            text: botReply,
-            isUser: false,
-            time: _currentTime(),
-          ));
+          _messages.add(
+            ChatMessage(text: botReply, isUser: false, time: _currentTime()),
+          );
         });
       } else {
         _addErrorMessage();
@@ -99,12 +103,15 @@ class _ChatbotScreenState extends State<ChatbotScreen>
 
   void _addErrorMessage() {
     setState(() {
-      _messages.add(ChatMessage(
-        text: "Sorry, I couldn't connect to the server. Please make sure the chatbot backend is running.",
-        isUser: false,
-        time: _currentTime(),
-        isError: true,
-      ));
+      _messages.add(
+        ChatMessage(
+          text:
+              "Sorry, I couldn't connect to the server. Please make sure the chatbot backend is running.",
+          isUser: false,
+          time: _currentTime(),
+          isError: true,
+        ),
+      );
     });
   }
 
@@ -151,13 +158,7 @@ class _ChatbotScreenState extends State<ChatbotScreen>
     return AppBar(
       elevation: 0,
       flexibleSpace: Container(
-        decoration: const BoxDecoration(
-          gradient: LinearGradient(
-            begin: Alignment.topLeft,
-            end: Alignment.bottomRight,
-            colors: [primaryColor, secondaryColor],
-          ),
-        ),
+        decoration: const BoxDecoration(color: secondaryColor),
       ),
       leading: IconButton(
         icon: const Icon(Icons.arrow_back_ios, color: Colors.white),
@@ -201,7 +202,7 @@ class _ChatbotScreenState extends State<ChatbotScreen>
                     style: TextStyle(color: Colors.white70, fontSize: 12),
                   ),
                 ],
-              )
+              ),
             ],
           ),
         ],
@@ -212,11 +213,14 @@ class _ChatbotScreenState extends State<ChatbotScreen>
           onPressed: () {
             setState(() {
               _messages.clear();
-              _messages.add(ChatMessage(
-                text: "Hello! 🤰 I'm your Pregnancy Care Assistant.\n\nHow can I help you today?",
-                isUser: false,
-                time: _currentTime(),
-              ));
+              _messages.add(
+                ChatMessage(
+                  text:
+                      "Hello! 🤰 I'm your Pregnancy Care Assistant.\n\nHow can I help you today?",
+                  isUser: false,
+                  time: _currentTime(),
+                ),
+              );
             });
           },
           tooltip: 'Clear chat',
@@ -265,10 +269,10 @@ class _ChatbotScreenState extends State<ChatbotScreen>
                   decoration: BoxDecoration(
                     color: Colors.white,
                     borderRadius: BorderRadius.circular(20),
-                    border: Border.all(color: primaryColor.withOpacity(0.3)),
+                    border: Border.all(color: secondaryColor.withOpacity(0.3)),
                     boxShadow: [
                       BoxShadow(
-                        color: primaryColor.withOpacity(0.08),
+                        color: secondaryColor.withOpacity(0.08),
                         blurRadius: 8,
                         offset: const Offset(0, 2),
                       ),
@@ -277,13 +281,16 @@ class _ChatbotScreenState extends State<ChatbotScreen>
                   child: Row(
                     mainAxisSize: MainAxisSize.min,
                     children: [
-                      Icon(Icons.chat_bubble_outline,
-                          size: 14, color: primaryColor),
+                      Icon(
+                        Icons.chat_bubble_outline,
+                        size: 14,
+                        color: secondaryColor,
+                      ),
                       const SizedBox(width: 6),
                       Text(
                         q,
                         style: TextStyle(
-                          color: primaryColor,
+                          color: secondaryColor,
                           fontSize: 13,
                           fontWeight: FontWeight.w500,
                         ),
@@ -314,8 +321,9 @@ class _ChatbotScreenState extends State<ChatbotScreen>
     return Padding(
       padding: const EdgeInsets.only(bottom: 12),
       child: Row(
-        mainAxisAlignment:
-            message.isUser ? MainAxisAlignment.end : MainAxisAlignment.start,
+        mainAxisAlignment: message.isUser
+            ? MainAxisAlignment.end
+            : MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.end,
         children: [
           if (!message.isUser) ...[
@@ -324,9 +332,7 @@ class _ChatbotScreenState extends State<ChatbotScreen>
               height: 34,
               margin: const EdgeInsets.only(right: 8),
               decoration: BoxDecoration(
-                gradient: const LinearGradient(
-                  colors: [primaryColor, secondaryColor],
-                ),
+                color: secondaryColor,
                 shape: BoxShape.circle,
               ),
               child: const Center(
@@ -351,14 +357,14 @@ class _ChatbotScreenState extends State<ChatbotScreen>
                   decoration: BoxDecoration(
                     gradient: message.isUser
                         ? const LinearGradient(
-                            colors: [primaryColor, secondaryColor],
+                            colors: [secondaryColor, secondaryColor],
                           )
                         : null,
                     color: message.isError
                         ? Colors.red[50]
                         : message.isUser
-                            ? null
-                            : Colors.white,
+                        ? null
+                        : Colors.white,
                     borderRadius: BorderRadius.only(
                       topLeft: const Radius.circular(18),
                       topRight: const Radius.circular(18),
@@ -368,7 +374,7 @@ class _ChatbotScreenState extends State<ChatbotScreen>
                     boxShadow: [
                       BoxShadow(
                         color: message.isUser
-                            ? primaryColor.withOpacity(0.25)
+                            ? secondaryColor.withOpacity(0.25)
                             : Colors.black.withOpacity(0.06),
                         blurRadius: 8,
                         offset: const Offset(0, 2),
@@ -384,8 +390,8 @@ class _ChatbotScreenState extends State<ChatbotScreen>
                       color: message.isUser
                           ? Colors.white
                           : message.isError
-                              ? Colors.red[700]
-                              : const Color(0xFF2D3748),
+                          ? Colors.red[700]
+                          : const Color(0xFF2D3748),
                       fontSize: 15,
                       height: 1.4,
                     ),
@@ -425,7 +431,7 @@ class _ChatbotScreenState extends State<ChatbotScreen>
             width: 34,
             height: 34,
             decoration: const BoxDecoration(
-              gradient: LinearGradient(colors: [primaryColor, secondaryColor]),
+              color: secondaryColor,
               shape: BoxShape.circle,
             ),
             child: const Center(
@@ -453,13 +459,13 @@ class _ChatbotScreenState extends State<ChatbotScreen>
                   builder: (context, child) {
                     final delay = index * 0.2;
                     final opacity = ((_typingAnimationController.value - delay)
-                            .clamp(0.0, 1.0));
+                        .clamp(0.0, 1.0));
                     return Container(
                       margin: const EdgeInsets.symmetric(horizontal: 2),
                       width: 8,
                       height: 8,
                       decoration: BoxDecoration(
-                        color: primaryColor.withOpacity(0.3 + opacity * 0.7),
+                        color: secondaryColor.withOpacity(0.3 + opacity * 0.7),
                         shape: BoxShape.circle,
                       ),
                     );
@@ -498,7 +504,7 @@ class _ChatbotScreenState extends State<ChatbotScreen>
               decoration: BoxDecoration(
                 color: const Color(0xFFF8F4FF),
                 borderRadius: BorderRadius.circular(25),
-                border: Border.all(color: primaryColor.withOpacity(0.2)),
+                border: Border.all(color: secondaryColor.withOpacity(0.2)),
               ),
               child: TextField(
                 controller: _messageController,
@@ -529,7 +535,7 @@ class _ChatbotScreenState extends State<ChatbotScreen>
                 gradient: _isLoading
                     ? null
                     : const LinearGradient(
-                        colors: [primaryColor, secondaryColor],
+                        colors: [secondaryColor, secondaryColor],
                       ),
                 color: _isLoading ? Colors.grey[300] : null,
                 shape: BoxShape.circle,
@@ -537,7 +543,7 @@ class _ChatbotScreenState extends State<ChatbotScreen>
                     ? []
                     : [
                         BoxShadow(
-                          color: primaryColor.withOpacity(0.4),
+                          color: secondaryColor.withOpacity(0.4),
                           blurRadius: 10,
                           offset: const Offset(0, 4),
                         ),

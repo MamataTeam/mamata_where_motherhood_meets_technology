@@ -29,7 +29,6 @@ class _RegistrationPageState extends State<RegistrationPage> {
   bool _obscurePassword = true;
   bool _isLoading = false;
 
-  final Color primaryPurple = const Color(0xFF667EEA);
   final Color secondaryPurple = const Color(0xFF764BA2);
   final Color accentPink = const Color(0xFFE77E7E);
   final Color lightPink = const Color(0xFFFDEEF0);
@@ -65,21 +64,30 @@ class _RegistrationPageState extends State<RegistrationPage> {
     if (!_formKey.currentState!.validate()) return;
 
     if (_pickedGregorianDate == null) {
-      Get.snackbar('Error', 'Please select your last period date',
-          backgroundColor: accentPink, colorText: Colors.white);
+      Get.snackbar(
+        'Error',
+        'Please select your last period date',
+        backgroundColor: accentPink,
+        colorText: Colors.white,
+      );
       return;
     }
 
     if (_passwordController.text != _confirmPasswordController.text) {
-      Get.snackbar('Error', 'Passwords do not match',
-          backgroundColor: accentPink, colorText: Colors.white);
+      Get.snackbar(
+        'Error',
+        'Passwords do not match',
+        backgroundColor: accentPink,
+        colorText: Colors.white,
+      );
       return;
     }
 
     setState(() => _isLoading = true);
 
-    final String dateString =
-        DateFormat('yyyy-MM-dd').format(_pickedGregorianDate!);
+    final String dateString = DateFormat(
+      'yyyy-MM-dd',
+    ).format(_pickedGregorianDate!);
     final String email = _emailController.text.trim();
     final String password = _passwordController.text;
 
@@ -101,29 +109,37 @@ class _RegistrationPageState extends State<RegistrationPage> {
       );
 
       if (!loggedIn) {
-        Get.snackbar('Login Failed',
-            'User created but could not log in automatically. Please log in.',
-            backgroundColor: Colors.red, colorText: Colors.white);
+        Get.snackbar(
+          'Login Failed',
+          'User created but could not log in automatically. Please log in.',
+          backgroundColor: Colors.red,
+          colorText: Colors.white,
+        );
         Get.offAll(() => const LoginPage());
         return;
       }
 
-      Get.snackbar('Success', 'Registration and automatic login successful! 💛',
-          backgroundColor: const Color(0xFF48BB78),
-          colorText: Colors.white,
-          snackPosition: SnackPosition.TOP,
-          borderRadius: 12,
-          margin: const EdgeInsets.all(16));
+      Get.snackbar(
+        'Success',
+        'Registration and automatic login successful! 💛',
+        backgroundColor: const Color(0xFF48BB78),
+        colorText: Colors.white,
+        snackPosition: SnackPosition.TOP,
+        borderRadius: 12,
+        margin: const EdgeInsets.all(16),
+      );
 
       Get.offAll(() => const DashboardPage());
     } catch (e) {
       Get.snackbar(
-          'Operation Failed', e.toString().replaceFirst('Exception: ', ''),
-          backgroundColor: const Color(0xFFC53030),
-          colorText: Colors.white,
-          snackPosition: SnackPosition.TOP,
-          borderRadius: 12,
-          margin: const EdgeInsets.all(16));
+        'Operation Failed',
+        e.toString().replaceFirst('Exception: ', ''),
+        backgroundColor: const Color(0xFFC53030),
+        colorText: Colors.white,
+        snackPosition: SnackPosition.TOP,
+        borderRadius: 12,
+        margin: const EdgeInsets.all(16),
+      );
     } finally {
       setState(() => _isLoading = false);
     }
@@ -142,12 +158,14 @@ class _RegistrationPageState extends State<RegistrationPage> {
   Widget build(BuildContext context) {
     final selectedDateStr = _selectedCalendar == CalendarType.nepali
         ? (_pickedNepaliDate != null
-            ? picker.NepaliDateFormat("yyyy MMMM d", picker.Language.nepali)
-                .format(_pickedNepaliDate!)
-            : '')
+              ? picker.NepaliDateFormat(
+                  "yyyy MMMM d",
+                  picker.Language.nepali,
+                ).format(_pickedNepaliDate!)
+              : '')
         : (_pickedGregorianDate != null
-            ? DateFormat("yyyy MMMM d", 'en_US').format(_pickedGregorianDate!)
-            : '');
+              ? DateFormat("yyyy MMMM d", 'en_US').format(_pickedGregorianDate!)
+              : '');
 
     return Scaffold(
       body: Container(
@@ -165,8 +183,10 @@ class _RegistrationPageState extends State<RegistrationPage> {
             // SCROLLABLE CONTENT
             Expanded(
               child: SingleChildScrollView(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 24,
+                  vertical: 12,
+                ),
                 child: Form(
                   key: _formKey,
                   child: Column(
@@ -267,28 +287,20 @@ class _RegistrationPageState extends State<RegistrationPage> {
   Widget _buildHeader() {
     return Container(
       width: double.infinity,
-      decoration: BoxDecoration(
-        gradient: LinearGradient(
-          begin: Alignment.topLeft,
-          end: Alignment.bottomRight,
-          colors: [primaryPurple, secondaryPurple],
-        ),
-      ),
-      padding: EdgeInsets.only(
-        top: 60,
-        left: 20,
-        right: 20,
-        bottom: 12,
-      ),
+      decoration: BoxDecoration(color: secondaryPurple),
+      padding: EdgeInsets.only(top: 60, left: 20, right: 20, bottom: 12),
       child: Column(
         children: [
           Row(
             children: [
               if (Navigator.canPop(context))
                 IconButton(
-                  icon:
-                      Icon(Icons.arrow_back_ios, color: Colors.white, size: 20),
-                  onPressed: () => Get.back(),
+                  icon: Icon(
+                    Icons.arrow_back_ios,
+                    color: Colors.white,
+                    size: 20,
+                  ),
+                  onPressed: () => Get.offAll(() => const LoginPage()),
                   padding: EdgeInsets.zero,
                   constraints: BoxConstraints(),
                 ),
@@ -345,10 +357,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
         TextFormField(
           controller: controller,
           keyboardType: keyboardType,
-          style: TextStyle(
-            color: textDark,
-            fontSize: 16,
-          ),
+          style: TextStyle(color: textDark, fontSize: 16),
           decoration: InputDecoration(
             hintText: hint,
             hintStyle: TextStyle(color: textGray.withOpacity(0.5)),
@@ -377,7 +386,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
             ),
             focusedBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(12),
-              borderSide: BorderSide(color: primaryPurple, width: 2),
+              borderSide: BorderSide(color: secondaryPurple, width: 2),
             ),
             errorBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(12),
@@ -415,10 +424,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
         TextFormField(
           controller: controller,
           obscureText: _obscurePassword,
-          style: TextStyle(
-            color: textDark,
-            fontSize: 16,
-          ),
+          style: TextStyle(color: textDark, fontSize: 16),
           decoration: InputDecoration(
             hintText: hint,
             hintStyle: TextStyle(color: textGray.withOpacity(0.5)),
@@ -458,7 +464,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
             ),
             focusedBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(12),
-              borderSide: BorderSide(color: primaryPurple, width: 2),
+              borderSide: BorderSide(color: secondaryPurple, width: 2),
             ),
             errorBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(12),
@@ -498,10 +504,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
             child: TextFormField(
               readOnly: true,
               controller: TextEditingController(text: selectedDateStr),
-              style: TextStyle(
-                color: textDark,
-                fontSize: 16,
-              ),
+              style: TextStyle(color: textDark, fontSize: 16),
               decoration: InputDecoration(
                 hintText: 'Select your last period date',
                 hintStyle: TextStyle(color: textGray.withOpacity(0.5)),
@@ -512,8 +515,11 @@ class _RegistrationPageState extends State<RegistrationPage> {
                     color: lightPink,
                     borderRadius: BorderRadius.circular(8),
                   ),
-                  child:
-                      Icon(Icons.calendar_month, color: accentPink, size: 20),
+                  child: Icon(
+                    Icons.calendar_month,
+                    color: accentPink,
+                    size: 20,
+                  ),
                 ),
                 filled: true,
                 fillColor: inputBg,
@@ -531,7 +537,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
                 ),
                 focusedBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(12),
-                  borderSide: BorderSide(color: primaryPurple, width: 2),
+                  borderSide: BorderSide(color: secondaryPurple, width: 2),
                 ),
                 errorBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(12),
@@ -539,8 +545,10 @@ class _RegistrationPageState extends State<RegistrationPage> {
                 ),
                 focusedErrorBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(12),
-                  borderSide:
-                      const BorderSide(color: Color(0xFFC53030), width: 2),
+                  borderSide: const BorderSide(
+                    color: Color(0xFFC53030),
+                    width: 2,
+                  ),
                 ),
               ),
               validator: validator,
@@ -556,13 +564,11 @@ class _RegistrationPageState extends State<RegistrationPage> {
       width: double.infinity,
       height: 56,
       decoration: BoxDecoration(
-        gradient: LinearGradient(
-          colors: [primaryPurple, secondaryPurple],
-        ),
+        color: secondaryPurple,
         borderRadius: BorderRadius.circular(12),
         boxShadow: [
           BoxShadow(
-            color: primaryPurple.withOpacity(0.3),
+            color: secondaryPurple.withOpacity(0.3),
             blurRadius: 15,
             offset: const Offset(0, 8),
           ),
@@ -605,20 +611,14 @@ class _RegistrationPageState extends State<RegistrationPage> {
       decoration: BoxDecoration(
         color: Colors.white.withOpacity(0.7),
         borderRadius: BorderRadius.circular(16),
-        border: Border.all(
-          color: primaryPurple.withOpacity(0.2),
-          width: 1.5,
-        ),
+        border: Border.all(color: secondaryPurple.withOpacity(0.2), width: 1.5),
       ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Text(
             "Already a member?",
-            style: TextStyle(
-              fontSize: 15,
-              color: textGray,
-            ),
+            style: TextStyle(fontSize: 15, color: textGray),
           ),
           const SizedBox(width: 6),
           GestureDetector(
@@ -628,7 +628,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
               style: TextStyle(
                 fontSize: 15,
                 fontWeight: FontWeight.w600,
-                color: primaryPurple,
+                color: secondaryPurple,
                 decoration: TextDecoration.underline,
               ),
             ),

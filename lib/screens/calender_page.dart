@@ -40,7 +40,6 @@ class _MyCalendarPageState extends State<MyCalendarPage> {
   final DeviceCalendarPlugin _deviceCalendar = DeviceCalendarPlugin();
   String? _deviceCalendarId;
 
-  final Color themeColor1 = const Color(0xFF667EEA);
   final Color themeColor2 = const Color(0xFF764BA2);
 
   StreamSubscription<QuerySnapshot<Map<String, dynamic>>>? _eventsSub;
@@ -175,7 +174,7 @@ class _MyCalendarPageState extends State<MyCalendarPage> {
         sound: const RawResourceAndroidNotificationSound('reminder'),
         enableVibration: true,
         enableLights: true,
-        color: themeColor1,
+        color: themeColor2,
       );
 
       const iosDetails = DarwinNotificationDetails(
@@ -436,7 +435,7 @@ class _MyCalendarPageState extends State<MyCalendarPage> {
                       borderRadius: BorderRadius.circular(8),
                     ),
                     focusedBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: themeColor1, width: 2),
+                      borderSide: BorderSide(color: themeColor2, width: 2),
                       borderRadius: BorderRadius.circular(8),
                     ),
                     errorBorder: OutlineInputBorder(
@@ -475,7 +474,7 @@ class _MyCalendarPageState extends State<MyCalendarPage> {
                 onPressed: () => Navigator.pop(context),
                 child: Text(
                   'Cancel',
-                  style: TextStyle(color: themeColor1, fontSize: 16),
+                  style: TextStyle(color: themeColor2, fontSize: 16),
                 ),
               ),
               TextButton(
@@ -491,6 +490,9 @@ class _MyCalendarPageState extends State<MyCalendarPage> {
                       .collection('notes');
                   final timestamp = _selectedDay ?? DateTime.now();
 
+                  // ── Close dialog FIRST, then save in background ──────────────
+                  Navigator.pop(context);
+
                   if (editNote == null) {
                     await coll.add({
                       'content': _noteController.text.trim(),
@@ -502,12 +504,11 @@ class _MyCalendarPageState extends State<MyCalendarPage> {
                       'content': _noteController.text.trim(),
                     });
                   }
-                  Navigator.pop(context);
                 },
                 child: Text(
                   'OK',
                   style: TextStyle(
-                    color: showError ? Colors.grey : themeColor1,
+                    color: showError ? Colors.grey : themeColor2,
                     fontSize: 16,
                     fontWeight: FontWeight.bold,
                   ),
@@ -528,7 +529,7 @@ class _MyCalendarPageState extends State<MyCalendarPage> {
             editEvent?['dateTime'] ?? (_selectedDay ?? DateTime.now()),
         editEvent: editEvent,
         userId: _userId,
-        themeColor: themeColor1,
+        themeColor: themeColor2,
       ),
     );
   }
@@ -598,7 +599,7 @@ class _MyCalendarPageState extends State<MyCalendarPage> {
       body: Container(
         decoration: const BoxDecoration(
           gradient: LinearGradient(
-            colors: [Color(0xFFF5F7FA), Color(0xFFC3CFE2)],
+            colors: [Color(0xFFF9F0FB), Color(0xFFEFD9F2), Color(0xFFE0C4EA)],
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
           ),
@@ -691,7 +692,7 @@ class _MyCalendarPageState extends State<MyCalendarPage> {
                               height: 6,
                               decoration: BoxDecoration(
                                 shape: BoxShape.circle,
-                                color: themeColor1,
+                                color: themeColor2,
                               ),
                             ),
                           );
@@ -890,7 +891,7 @@ class _MyCalendarPageState extends State<MyCalendarPage> {
                 left: 20,
                 right: 20,
                 bottom: 40,
-              ), 
+              ),
 
               child: Column(
                 mainAxisSize: MainAxisSize.min,
@@ -904,7 +905,7 @@ class _MyCalendarPageState extends State<MyCalendarPage> {
                     },
                   ),
                   ListTile(
-                    leading: Icon(Icons.event, color: themeColor1),
+                    leading: Icon(Icons.event, color: themeColor2),
                     title: const Text('Add Appointment/Reminder'),
                     onTap: () {
                       Navigator.pop(context);
@@ -916,7 +917,7 @@ class _MyCalendarPageState extends State<MyCalendarPage> {
             ),
           );
         },
-        backgroundColor: themeColor1,
+        backgroundColor: const Color(0xFFEFD9F2),
         child: const Icon(Icons.add, size: 32),
       ),
     );
@@ -1178,6 +1179,10 @@ class _AppointmentDialogState extends State<AppointmentDialog> {
                         setState(() => showError = true);
                         return;
                       }
+
+                      // ── Close dialog FIRST, then save in background ──────────────
+                      Navigator.pop(context);
+
                       final dt = DateTime(
                         selectedDate.year,
                         selectedDate.month,
@@ -1190,6 +1195,7 @@ class _AppointmentDialogState extends State<AppointmentDialog> {
                           .doc(widget.userId)
                           .collection('events');
                       final timeStr = _formatTime(selectedTime);
+
                       if (widget.editEvent == null) {
                         await coll.add({
                           'title': _nameController.text.trim(),
@@ -1210,7 +1216,6 @@ class _AppointmentDialogState extends State<AppointmentDialog> {
                           'syncCalendar': syncWithCalendar,
                         });
                       }
-                      Navigator.pop(context);
                     },
                     child: Text(
                       'OK',
