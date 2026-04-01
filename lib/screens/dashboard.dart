@@ -1185,8 +1185,9 @@ class _DashboardPageState extends State<DashboardPage> {
     return MyCalendarPage(dueDate: dueDate, userId: _userProfile?.email);
   }
 
-  Widget _buildHospitalPage() => HospitalListScreen();
-
+Widget _buildHospitalPage() => HospitalListScreen(
+  onBack: () => setState(() => _selectedIndex = 0),
+);
   Widget _buildProfilePage() {
     return Container(
       color: const Color(0xFFF9F0FB),
@@ -1258,12 +1259,6 @@ class _DashboardPageState extends State<DashboardPage> {
 
                   const SizedBox(height: 40),
 
-                  // Details — no card, just rows
-                  _buildProfileRow(
-                    icon: Icons.location_on_rounded,
-                    label: 'Address',
-                    value: _userProfile!.address ?? 'Not provided',
-                  ),
                   _buildProfileRow(
                     icon: Icons.calendar_today_rounded,
                     label: 'First Day of Last Period',

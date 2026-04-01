@@ -258,7 +258,7 @@ class _MyCalendarPageState extends State<MyCalendarPage> {
         _deviceCalendarId,
         deviceEventId,
       );
-      if (result?.isSuccess == true) {
+      if (result.isSuccess == true) {
         debugPrint('Removed from device calendar: $deviceEventId');
       }
     } catch (e) {

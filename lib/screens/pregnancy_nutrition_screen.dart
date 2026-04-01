@@ -350,29 +350,43 @@ class _PregnancyNutritionScreenState extends State<PregnancyNutritionScreen> {
   Widget _buildHeader() {
     return Container(
       width: double.infinity,
-      decoration: BoxDecoration(
-        color: const Color(0xFF764BA2),
-      ),
+      decoration: BoxDecoration(color: const Color(0xFF764BA2)),
       padding: EdgeInsets.only(top: 50, left: 20, right: 30, bottom: 30),
-      child: Column(
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Text(
-            'Pregnancy Nutrition Guide',
-            style: TextStyle(
-              fontSize: 24,
-              fontWeight: FontWeight.w600,
+          GestureDetector(
+            onTap: () => Navigator.pop(context),
+            child: Icon(
+              Icons.arrow_back_ios_new,
               color: Colors.white,
+              size: 20,
             ),
-            textAlign: TextAlign.center,
           ),
-          const SizedBox(height: 8),
-          Text(
-            'Trimester-wise food recommendations',
-            style: TextStyle(
-              fontSize: 13,
-              color: Colors.white.withOpacity(0.95),
+          const SizedBox(width: 12),
+          Expanded(
+            child: Column(
+              children: [
+                Text(
+                  'Pregnancy Nutrition Guide',
+                  style: TextStyle(
+                    fontSize: 24,
+                    fontWeight: FontWeight.w600,
+                    color: Colors.white,
+                  ),
+                  textAlign: TextAlign.center,
+                ),
+                const SizedBox(height: 8),
+                Text(
+                  'Trimester-wise food recommendations',
+                  style: TextStyle(
+                    fontSize: 13,
+                    color: Colors.white.withOpacity(0.95),
+                  ),
+                  textAlign: TextAlign.center,
+                ),
+              ],
             ),
-            textAlign: TextAlign.center,
           ),
         ],
       ),
@@ -642,10 +656,7 @@ class _PregnancyNutritionScreenState extends State<PregnancyNutritionScreen> {
         children: [
           Row(
             children: [
-              Text(
-                '❌',
-                style: TextStyle(fontSize: 22),
-              ),
+              Text('❌', style: TextStyle(fontSize: 22)),
               const SizedBox(width: 10),
               Expanded(
                 child: Text(

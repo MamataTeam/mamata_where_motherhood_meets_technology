@@ -6,7 +6,8 @@ import '../models/hospital.dart';
 import '../widgets/hospital_card.dart';
 
 class HospitalListScreen extends StatefulWidget {
-  const HospitalListScreen({super.key});
+  final VoidCallback? onBack;
+  const HospitalListScreen({super.key, this.onBack});
   @override
   State<HospitalListScreen> createState() => _HospitalListScreenState();
 }
@@ -66,8 +67,7 @@ class _HospitalListScreenState extends State<HospitalListScreen>
     try {
       // 1. Check if GPS is switched on
       if (!await Geolocator.isLocationServiceEnabled()) {
-        _locationError =
-            'Location services are disabled. Please turn on GPS.';
+        _locationError = 'Location services are disabled. Please turn on GPS.';
         return;
       }
 
@@ -137,9 +137,7 @@ class _HospitalListScreenState extends State<HospitalListScreen>
         color: isError ? _crimsonSoft : _purpleSoft,
         borderRadius: BorderRadius.circular(16),
         border: Border.all(
-          color: isError
-              ? _crimson.withOpacity(0.2)
-              : _purple.withOpacity(0.2),
+          color: isError ? _crimson.withOpacity(0.2) : _purple.withOpacity(0.2),
           width: 1,
         ),
       ),
@@ -186,8 +184,8 @@ class _HospitalListScreenState extends State<HospitalListScreen>
                   _loadingLocation
                       ? 'Finding your location…'
                       : isError
-                          ? 'Location unavailable'
-                          : 'Location found',
+                      ? 'Location unavailable'
+                      : 'Location found',
                   style: TextStyle(
                     color: isError ? _crimson : _ink,
                     fontSize: 13.5,
@@ -199,8 +197,8 @@ class _HospitalListScreenState extends State<HospitalListScreen>
                   _loadingLocation
                       ? 'Searching for nearby hospitals'
                       : isError
-                          ? _locationError!
-                          : 'Showing results within 5 km',
+                      ? _locationError!
+                      : 'Showing results within 5 km',
                   style: TextStyle(
                     color: isError ? _crimson.withOpacity(0.65) : _sub,
                     fontSize: 12,
@@ -217,8 +215,7 @@ class _HospitalListScreenState extends State<HospitalListScreen>
           // ── Action badge / button ────────────────────────────────────
           if (isSuccess)
             Container(
-              padding:
-                  const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(20),
                 border: Border.all(color: _green, width: 1.5),
@@ -329,11 +326,7 @@ class _HospitalListScreenState extends State<HospitalListScreen>
       body: Container(
         decoration: const BoxDecoration(
           gradient: LinearGradient(
-            colors: [
-              Color(0xFFF9F0FB),
-              Color(0xFFEFD9F2),
-              Color(0xFFE0C4EA),
-            ],
+            colors: [Color(0xFFF9F0FB), Color(0xFFEFD9F2), Color(0xFFE0C4EA)],
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
           ),
@@ -351,6 +344,17 @@ class _HospitalListScreenState extends State<HospitalListScreen>
               backgroundColor: const Color(0xFF7B4F9E),
               surfaceTintColor: Colors.transparent,
               foregroundColor: Colors.white,
+              leading: IconButton(
+                icon: const Icon(Icons.arrow_back_ios, color: Colors.white),
+                tooltip: 'Back to Dashboard',
+                onPressed: () {
+                  if (widget.onBack != null) {
+                    widget.onBack!();
+                  } else {
+                    Navigator.pop(context);
+                  }
+                },
+              ),
               title: const Text(
                 'Nearby Hospitals',
                 style: TextStyle(
@@ -417,48 +421,48 @@ class _HospitalListScreenState extends State<HospitalListScreen>
 
                   final hospitals = snapshot.data!;
                   return SliverList(
-                    delegate: SliverChildBuilderDelegate(
-                      (context, index) {
-                        if (index == 0) {
-                          return FadeTransition(
-                            opacity: _fadeAnim,
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Padding(
-                                  padding: const EdgeInsets.fromLTRB(
-                                    20, 22, 20, 16,
-                                  ),
-                                  child: Text(
-                                    '${hospitals.length} hospitals found',
-                                    style: const TextStyle(
-                                      color: _ink,
-                                      fontSize: 20,
-                                      fontWeight: FontWeight.w800,
-                                      letterSpacing: -0.5,
-                                    ),
-                                  ),
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.symmetric(
-                                    horizontal: 16,
-                                  ),
-                                  child: HospitalCard(hospital: hospitals[0]),
-                                ),
-                              ],
-                            ),
-                          );
-                        }
+                    delegate: SliverChildBuilderDelegate((context, index) {
+                      if (index == 0) {
                         return FadeTransition(
                           opacity: _fadeAnim,
-                          child: Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 16),
-                            child: HospitalCard(hospital: hospitals[index]),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Padding(
+                                padding: const EdgeInsets.fromLTRB(
+                                  20,
+                                  22,
+                                  20,
+                                  16,
+                                ),
+                                child: Text(
+                                  '${hospitals.length} hospitals found',
+                                  style: const TextStyle(
+                                    color: _ink,
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.w800,
+                                    letterSpacing: -0.5,
+                                  ),
+                                ),
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.symmetric(
+                                  horizontal: 16,
+                                ),
+                                child: HospitalCard(hospital: hospitals[0]),
+                              ),
+                            ],
                           ),
                         );
-                      },
-                      childCount: hospitals.length,
-                    ),
+                      }
+                      return FadeTransition(
+                        opacity: _fadeAnim,
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 16),
+                          child: HospitalCard(hospital: hospitals[index]),
+                        ),
+                      );
+                    }, childCount: hospitals.length),
                   );
                 },
               ),

@@ -180,7 +180,11 @@ class _LoginPageState extends State<LoginPage> {
               keyboardType: TextInputType.emailAddress,
               validator: (v) {
                 if (v == null || v.isEmpty) return 'Please enter your email';
-                if (!GetUtils.isEmail(v)) return 'Please enter a valid email';
+                final emailRegex = RegExp(
+                  r'^[a-zA-Z][a-zA-Z0-9._%+-]*@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$',
+                );
+                if (!emailRegex.hasMatch(v))
+                  return 'Enter a valid email (e.g. name@gmail.com)';
                 return null;
               },
             ),

@@ -229,8 +229,11 @@ class _RegistrationPageState extends State<RegistrationPage> {
                               validator: (v) {
                                 if (v == null || v.isEmpty)
                                   return 'Enter email';
-                                if (!GetUtils.isEmail(v))
-                                  return 'Invalid email format';
+                                final emailRegex = RegExp(
+                                  r'^[a-zA-Z][a-zA-Z0-9._%+-]*@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$',
+                                );
+                                if (!emailRegex.hasMatch(v))
+                                  return 'Enter a valid email (e.g. name@gmail.com)';
                                 return null;
                               },
                             ),
